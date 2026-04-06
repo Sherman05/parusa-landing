@@ -252,15 +252,17 @@ function Nav(){
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled?'nav-bg py-4':'py-6'}`}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 flex items-center justify-between">
         <a href="#top" className="flex items-center gap-3 group">
-          <svg width="34" height="34" viewBox="0 0 40 40" fill="none">
-            <path d="M20 4 L34 34 L6 34 Z" stroke="url(#g1)" strokeWidth="1.2" fill="rgba(212,162,76,.08)"/>
-            <path d="M20 4 L20 34" stroke="url(#g1)" strokeWidth="1.2"/>
-            <path d="M20 10 C 28 16, 30 24, 32 32" stroke="#F5D98B" strokeWidth="1" fill="none" opacity=".6"/>
+          <svg width="34" height="34" viewBox="0 0 110 120" fill="none">
             <defs>
-              <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0" stopColor="#F5D98B"/><stop offset="1" stopColor="#8A6323"/>
+              <linearGradient id="g1" x1="0" y1="1" x2="0" y2="0">
+                <stop offset="0" stopColor="#C9A84C"/>
+                <stop offset="0.5" stopColor="#E8D5A3"/>
+                <stop offset="1" stopColor="#F5E7B8"/>
               </linearGradient>
             </defs>
+            <path d="M55 4 L104 98 L55 82 L6 98 Z" fill="none" stroke="rgba(232,213,163,.5)" strokeWidth="1.8"/>
+            <path d="M55 20 L86 88 L55 74 L24 88 Z" fill="url(#g1)"/>
+            <circle cx="55" cy="4" r="3" fill="#F5E7B8"/>
           </svg>
           <div className="leading-none">
             <div className="font-display text-[22px] tracking-tight">Паруса</div>

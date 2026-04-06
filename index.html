@@ -1,0 +1,869 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Паруса — Попутный ветер для вашего бизнеса</title>
+<meta name="description" content="Паруса — IT-студия: автоматизация бизнес-процессов, интеграция AI-агентов, разработка полного цикла." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=Onest:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<style>
+  :root{
+    --ink:#070E1C;
+    --ink-2:#0C1A31;
+    --ink-3:#11223F;
+    --gold:#D4A24C;
+    --gold-hi:#F5D98B;
+    --gold-deep:#8A6323;
+    --cream:#F4EAD5;
+    --mist:#8FA3B8;
+    --line: rgba(212,162,76,.22);
+  }
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--cream);
+    font-family:'Onest',system-ui,sans-serif;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .font-display{font-family:'Playfair Display',serif;font-feature-settings:"liga","dlig"}
+  .font-mono{font-family:'JetBrains Mono',monospace}
+
+  /* grain */
+  .grain::before{
+    content:"";position:fixed;inset:-50%;pointer-events:none;z-index:60;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity:.7;mix-blend-mode:overlay;
+  }
+
+  /* gold text */
+  .gold{
+    background:linear-gradient(180deg,var(--gold-hi) 0%,var(--gold) 55%,var(--gold-deep) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+
+  /* link underline */
+  .ulink{position:relative}
+  .ulink::after{
+    content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;
+    background:var(--gold);transform:scaleX(.2);transform-origin:left;
+    transition:transform .6s cubic-bezier(.2,.7,0,1);
+  }
+  .ulink:hover::after{transform:scaleX(1)}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.2,.7,0,1),transform 1s cubic-bezier(.2,.7,0,1)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}.reveal.d4{transition-delay:.4s}.reveal.d5{transition-delay:.5s}
+
+  /* char reveal */
+  .char{display:inline-block;opacity:0;transform:translateY(60%) rotate(6deg);transition:opacity .9s,transform .9s cubic-bezier(.2,.7,0,1)}
+  .in .char{opacity:1;transform:none}
+
+  /* sail wind lines */
+  @keyframes drift { 0%{transform:translateX(-10%)} 100%{transform:translateX(10%)} }
+  .drift{animation:drift 18s ease-in-out infinite alternate}
+
+  @keyframes sway { 0%,100%{transform:rotate(-1.2deg)} 50%{transform:rotate(1.2deg)} }
+  .sway{transform-origin:50% 100%;animation:sway 7s ease-in-out infinite}
+
+  @keyframes shimmer {
+    0%{background-position:-200% 0} 100%{background-position:200% 0}
+  }
+  .shimmer{
+    background:linear-gradient(90deg,transparent 0%,rgba(245,217,139,.4) 50%,transparent 100%);
+    background-size:200% 100%;
+    animation:shimmer 4s linear infinite;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+
+  @keyframes wave {
+    0%{transform:translateX(0)} 100%{transform:translateX(-50%)}
+  }
+  .wave-move{animation:wave 22s linear infinite}
+
+  /* marquee — seamless: two identical sequences, animate exactly -50% */
+  @keyframes marquee { from{transform:translate3d(0,0,0)} to{transform:translate3d(-50%,0,0)} }
+  .marquee-track{display:flex;width:max-content;animation:marquee 40s linear infinite;will-change:transform}
+  .marquee-seq{display:flex;gap:3rem;padding-right:3rem;flex-shrink:0}
+
+  /* divider line */
+  .hairline{height:1px;background:linear-gradient(90deg,transparent, var(--line) 15%, var(--line) 85%, transparent)}
+
+  /* card */
+  .service-card{
+    position:relative;
+    background:linear-gradient(180deg, rgba(17,34,63,.6), rgba(7,14,28,.6));
+    border:1px solid rgba(212,162,76,.18);
+    transition:transform .7s cubic-bezier(.2,.7,0,1), border-color .7s;
+  }
+  .service-card::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(600px 200px at var(--mx,50%) var(--my,0%), rgba(245,217,139,.14), transparent 60%);
+    opacity:0;transition:opacity .6s;pointer-events:none;
+  }
+  .service-card:hover{transform:translateY(-6px);border-color:rgba(245,217,139,.5)}
+  .service-card:hover::before{opacity:1}
+
+  .btn-gold{
+    position:relative;display:inline-flex;align-items:center;gap:.75rem;
+    padding:1rem 1.75rem;font-weight:500;letter-spacing:.02em;
+    color:var(--ink);background:var(--gold-hi);
+    border:1px solid var(--gold-hi);
+    overflow:hidden;transition:color .4s;
+  }
+  .btn-gold::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(120deg,var(--gold-hi),var(--gold) 50%,var(--gold-hi));
+    background-size:200% 100%;background-position:0 0;
+    transition:background-position .7s cubic-bezier(.2,.7,0,1);z-index:-1;
+  }
+  .btn-gold:hover::before{background-position:100% 0}
+  .btn-ghost{
+    display:inline-flex;align-items:center;gap:.75rem;
+    padding:1rem 1.75rem;border:1px solid var(--line);color:var(--cream);
+    transition:background .4s, border-color .4s;
+  }
+  .btn-ghost:hover{background:rgba(212,162,76,.08);border-color:var(--gold)}
+
+  /* compass */
+  .compass{transition:transform .2s linear}
+  @keyframes needle-sway {
+    0%   { transform: rotate(-28deg); }
+    18%  { transform: rotate( 14deg); }
+    32%  { transform: rotate(-8deg);  }
+    50%  { transform: rotate( 42deg); }
+    68%  { transform: rotate( 20deg); }
+    82%  { transform: rotate( 60deg); }
+    100% { transform: rotate(-28deg); }
+  }
+  .needle{ transform-origin: 100px 100px; animation: needle-sway 11s cubic-bezier(.65,.05,.35,1) infinite; }
+
+  /* section label */
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.25em;
+    text-transform:uppercase;color:var(--gold);
+    display:inline-flex;align-items:center;gap:.75rem;
+  }
+  .eyebrow::before{content:"";width:32px;height:1px;background:var(--gold)}
+
+  /* process step dot */
+  .step-dot{
+    width:14px;height:14px;border:1px solid var(--gold);border-radius:999px;
+    background:var(--ink);position:relative;
+  }
+  .step-dot::after{
+    content:"";position:absolute;inset:3px;border-radius:999px;background:var(--gold);
+    transform:scale(0);transition:transform .6s;
+  }
+  .in .step-dot::after{transform:scale(1)}
+
+  /* big stat */
+  .stat-num{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,3.6vw,3.5rem);line-height:1.15;letter-spacing:-.01em;font-variant-numeric:tabular-nums;white-space:nowrap;display:block;padding-top:.15em;overflow:visible}
+
+  /* input */
+  .field{
+    background:transparent;border:none;border-bottom:1px solid var(--line);
+    color:var(--cream);padding:1.1rem 0;width:100%;outline:none;font-size:1.05rem;
+    transition:border-color .4s;
+  }
+  .field:focus{border-color:var(--gold)}
+  .field::placeholder{color:var(--mist)}
+
+  /* custom cursor dot (desktop) */
+  @media (hover:hover){
+    .cursor-dot{position:fixed;top:0;left:0;pointer-events:none;z-index:100;width:6px;height:6px;border-radius:999px;background:var(--gold-hi);mix-blend-mode:difference;will-change:transform}
+    .cursor-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:100;width:36px;height:36px;border-radius:999px;border:1px solid rgba(245,217,139,.5);will-change:transform;transition:width .35s cubic-bezier(.2,.7,0,1), height .35s cubic-bezier(.2,.7,0,1), border-color .35s}
+    .cursor-grow .cursor-ring{width:72px;height:72px;border-color:var(--gold-hi)}
+    body:hover .cursor-dot,body:hover .cursor-ring{opacity:1}
+  }
+
+  /* nav blur */
+  .nav-bg{
+    background:linear-gradient(180deg, rgba(7,14,28,.85), rgba(7,14,28,.2));
+    backdrop-filter:blur(14px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+  }
+
+  /* selection */
+  ::selection{background:var(--gold);color:var(--ink)}
+  ::-webkit-scrollbar{width:10px;height:10px}
+  ::-webkit-scrollbar-track{background:var(--ink)}
+  ::-webkit-scrollbar-thumb{background:var(--ink-3);border-radius:10px}
+  ::-webkit-scrollbar-thumb:hover{background:var(--gold-deep)}
+</style>
+</head>
+<body class="grain">
+<div id="root"></div>
+
+<script type="text/babel" data-presets="env,react">
+const { useEffect, useRef, useState } = React;
+
+/* ---------- hooks ---------- */
+function useReveal(){
+  useEffect(()=>{
+    const els = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    },{threshold:.15});
+    els.forEach(el=>io.observe(el));
+    return ()=>io.disconnect();
+  },[]);
+}
+
+function SplitText({ children, className="" }){
+  const words = String(children).split(" ");
+  let i = 0;
+  return (
+    <span className={className}>
+      {words.map((w,wi)=>(
+        <span key={wi} className="inline-block whitespace-nowrap mr-[0.25em]">
+          {[...w].map((c,ci)=>{
+            const delay = (i++)*0.025;
+            return <span key={ci} className="char" style={{transitionDelay:`${delay}s`}}>{c}</span>;
+          })}
+        </span>
+      ))}
+    </span>
+  );
+}
+
+/* ---------- parts ---------- */
+function Nav(){
+  const [scrolled,setScrolled] = useState(false);
+  useEffect(()=>{
+    const onScroll = ()=>setScrolled(window.scrollY>40);
+    window.addEventListener('scroll',onScroll);
+    return ()=>window.removeEventListener('scroll',onScroll);
+  },[]);
+  return (
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled?'nav-bg py-4':'py-6'}`}>
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10 flex items-center justify-between">
+        <a href="#top" className="flex items-center gap-3 group">
+          <svg width="34" height="34" viewBox="0 0 40 40" fill="none">
+            <path d="M20 4 L34 34 L6 34 Z" stroke="url(#g1)" strokeWidth="1.2" fill="rgba(212,162,76,.08)"/>
+            <path d="M20 4 L20 34" stroke="url(#g1)" strokeWidth="1.2"/>
+            <path d="M20 10 C 28 16, 30 24, 32 32" stroke="#F5D98B" strokeWidth="1" fill="none" opacity=".6"/>
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stopColor="#F5D98B"/><stop offset="1" stopColor="#8A6323"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div className="leading-none">
+            <div className="font-display text-[22px] tracking-tight">Паруса</div>
+          </div>
+        </a>
+        <nav className="hidden md:flex items-center gap-10 text-sm text-[color:var(--cream)]/80">
+          <a href="#services" className="ulink">Услуги</a>
+          <a href="#process" className="ulink">Процесс</a>
+          <a href="#results" className="ulink">Результаты</a>
+          <a href="#team" className="ulink">Команда</a>
+        </nav>
+        <a href="#contact" className="btn-ghost text-sm !py-2.5 !px-5">
+          <span className="w-1.5 h-1.5 rounded-full bg-[color:var(--gold)] animate-pulse"/>
+          Обсудить проект
+        </a>
+      </div>
+    </header>
+  );
+}
+
+function Hero(){
+  const heroRef = useRef(null);
+  const sailRef = useRef(null);
+  useEffect(()=>{
+    const onScroll = ()=>{
+      const y = window.scrollY;
+      if(sailRef.current) sailRef.current.style.transform = `translateY(${y*0.15}px)`;
+    };
+    window.addEventListener('scroll',onScroll,{passive:true});
+    return ()=>window.removeEventListener('scroll',onScroll);
+  },[]);
+
+  return (
+    <section id="top" ref={heroRef} className="relative min-h-[100svh] pt-32 pb-20 overflow-hidden">
+      {/* layered atmosphere */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0" style={{background:"radial-gradient(1200px 700px at 70% 20%, rgba(212,162,76,.14), transparent 60%), radial-gradient(900px 600px at 10% 90%, rgba(20,50,90,.6), transparent 60%), linear-gradient(180deg,#060C19 0%,#0A162A 60%,#070E1C 100%)"}}/>
+        {/* stars */}
+        <svg className="absolute inset-0 w-full h-full opacity-60" aria-hidden>
+          {Array.from({length:70}).map((_,i)=>{
+            const x = (i*73)%100, y=(i*131)%100, r=(i%3)*.4+.3;
+            return <circle key={i} cx={`${x}%`} cy={`${y}%`} r={r} fill="#F5D98B" opacity={.15+((i%7)/20)}/>;
+          })}
+        </svg>
+        {/* sun/moon arc */}
+        <div className="absolute right-[-160px] top-[80px] w-[520px] h-[520px] rounded-full" style={{background:"radial-gradient(closest-side, rgba(245,217,139,.22), rgba(245,217,139,0) 70%)"}}/>
+      </div>
+
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10 grid lg:grid-cols-12 gap-10 items-center">
+        {/* left: text */}
+        <div className="lg:col-span-7 relative z-10">
+          <div className="reveal eyebrow mb-8">Студия цифровой навигации · Казань</div>
+
+          <h1 className="reveal font-display text-[clamp(3rem,7.8vw,7.5rem)] leading-[.92] tracking-[-0.02em]">
+            <SplitText>Попутный</SplitText>
+            <br/>
+            <span className="italic font-normal"><SplitText>ветер&nbsp;для</SplitText></span>
+            <br/>
+            <span className="gold"><SplitText>вашего бизнеса.</SplitText></span>
+          </h1>
+
+          <p className="reveal d2 mt-10 max-w-xl text-lg text-[color:var(--cream)]/75 leading-relaxed">
+            Мы поднимаем паруса там, где другие ждут у берега. Автоматизируем процессы,
+            встраиваем AI-агентов и строим софт, который везёт бизнес дальше горизонта.
+          </p>
+
+          <div className="reveal d3 mt-12 flex flex-wrap items-center gap-4">
+            <a href="#contact" className="btn-gold">
+              Запустить проект
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </a>
+            <a href="#services" className="btn-ghost">Что мы делаем</a>
+          </div>
+
+          <div className="reveal d4 mt-16 grid grid-cols-3 gap-6 max-w-xl">
+            {[
+              ["74+","проектов под парусом"],
+              ["3","года в открытом море"],
+              ["4","инженера на борту"],
+            ].map(([n,l],i)=>(
+              <div key={i} className="border-t border-[color:var(--line)] pt-4">
+                <div className="font-display text-4xl gold">{n}</div>
+                <div className="text-xs tracking-wide text-[color:var(--mist)] mt-1 uppercase">{l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* right: sail art */}
+        <div className="lg:col-span-5 relative h-[520px] lg:h-[680px]">
+          <div ref={sailRef} className="absolute inset-0 flex items-center justify-center">
+            <svg viewBox="0 0 500 720" className="w-full h-full sway" fill="none">
+              <defs>
+                <linearGradient id="sail1" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0" stopColor="#F5D98B" stopOpacity=".95"/>
+                  <stop offset="0.55" stopColor="#D4A24C" stopOpacity=".7"/>
+                  <stop offset="1" stopColor="#6B4A18" stopOpacity=".25"/>
+                </linearGradient>
+                <linearGradient id="sail2" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stopColor="#F5D98B" stopOpacity=".7"/>
+                  <stop offset="1" stopColor="#8A6323" stopOpacity=".1"/>
+                </linearGradient>
+                <filter id="blur1"><feGaussianBlur stdDeviation="10"/></filter>
+              </defs>
+
+              {/* soft halo */}
+              <ellipse cx="250" cy="360" rx="220" ry="320" fill="url(#sail1)" opacity=".08" filter="url(#blur1)"/>
+
+              {/* mast */}
+              <line x1="250" y1="30" x2="250" y2="690" stroke="#D4A24C" strokeWidth="2"/>
+              <line x1="250" y1="30" x2="250" y2="40" stroke="#F5D98B" strokeWidth="4"/>
+              <circle cx="250" cy="28" r="4" fill="#F5D98B"/>
+
+              {/* big sail — curved triangle */}
+              <path d="M250 60 C 340 220, 420 380, 360 620 L250 640 Z" fill="url(#sail1)" stroke="#F5D98B" strokeWidth="1.2"/>
+              {/* stitching lines */}
+              {Array.from({length:8}).map((_,i)=>{
+                const t = 0.08 + i*0.11;
+                return <path key={i} d={`M250 ${60+t*580} C ${260+t*110} ${120+t*500}, ${340+t*20} ${380+t*240}, ${360 - (1-t)*10} ${620 - (1-t)*20}`} stroke="#F5D98B" strokeWidth=".4" fill="none" opacity=".35"/>;
+              })}
+
+              {/* second smaller sail */}
+              <path d="M250 110 C 170 240, 120 420, 180 600 L250 620 Z" fill="url(#sail2)" stroke="#D4A24C" strokeWidth=".8" opacity=".85"/>
+              {Array.from({length:6}).map((_,i)=>{
+                const t = 0.1 + i*0.14;
+                return <line key={i} x1="250" y1={110+t*510} x2={250 - 80*(1-t*.3)} y2={240+t*360} stroke="#F5D98B" strokeWidth=".3" opacity=".3"/>;
+              })}
+
+              {/* ropes */}
+              <line x1="250" y1="60" x2="360" y2="620" stroke="#F5D98B" strokeWidth=".6" opacity=".5"/>
+              <line x1="250" y1="60" x2="180" y2="600" stroke="#F5D98B" strokeWidth=".6" opacity=".5"/>
+
+              {/* hull hint */}
+              <path d="M120 660 Q 250 720 400 660 L380 690 Q 250 740 140 690 Z" fill="#0C1A31" stroke="#D4A24C" strokeWidth=".8"/>
+
+              {/* wind drift lines */}
+              <g className="drift" opacity=".4">
+                <path d="M40 180 Q 120 170 200 185" stroke="#F5D98B" strokeWidth=".6" fill="none"/>
+                <path d="M20 240 Q 110 225 210 245" stroke="#F5D98B" strokeWidth=".5" fill="none"/>
+                <path d="M60 320 Q 140 305 220 320" stroke="#F5D98B" strokeWidth=".5" fill="none"/>
+                <path d="M30 420 Q 120 405 200 420" stroke="#F5D98B" strokeWidth=".4" fill="none"/>
+              </g>
+            </svg>
+          </div>
+          {/* coordinates */}
+          <div className="absolute top-4 right-4 text-right font-mono text-[10px] text-[color:var(--mist)] tracking-widest">
+            <div>55.7963°N</div><div>49.1088°E</div>
+            <div className="mt-2 text-[color:var(--gold)]">KORSTON · KAZAN</div>
+          </div>
+        </div>
+      </div>
+
+      {/* scroll hint */}
+      <div className="absolute left-1/2 bottom-6 -translate-x-1/2 flex flex-col items-center">
+        <div className="w-px h-10 bg-gradient-to-b from-[color:var(--gold)] to-transparent"/>
+      </div>
+
+      {/* waves bottom */}
+      <svg className="absolute bottom-0 left-0 w-[200%] wave-move opacity-50" viewBox="0 0 2400 120" preserveAspectRatio="none">
+        <path d="M0 60 Q 300 0 600 60 T 1200 60 T 1800 60 T 2400 60 V120 H0 Z" fill="#0A162A"/>
+        <path d="M0 80 Q 300 30 600 80 T 1200 80 T 1800 80 T 2400 80 V120 H0 Z" fill="#060C19" opacity=".8"/>
+      </svg>
+    </section>
+  );
+}
+
+function Marquee(){
+  const items = ["Автоматизация","AI-агенты","Разработка","Интеграции","Data Pipelines","LLM Ops","Процессы","Архитектура"];
+  const Seq = ({aria}) => (
+    <div className="marquee-seq" aria-hidden={aria}>
+      {items.map((t,i)=>(
+        <span key={i} className="font-display italic text-3xl md:text-5xl text-[color:var(--cream)]/80 flex items-center gap-12 whitespace-nowrap">
+          {t}
+          <svg width="28" height="28" viewBox="0 0 40 40"><path d="M20 6 L26 20 L20 34 L14 20 Z" fill="none" stroke="#D4A24C" strokeWidth="1"/></svg>
+        </span>
+      ))}
+    </div>
+  );
+  return (
+    <div className="relative border-y border-[color:var(--line)] py-6 overflow-hidden bg-[#050B17]">
+      <div className="marquee-track">
+        <Seq/>
+        <Seq aria={true}/>
+      </div>
+    </div>
+  );
+}
+
+function Services(){
+  const list = [
+    {
+      n:"01",
+      title:"Автоматизация бизнес-процессов",
+      tag:"Operations",
+      desc:"Снимаем рутину с плеч команды: CRM, ERP, документооборот, связки между системами. Вы видите процессы на карте, а не в чатах.",
+      bullets:["Аудит и реинжиниринг","Low-code и кастом","Интеграции API","Мониторинг и метрики"],
+    },
+    {
+      n:"02",
+      title:"AI-агенты на борту",
+      tag:"Intelligence",
+      desc:"Внедряем агентов, которые отвечают клиентам, ведут документы, анализируют данные и принимают решения. Не чат-бот — цифровой сотрудник.",
+      bullets:["LLM под задачи","RAG и базы знаний","Голос и мультимодал","Safety и наблюдаемость"],
+    },
+    {
+      n:"03",
+      title:"Разработка полного цикла",
+      tag:"Engineering",
+      desc:"От концепта и дизайна до релиза и поддержки. Веб, мобильные, backend, инфраструктура — всё под одной мачтой.",
+      bullets:["Продуктовый дизайн","Web · Mobile · Backend","DevOps & Cloud","Сопровождение 24/7"],
+    },
+  ];
+
+  const onMove = (e)=>{
+    const el = e.currentTarget;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty('--mx',`${e.clientX-r.left}px`);
+    el.style.setProperty('--my',`${e.clientY-r.top}px`);
+  };
+
+  return (
+    <section id="services" className="relative py-32 md:py-40">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10">
+        <div className="grid md:grid-cols-12 gap-10 mb-20">
+          <div className="md:col-span-5">
+            <div className="eyebrow reveal mb-6">§ 01 — Направления</div>
+            <h2 className="reveal font-display text-[clamp(2.5rem,5vw,5rem)] leading-[.95] tracking-tight">
+              Три <span className="italic">мачты,</span><br/> одна <span className="gold">команда.</span>
+            </h2>
+          </div>
+          <div className="md:col-span-6 md:col-start-7 flex items-end">
+            <p className="reveal d2 text-lg text-[color:var(--cream)]/70 max-w-lg">
+              Каждое направление — отдельный парус. Вместе они ловят ветер и разгоняют
+              бизнес, куда бы вы ни держали курс.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {list.map((s,i)=>(
+            <div key={i} onMouseMove={onMove} className={`service-card p-8 md:p-10 reveal d${i+1}`}>
+              <div className="flex items-start justify-between">
+                <div className="font-mono text-[11px] tracking-[0.3em] text-[color:var(--gold)] uppercase">{s.tag}</div>
+                <div className="font-display text-6xl md:text-7xl text-[color:var(--cream)]/10 leading-none">{s.n}</div>
+              </div>
+              <h3 className="font-display text-3xl md:text-[32px] leading-tight mt-6">{s.title}</h3>
+              <p className="mt-5 text-[color:var(--cream)]/70 leading-relaxed">{s.desc}</p>
+              <ul className="mt-8 space-y-3">
+                {s.bullets.map((b,bi)=>(
+                  <li key={bi} className="flex items-center gap-3 text-sm text-[color:var(--cream)]/80">
+                    <svg width="14" height="14" viewBox="0 0 20 20"><path d="M10 3 L13 10 L10 17 L7 10 Z" fill="none" stroke="#D4A24C" strokeWidth="1"/></svg>
+                    {b}
+                  </li>
+                ))}
+              </ul>
+              <a href="#contact" className="mt-10 inline-flex items-center gap-3 text-sm text-[color:var(--gold)] group/link">
+                <span className="ulink">Узнать подробнее</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="transition-transform duration-500 group-hover/link:translate-x-1"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/></svg>
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Process(){
+  const compRef = useRef(null);
+  useEffect(()=>{
+    const onScroll = ()=>{
+      if(!compRef.current) return;
+      const r = compRef.current.getBoundingClientRect();
+      const progress = 1 - (r.top / window.innerHeight);
+      compRef.current.style.transform = `rotate(${progress * -24}deg)`;
+    };
+    window.addEventListener('scroll',onScroll,{passive:true});
+    onScroll();
+    return ()=>window.removeEventListener('scroll',onScroll);
+  },[]);
+
+  const steps = [
+    {k:"I",   t:"Гавань",       d:"Встреча, бриф, аудит. Смотрим карту бизнеса, отмечаем мели и попутные течения."},
+    {k:"II",  t:"Курс",         d:"Стратегия и план. Архитектура, roadmap, оценка, ответственные по вахтам."},
+    {k:"III", t:"Плавание",     d:"Двухнедельные спринты, демо, метрики. Вы видите прогресс каждую пятницу."},
+    {k:"IV",  t:"Швартовка",    d:"Релиз, обучение команды, документация. Переход в рабочий режим."},
+    {k:"V",   t:"Попутный ветер",d:"Поддержка, развитие, наблюдаемость. Мы остаёмся на связи — как штурман в рубке."},
+  ];
+
+  return (
+    <section id="process" className="relative py-32 md:py-40 bg-[#050B17]">
+      {/* faint map lines */}
+      <svg className="absolute inset-0 w-full h-full opacity-[0.06]" preserveAspectRatio="none" viewBox="0 0 1400 800">
+        {Array.from({length:12}).map((_,i)=>(
+          <path key={i} d={`M0 ${i*70} Q 350 ${i*70-40} 700 ${i*70} T 1400 ${i*70}`} stroke="#F5D98B" fill="none" strokeWidth=".5"/>
+        ))}
+        {Array.from({length:14}).map((_,i)=>(
+          <line key={i} x1={i*100} y1="0" x2={i*100} y2="800" stroke="#F5D98B" strokeWidth=".3"/>
+        ))}
+      </svg>
+
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10 relative">
+        <div className="grid md:grid-cols-12 gap-10 mb-20 items-end">
+          <div className="md:col-span-7">
+            <div className="eyebrow reveal mb-6">§ 02 — Процесс</div>
+            <h2 className="reveal font-display text-[clamp(2.5rem,5vw,5rem)] leading-[.95] tracking-tight">
+              Как мы держим <span className="italic gold">курс.</span>
+            </h2>
+          </div>
+          <div className="md:col-span-4 md:col-start-9 flex justify-end">
+            <div ref={compRef} className="compass w-36 h-36 md:w-44 md:h-44">
+              <svg viewBox="0 0 200 200" className="w-full h-full">
+                <circle cx="100" cy="100" r="92" fill="none" stroke="#D4A24C" strokeWidth="1"/>
+                <circle cx="100" cy="100" r="74" fill="none" stroke="#D4A24C" strokeWidth=".5" strokeDasharray="2 4"/>
+                {Array.from({length:32}).map((_,i)=>{
+                  if(i%8===0) return null; /* skip ticks at N/S/E/W */
+                  const a = (i*360/32)*Math.PI/180;
+                  const r1 = i%4===0?80:86;
+                  return <line key={i} x1={100+r1*Math.cos(a)} y1={100+r1*Math.sin(a)} x2={100+92*Math.cos(a)} y2={100+92*Math.sin(a)} stroke="#F5D98B" strokeWidth={i%4===0?1:.4}/>;
+                })}
+                <text x="100" y="24" textAnchor="middle" fill="#F5D98B" fontFamily="Playfair Display" fontSize="14">N</text>
+                <text x="100" y="188" textAnchor="middle" fill="#F5D98B" fontFamily="Playfair Display" fontSize="14">S</text>
+                <text x="18" y="106" textAnchor="middle" fill="#F5D98B" fontFamily="Playfair Display" fontSize="14">W</text>
+                <text x="182" y="106" textAnchor="middle" fill="#F5D98B" fontFamily="Playfair Display" fontSize="14">E</text>
+                <g className="needle">
+                  <path d="M100 30 L108 100 L100 170 L92 100 Z" fill="#F5D98B"/>
+                  <path d="M100 30 L108 100 L100 100 Z" fill="#D4A24C"/>
+                </g>
+                <circle cx="100" cy="100" r="4" fill="#070E1C" stroke="#F5D98B"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative">
+          {/* timeline line */}
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-[linear-gradient(180deg,transparent,var(--line)_10%,var(--line)_90%,transparent)]"/>
+          <div className="space-y-16 md:space-y-24">
+            {steps.map((s,i)=>(
+              <div key={i} className={`reveal d${(i%3)+1} relative grid md:grid-cols-2 gap-8 items-center ${i%2? 'md:[direction:rtl]':''}`}>
+                <div className="md:[direction:ltr] pl-16 md:pl-0 md:px-10">
+                  <div className="font-mono text-xs tracking-[0.3em] text-[color:var(--gold)]">ЭТАП {s.k}</div>
+                  <h3 className="font-display text-4xl md:text-5xl mt-3">{s.t}</h3>
+                  <p className="mt-4 text-[color:var(--cream)]/70 leading-relaxed max-w-md">{s.d}</p>
+                </div>
+                <div className="hidden md:block"/>
+                <div className="absolute left-6 md:left-1/2 top-4 md:top-1/2 -translate-x-1/2 md:-translate-y-1/2">
+                  <div className="step-dot"/>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Results(){
+  const stats = [
+    {n:"+318%",l:"средний ROI наших внедрений",sub:"по 24 проектам 2023–2025"},
+    {n:"−62%",l:"сокращение ручных операций",sub:"после автоматизации"},
+    {n:"4.9/5",l:"NPS клиентов на поддержке",sub:"за последний год"},
+    {n:"14д",l:"от идеи до первого релиза",sub:"в среднем по MVP"},
+  ];
+  const cases = [
+    {tag:"Логистика",title:"Перенос диспетчеризации в AI-агента",result:"×3,4 обрабатываемых заявок в смену"},
+    {tag:"Ритейл",title:"Единая витрина данных для 140 магазинов",result:"отчёты за минуты вместо суток"},
+    {tag:"Финтех",title:"Скоринг и антифрод на LLM + правилах",result:"−41% потерь, +2,1% одобрений"},
+  ];
+  return (
+    <section id="results" className="relative py-32 md:py-40">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10">
+        <div className="eyebrow reveal mb-6">§ 03 — Результаты</div>
+        <h2 className="reveal font-display text-[clamp(2.5rem,5vw,5rem)] leading-[.95] tracking-tight max-w-4xl">
+          Ветер в цифрах, <br/><span className="italic">а не в обещаниях.</span>
+        </h2>
+
+        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-8 border-t border-[color:var(--line)] pt-12">
+          {stats.map((s,i)=>(
+            <div key={i} className={`reveal d${i+1} min-w-0`}>
+              <div className="stat-num gold">{s.n}</div>
+              <div className="mt-5 text-[color:var(--cream)]/90 font-medium">{s.l}</div>
+              <div className="mt-1 text-xs uppercase tracking-wider text-[color:var(--mist)]">{s.sub}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-28 grid md:grid-cols-3 gap-0 border-t border-b border-[color:var(--line)]">
+          {cases.map((c,i)=>(
+            <a key={i} href="#contact" className={`reveal d${i+1} group p-8 md:p-10 ${i<2?'md:border-r border-[color:var(--line)]':''} ${i<cases.length-1?'border-b md:border-b-0 border-[color:var(--line)]':''} hover:bg-[rgba(212,162,76,0.05)] transition-colors duration-500`}>
+              <div className="flex items-center justify-between">
+                <div className="font-mono text-[11px] tracking-[0.3em] uppercase text-[color:var(--gold)]">{c.tag}</div>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all"><path d="M7 17 L17 7 M9 7 H17 V15" stroke="#F5D98B" strokeWidth="1.4"/></svg>
+              </div>
+              <h3 className="font-display text-2xl md:text-3xl mt-6 leading-tight">{c.title}</h3>
+              <div className="mt-8 text-[color:var(--cream)]/75 text-sm">Результат</div>
+              <div className="text-[color:var(--gold-hi)] text-lg mt-1">{c.result}</div>
+            </a>
+          ))}
+        </div>
+
+        {/* quote */}
+        <figure className="reveal mt-28 max-w-3xl mx-auto text-center">
+          <svg className="mx-auto mb-6" width="40" height="40" viewBox="0 0 40 40"><path d="M8 26 C 8 16, 14 10, 20 10 L 20 16 C 16 16, 14 19, 14 22 H 20 V 30 H 8 Z M 22 26 C 22 16, 28 10, 34 10 L 34 16 C 30 16, 28 19, 28 22 H 34 V 30 H 22 Z" fill="#D4A24C"/></svg>
+          <blockquote className="font-display italic text-2xl md:text-3xl leading-snug">
+            «Паруса превратили идеи из моих книг в живой цифровой продукт. Они не просто
+            написали код — они погрузились в саму философию игры, в стратегию, в замысел.
+            Такой уровень профессионализма и вовлечённости — большая редкость на рынке.»
+          </blockquote>
+          <figcaption className="mt-6 text-sm text-[color:var(--mist)] tracking-wide">
+            ХАСАНОВ ШАМИЛЬ МИХАЙЛОВИЧ · предприниматель, автор книги «Другие шахматы», основатель Chess T1
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+  );
+}
+
+function Team(){
+  const people = [
+    {n:"Камал",r:"Капитан / CEO",q:"Стратегия, курс и работа с клиентами"},
+    {n:"Амир",r:"Full Stack · AI",q:"Разработка и интеграция ИИ-агентов"},
+    {n:"Илья",r:"Рост / Sales & Marketing",q:"Продажи, маркетинг и партнёрства"},
+    {n:"Никита",r:"Full Stack · AI",q:"Архитектура, LLM, инженерия данных"},
+  ];
+  return (
+    <section id="team" className="relative py-32 md:py-40 bg-[#050B17]">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10">
+        <div className="grid md:grid-cols-12 gap-10 items-end mb-20">
+          <div className="md:col-span-7">
+            <div className="eyebrow reveal mb-6">§ 04 — Экипаж</div>
+            <h2 className="reveal font-display text-[clamp(2.5rem,5vw,5rem)] leading-[.95] tracking-tight">
+              Маленькая команда <br/><span className="italic gold">большого плавания.</span>
+            </h2>
+          </div>
+          <div className="md:col-span-4 md:col-start-9">
+            <p className="reveal d2 text-[color:var(--cream)]/70">
+              Четыре человека, каждый — на своей вахте. Без прослоек, без аккаунт-менеджеров
+              между вами и теми, кто делает продукт.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-px bg-[color:var(--line)] border border-[color:var(--line)]">
+          {people.map((p,i)=>(
+            <div key={i} className={`reveal d${(i%4)+1} bg-[#060C19] p-8 md:p-10 group relative overflow-hidden`}>
+              <div className="pointer-events-none absolute top-4 right-5 font-display text-[88px] md:text-[104px] leading-none text-[color:var(--cream)]/[0.05] group-hover:text-[color:var(--gold)]/20 transition-colors duration-700">
+                {String(i+1).padStart(2,'0')}
+              </div>
+              {/* silhouette */}
+              <div className="w-20 h-20 rounded-full border border-[color:var(--line)] flex items-center justify-center relative">
+                <svg viewBox="0 0 80 80" className="w-full h-full">
+                  <circle cx="40" cy="32" r="14" fill="none" stroke="#D4A24C" strokeWidth="1"/>
+                  <path d="M14 76 C 18 56, 32 50, 40 50 C 48 50, 62 56, 66 76" stroke="#D4A24C" strokeWidth="1" fill="none"/>
+                </svg>
+              </div>
+              <h3 className="font-display text-3xl mt-6">{p.n}</h3>
+              <div className="text-[color:var(--gold)] text-sm mt-1 tracking-wide">{p.r}</div>
+              <div className="mt-6 text-sm text-[color:var(--cream)]/70">{p.q}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Contact(){
+  return (
+    <section id="contact" className="relative py-32 md:py-44 overflow-hidden">
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0" style={{background:"radial-gradient(800px 500px at 50% 0%, rgba(212,162,76,.18), transparent 60%), linear-gradient(180deg,#070E1C,#050B17)"}}/>
+        <svg className="absolute inset-x-0 bottom-0 w-full opacity-30" viewBox="0 0 1400 200" preserveAspectRatio="none">
+          <path d="M0 120 Q 350 60 700 120 T 1400 120 V200 H0 Z" fill="#0A162A"/>
+        </svg>
+      </div>
+
+      <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+        <div className="eyebrow reveal mb-8 justify-self-center text-center">§ 05 — Отправление</div>
+        <h2 className="reveal font-display text-center text-[clamp(2.8rem,7vw,8rem)] leading-[.9] tracking-[-0.02em]">
+          Поднимем <span className="italic">паруса</span><br/>
+          <span className="gold shimmer">вместе?</span>
+        </h2>
+        <p className="reveal d2 mt-10 text-center text-lg text-[color:var(--cream)]/70 max-w-xl mx-auto">
+          Расскажите, куда держите курс. Ответим в течение одного рабочего дня
+          и предложим маршрут.
+        </p>
+
+        <form onSubmit={(e)=>{e.preventDefault(); alert('Спасибо! Мы уже поднимаем паруса.');}} className="reveal d3 mt-16 max-w-2xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-x-10 gap-y-2">
+            <input className="field" placeholder="Ваше имя" required/>
+            <input className="field" placeholder="Email или Telegram" required/>
+            <input className="field md:col-span-2" placeholder="Компания"/>
+            <textarea className="field md:col-span-2 resize-none" rows="3" placeholder="О чём проект?"/>
+          </div>
+          <div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div className="text-xs text-[color:var(--mist)] font-mono tracking-widest uppercase">
+              Нажимая, вы принимаете политику конфиденциальности
+            </div>
+            <button className="btn-gold">
+              Отправить бриф
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </button>
+          </div>
+        </form>
+
+        <div className="mt-24 grid md:grid-cols-3 gap-6 text-sm">
+          {[
+            ["Пишите","hello@parusa.studio"],
+            ["Звоните","+7 (495) 000-00-00"],
+            ["Приходите","ул. Николая Ершова, 1А · Korston, Казань, 420015"],
+          ].map(([k,v],i)=>(
+            <div key={i} className="border-t border-[color:var(--line)] pt-5">
+              <div className="font-mono text-[10px] tracking-[0.3em] uppercase text-[color:var(--gold)]">{k}</div>
+              <div className="mt-2 text-[color:var(--cream)]">{v}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Footer(){
+  return (
+    <footer className="relative border-t border-[color:var(--line)] py-10 bg-[#040812]">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex items-center gap-3">
+          <svg width="24" height="24" viewBox="0 0 40 40" fill="none">
+            <path d="M20 4 L34 34 L6 34 Z" stroke="#D4A24C" strokeWidth="1.2" fill="rgba(212,162,76,.08)"/>
+            <path d="M20 4 L20 34" stroke="#D4A24C" strokeWidth="1.2"/>
+          </svg>
+          <span className="font-display text-lg">Паруса</span>
+        </div>
+        <div className="text-xs text-[color:var(--mist)] font-mono tracking-widest uppercase text-center">
+          Сделано с попутным ветром в Казани
+        </div>
+        <div className="flex items-center gap-5 text-xs text-[color:var(--cream)]/70">
+          <a className="ulink" href="https://t.me/" target="_blank" rel="noopener">Telegram</a>
+          <a className="ulink" href="https://vk.com/" target="_blank" rel="noopener">VK</a>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function Cursor(){
+  const dot = useRef(null), ring = useRef(null);
+  useEffect(()=>{
+    if(!matchMedia('(hover:hover)').matches) return;
+    let tx = window.innerWidth/2, ty = window.innerHeight/2;
+    let dx = tx, dy = ty, rx = tx, ry = ty;
+    let running = true;
+    const move = e=>{ tx = e.clientX; ty = e.clientY; };
+    const tick = ()=>{
+      if(!running) return;
+      // dot: near-instant follow (lerp 0.55) for crisp pointer feel
+      dx += (tx - dx) * 0.55;
+      dy += (ty - dy) * 0.55;
+      // ring: smooth trailing (lerp 0.15) for 60fps silky lag
+      rx += (tx - rx) * 0.15;
+      ry += (ty - ry) * 0.15;
+      if(dot.current)  dot.current.style.transform  = `translate3d(${dx}px,${dy}px,0) translate(-50%,-50%)`;
+      if(ring.current) ring.current.style.transform = `translate3d(${rx}px,${ry}px,0) translate(-50%,-50%)`;
+      requestAnimationFrame(tick);
+    };
+    const over = e=>{
+      if(e.target.closest('a,button,.service-card,input,textarea')) document.body.classList.add('cursor-grow');
+      else document.body.classList.remove('cursor-grow');
+    };
+    window.addEventListener('mousemove',move,{passive:true});
+    window.addEventListener('mouseover',over);
+    requestAnimationFrame(tick);
+    return ()=>{ running = false; window.removeEventListener('mousemove',move); window.removeEventListener('mouseover',over); };
+  },[]);
+  return (<>
+    <div ref={dot} className="cursor-dot"/>
+    <div ref={ring} className="cursor-ring"/>
+  </>);
+}
+
+function App(){
+  useReveal();
+  return (
+    <>
+      <Cursor/>
+      <Nav/>
+      <main>
+        <Hero/>
+        <Marquee/>
+        <Services/>
+        <Process/>
+        <Results/>
+        <Team/>
+        <Contact/>
+      </main>
+      <Footer/>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

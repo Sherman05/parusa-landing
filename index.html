@@ -196,6 +196,8 @@
   }
 
   /* selection */
+  @keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+
   ::selection{background:var(--gold);color:var(--ink)}
   ::-webkit-scrollbar{width:10px;height:10px}
   ::-webkit-scrollbar-track{background:var(--ink)}
@@ -752,28 +754,84 @@ function Contact(){
           и предложим маршрут.
         </p>
 
-        <form onSubmit={(e)=>{e.preventDefault(); alert('Спасибо! Мы уже поднимаем паруса.');}} className="reveal d3 mt-16 max-w-2xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-x-10 gap-y-2">
-            <input className="field" placeholder="Ваше имя" required/>
-            <input className="field" placeholder="Email или Telegram" required/>
-            <input className="field md:col-span-2" placeholder="Компания"/>
-            <textarea className="field md:col-span-2 resize-none" rows="3" placeholder="О чём проект?"/>
-          </div>
-          <div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div className="text-xs text-[color:var(--mist)] font-mono tracking-widest uppercase">
-              Нажимая, вы принимаете политику конфиденциальности
-            </div>
-            <button className="btn-gold">
-              Отправить бриф
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            </button>
-          </div>
-        </form>
+        {(()=>{
+          const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxWoTLc5MZYcQhAAiR0inzQHS6x9dG95D4sV_oB7c5-Lw6fG-3I4_FpjOee6YrL_78/exec';
+          const [agreed, setAgreed] = React.useState(false);
+          const [status, setStatus] = React.useState('idle');
+          const nameRef = React.useRef(null);
+          const contactRef = React.useRef(null);
+          const companyRef = React.useRef(null);
+          const projectRef = React.useRef(null);
+
+          if (status === 'success') {
+            return (
+              <div className="mt-16 max-w-2xl mx-auto text-center py-16" style={{animation:'fadeIn 1s cubic-bezier(.2,.7,0,1) forwards'}}>
+                <div className="font-display text-[clamp(1.8rem,4vw,3rem)] leading-[1.1] gold mb-6">Заявка принята</div>
+                <p className="text-lg text-[color:var(--cream)]/80 leading-relaxed">Мы свяжемся с вами в течение одного рабочего дня<br/>и предложим маршрут.</p>
+                <p className="mt-6 text-sm text-[color:var(--mist)]">Если вопрос срочный — пишите в Telegram: <a href="https://t.me/parusa_manager" target="_blank" rel="noopener" className="ulink text-[color:var(--gold)]">@parusa_manager</a></p>
+              </div>
+            );
+          }
+          if (status === 'error') {
+            return (
+              <div className="reveal d3 mt-16 max-w-2xl mx-auto text-center py-16">
+                <div className="font-display text-2xl mb-4">Что-то пошло не так</div>
+                <p className="text-[color:var(--cream)]/70">Напишите нам напрямую на <a href="mailto:main@parusa.tech" className="ulink text-[color:var(--gold)]">main@parusa.tech</a></p>
+              </div>
+            );
+          }
+
+          const handleSubmit = async (e) => {
+            e.preventDefault();
+            setStatus('sending');
+            const payload = {
+              name: nameRef.current.value,
+              contact: contactRef.current.value,
+              company: companyRef.current.value,
+              project: projectRef.current.value,
+            };
+            console.log('[Form] Отправляем данные:', payload);
+            try {
+              const res = await fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+              });
+              console.log('[Form] Ответ получен, type:', res.type, 'status:', res.status);
+              setStatus('success');
+            } catch (err) {
+              console.error('[Form] Ошибка отправки:', err);
+              setStatus('error');
+            }
+          };
+
+          return (
+            <form onSubmit={handleSubmit} className="reveal d3 mt-16 max-w-2xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-x-10 gap-y-2">
+                <input ref={nameRef} className="field" placeholder="Ваше имя" required/>
+                <input ref={contactRef} className="field" placeholder="Email, Telegram или MAX" required/>
+                <input ref={companyRef} className="field md:col-span-2" placeholder="Компания"/>
+                <textarea ref={projectRef} className="field md:col-span-2 resize-none" rows="3" placeholder="О чём проект?"/>
+              </div>
+              <div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-6">
+                <label className="flex items-start gap-3 cursor-pointer text-xs text-[color:var(--mist)] select-none">
+                  <input type="checkbox" checked={agreed} onChange={()=>setAgreed(!agreed)} className="mt-0.5 accent-[#D4A24C]"/>
+                  <span>Нажимая, вы соглашаетесь с{' '}<a href="privacy.html" target="_blank" rel="noopener" className="ulink text-[color:var(--gold)]">политикой конфиденциальности</a></span>
+                </label>
+                <button className="btn-gold" disabled={!agreed || status === 'sending'} style={{opacity: (agreed && status !== 'sending') ? 1 : 0.4, pointerEvents: (agreed && status !== 'sending') ? 'auto' : 'none'}}>
+                  {status === 'sending' ? 'Отправляем...' : 'Отправить бриф'}
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </button>
+              </div>
+            </form>
+          );
+        })()}
 
         <div className="mt-24 grid md:grid-cols-3 gap-6 text-sm">
           {[
-            ["Пишите","info@parusa.tech"],
-            ["Звоните","+7 (495) 000-00-00"],
+            ["Пишите","main@parusa.tech"],
+            ["Звоните","+7 (999) 265-00-33"],
             ["Приходите","ул. Николая Ершова, 1А · Korston, Казань, 420015"],
           ].map(([k,v],i)=>(
             <div key={i} className="border-t border-[color:var(--line)] pt-5">
@@ -792,18 +850,28 @@ function Footer(){
     <footer className="relative border-t border-[color:var(--line)] py-10 bg-[#040812]">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-3">
-          <svg width="24" height="24" viewBox="0 0 40 40" fill="none">
-            <path d="M20 4 L34 34 L6 34 Z" stroke="#D4A24C" strokeWidth="1.2" fill="rgba(212,162,76,.08)"/>
-            <path d="M20 4 L20 34" stroke="#D4A24C" strokeWidth="1.2"/>
+          <svg width="34" height="34" viewBox="0 0 110 120" fill="none">
+            <defs>
+              <linearGradient id="g1f" x1="0" y1="1" x2="0" y2="0">
+                <stop offset="0" stopColor="#C9A84C"/>
+                <stop offset="0.5" stopColor="#E8D5A3"/>
+                <stop offset="1" stopColor="#F5E7B8"/>
+              </linearGradient>
+            </defs>
+            <path d="M55 4 L104 98 L55 82 L6 98 Z" fill="none" stroke="rgba(232,213,163,.5)" strokeWidth="1.8"/>
+            <path d="M55 20 L86 88 L55 74 L24 88 Z" fill="url(#g1f)"/>
+            <circle cx="55" cy="4" r="3" fill="#F5E7B8"/>
           </svg>
-          <span className="font-display text-lg">Паруса</span>
+          <div className="leading-none">
+            <div className="font-display text-[22px] tracking-tight">Паруса</div>
+          </div>
         </div>
         <div className="text-xs text-[color:var(--mist)] font-mono tracking-widest uppercase text-center">
           Сделано с попутным ветром в Казани
         </div>
         <div className="flex items-center gap-5 text-xs text-[color:var(--cream)]/70">
-          <a className="ulink" href="https://t.me/" target="_blank" rel="noopener">Telegram</a>
-          <a className="ulink" href="https://vk.com/" target="_blank" rel="noopener">VK</a>
+          <a className="ulink" href="https://t.me/parusa_manager" target="_blank" rel="noopener">Telegram</a>
+          <a className="ulink" href="https://max.ru/u/f9LHodD0cOKyvXihVX2qTLPRPyTuBJ5HVyyzC6pm3lYzTV0CAoqot0K3ZIs" target="_blank" rel="noopener">MAX</a>
         </div>
       </div>
     </footer>

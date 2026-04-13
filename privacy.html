@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Политика конфиденциальности — Паруса</title>
+<meta name="description" content="Политика конфиденциальности сайта Паруса" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=Onest:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<style>
+  :root{
+    --ink:#070E1C;
+    --ink-2:#0C1A31;
+    --ink-3:#11223F;
+    --gold:#D4A24C;
+    --gold-hi:#F5D98B;
+    --gold-deep:#8A6323;
+    --cream:#F4EAD5;
+    --mist:#8FA3B8;
+    --line: rgba(212,162,76,.22);
+  }
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--cream);
+    font-family:'Onest',system-ui,sans-serif;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .font-display{font-family:'Playfair Display',serif;font-feature-settings:"liga","dlig"}
+  .font-mono{font-family:'JetBrains Mono',monospace}
+
+  .grain::before{
+    content:"";position:fixed;inset:-50%;pointer-events:none;z-index:60;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity:.7;mix-blend-mode:overlay;
+  }
+
+  .gold{
+    background:linear-gradient(180deg,var(--gold-hi) 0%,var(--gold) 55%,var(--gold-deep) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+
+  .ulink{position:relative}
+  .ulink::after{
+    content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;
+    background:var(--gold);transform:scaleX(.2);transform-origin:left;
+    transition:transform .6s cubic-bezier(.2,.7,0,1);
+  }
+  .ulink:hover::after{transform:scaleX(1)}
+
+  .btn-ghost{
+    display:inline-flex;align-items:center;gap:.75rem;
+    padding:1rem 1.75rem;border:1px solid var(--line);color:var(--cream);
+    transition:background .4s, border-color .4s;
+  }
+  .btn-ghost:hover{background:rgba(212,162,76,.08);border-color:var(--gold)}
+
+  .nav-bg{
+    background:linear-gradient(180deg, rgba(7,14,28,.85), rgba(7,14,28,.2));
+    backdrop-filter:blur(14px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+  }
+
+  ::selection{background:var(--gold);color:var(--ink)}
+
+  ::-webkit-scrollbar{width:10px;height:10px}
+  ::-webkit-scrollbar-track{background:var(--ink)}
+  ::-webkit-scrollbar-thumb{background:var(--ink-3);border-radius:10px}
+  ::-webkit-scrollbar-thumb:hover{background:var(--gold-deep)}
+
+  @media (hover:hover){
+    .cursor-dot{position:fixed;top:0;left:0;pointer-events:none;z-index:100;width:6px;height:6px;border-radius:999px;background:var(--gold-hi);mix-blend-mode:difference;will-change:transform}
+    .cursor-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:100;width:36px;height:36px;border-radius:999px;border:1px solid rgba(245,217,139,.5);will-change:transform;transition:width .35s cubic-bezier(.2,.7,0,1), height .35s cubic-bezier(.2,.7,0,1), border-color .35s}
+    .cursor-grow .cursor-ring{width:72px;height:72px;border-color:var(--gold-hi)}
+    body:hover .cursor-dot,body:hover .cursor-ring{opacity:1}
+  }
+</style>
+</head>
+<body class="grain">
+<div id="root"></div>
+
+<script type="text/babel" data-presets="env,react">
+const { useEffect, useRef, useState } = React;
+
+function Nav(){
+  const [scrolled,setScrolled] = useState(false);
+  useEffect(()=>{
+    const onScroll = ()=>setScrolled(window.scrollY>40);
+    window.addEventListener('scroll',onScroll);
+    return ()=>window.removeEventListener('scroll',onScroll);
+  },[]);
+  return (
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled?'nav-bg py-4':'py-6'}`}>
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10 flex items-center justify-between">
+        <a href="index.html" className="flex items-center gap-3 group">
+          <svg width="34" height="34" viewBox="0 0 110 120" fill="none">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="1" x2="0" y2="0">
+                <stop offset="0" stopColor="#C9A84C"/>
+                <stop offset="0.5" stopColor="#E8D5A3"/>
+                <stop offset="1" stopColor="#F5E7B8"/>
+              </linearGradient>
+            </defs>
+            <path d="M55 4 L104 98 L55 82 L6 98 Z" fill="none" stroke="rgba(232,213,163,.5)" strokeWidth="1.8"/>
+            <path d="M55 20 L86 88 L55 74 L24 88 Z" fill="url(#g1)"/>
+            <circle cx="55" cy="4" r="3" fill="#F5E7B8"/>
+          </svg>
+          <div className="leading-none">
+            <div className="font-display text-[22px] tracking-tight">Паруса</div>
+          </div>
+        </a>
+        <a href="index.html" className="btn-ghost text-sm !py-2.5 !px-5">
+          ← На главную
+        </a>
+      </div>
+    </header>
+  );
+}
+
+function Footer(){
+  return (
+    <footer className="relative border-t border-[color:var(--line)] py-10 bg-[#040812]">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex items-center gap-3">
+          <svg width="34" height="34" viewBox="0 0 110 120" fill="none">
+            <defs>
+              <linearGradient id="g1f" x1="0" y1="1" x2="0" y2="0">
+                <stop offset="0" stopColor="#C9A84C"/>
+                <stop offset="0.5" stopColor="#E8D5A3"/>
+                <stop offset="1" stopColor="#F5E7B8"/>
+              </linearGradient>
+            </defs>
+            <path d="M55 4 L104 98 L55 82 L6 98 Z" fill="none" stroke="rgba(232,213,163,.5)" strokeWidth="1.8"/>
+            <path d="M55 20 L86 88 L55 74 L24 88 Z" fill="url(#g1f)"/>
+            <circle cx="55" cy="4" r="3" fill="#F5E7B8"/>
+          </svg>
+          <div className="leading-none">
+            <div className="font-display text-[22px] tracking-tight">Паруса</div>
+          </div>
+        </div>
+        <div className="text-xs text-[color:var(--mist)] font-mono tracking-widest uppercase text-center">
+          Сделано с попутным ветром в Казани
+        </div>
+        <div className="flex items-center gap-5 text-xs text-[color:var(--cream)]/70">
+          <a className="ulink" href="https://t.me/parusa_manager" target="_blank" rel="noopener">Telegram</a>
+          <a className="ulink" href="https://max.ru/u/f9LHodD0cOKyvXihVX2qTLPRPyTuBJ5HVyyzC6pm3lYzTV0CAoqot0K3ZIs" target="_blank" rel="noopener">MAX</a>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function Cursor(){
+  const dot = useRef(null), ring = useRef(null);
+  useEffect(()=>{
+    if(!matchMedia('(hover:hover)').matches) return;
+    let tx = window.innerWidth/2, ty = window.innerHeight/2;
+    let dx = tx, dy = ty, rx = tx, ry = ty;
+    let running = true;
+    const move = e=>{ tx = e.clientX; ty = e.clientY; };
+    const tick = ()=>{
+      if(!running) return;
+      dx += (tx - dx) * 0.55;
+      dy += (ty - dy) * 0.55;
+      rx += (tx - rx) * 0.15;
+      ry += (ty - ry) * 0.15;
+      if(dot.current)  dot.current.style.transform  = `translate3d(${dx}px,${dy}px,0) translate(-50%,-50%)`;
+      if(ring.current) ring.current.style.transform = `translate3d(${rx}px,${ry}px,0) translate(-50%,-50%)`;
+      requestAnimationFrame(tick);
+    };
+    const over = e=>{
+      if(e.target.closest('a,button')) document.body.classList.add('cursor-grow');
+      else document.body.classList.remove('cursor-grow');
+    };
+    window.addEventListener('mousemove',move,{passive:true});
+    window.addEventListener('mouseover',over);
+    requestAnimationFrame(tick);
+    return ()=>{ running = false; window.removeEventListener('mousemove',move); window.removeEventListener('mouseover',over); };
+  },[]);
+  return (<>
+    <div ref={dot} className="cursor-dot"/>
+    <div ref={ring} className="cursor-ring"/>
+  </>);
+}
+
+function Privacy(){
+  return (
+    <section className="pt-40 pb-24 px-6 md:px-10">
+      <div className="max-w-[800px] mx-auto">
+        <div className="font-mono text-[11px] tracking-[0.25em] uppercase text-[color:var(--gold)] flex items-center gap-3 mb-8">
+          <span className="inline-block w-8 h-px bg-[color:var(--gold)]"></span>
+          Правовая информация
+        </div>
+
+        <h1 className="font-display text-[clamp(2rem,5vw,4rem)] leading-[1.05] tracking-[-0.02em] mb-16">
+          Политика<br/><span className="italic gold">конфиденциальности</span>
+        </h1>
+
+        <div className="space-y-12 text-[color:var(--cream)]/85 leading-relaxed">
+
+          <div>
+            <h2 className="font-display text-xl mb-4">1. Общие положения</h2>
+            <p>Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональных данных пользователей сайта <strong>parusa.tech</strong> (далее — Сайт).</p>
+            <p className="mt-3">Оператор персональных данных: <strong>Машухин Илья</strong> (физическое лицо).</p>
+            <p className="mt-3">Обработка персональных данных осуществляется в соответствии с Федеральным законом №152-ФЗ «О персональных данных».</p>
+            <p className="mt-3">Дата вступления в силу: 13 апреля 2026 года.</p>
+          </div>
+
+          <div>
+            <h2 className="font-display text-xl mb-4">2. Какие данные мы собираем</h2>
+            <p>Через форму обратной связи на Сайте мы собираем следующие данные:</p>
+            <ul className="mt-3 space-y-2 ml-5 list-disc text-[color:var(--cream)]/70">
+              <li>Имя</li>
+              <li>Email, Telegram или MAX</li>
+              <li>Название компании</li>
+              <li>Описание проекта</li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="font-display text-xl mb-4">3. Цель сбора данных</h2>
+            <p>Персональные данные собираются исключительно для обработки заявок и связи с потенциальными клиентами.</p>
+          </div>
+
+          <div>
+            <h2 className="font-display text-xl mb-4">4. Передача данных третьим лицам</h2>
+            <p>Мы не передаём персональные данные пользователей третьим лицам. Данные используются только оператором для целей, указанных в пункте 3.</p>
+          </div>
+
+          <div>
+            <h2 className="font-display text-xl mb-4">5. Сроки хранения данных</h2>
+            <p>Персональные данные хранятся до момента отзыва согласия на их обработку со стороны пользователя.</p>
+          </div>
+
+          <div>
+            <h2 className="font-display text-xl mb-4">6. Права пользователя</h2>
+            <p>Пользователь вправе в любой момент запросить удаление своих персональных данных, направив письмо на адрес <a href="mailto:main@parusa.tech" className="ulink text-[color:var(--gold)]">main@parusa.tech</a>.</p>
+          </div>
+
+          <div>
+            <h2 className="font-display text-xl mb-4">7. Cookies и аналитика</h2>
+            <p>Сайт не использует файлы cookies и системы аналитики.</p>
+          </div>
+
+          <div>
+            <h2 className="font-display text-xl mb-4">8. Контакты</h2>
+            <p>По всем вопросам, связанным с обработкой персональных данных, вы можете обратиться по адресу: <a href="mailto:main@parusa.tech" className="ulink text-[color:var(--gold)]">main@parusa.tech</a>.</p>
+          </div>
+
+          <div>
+            <h2 className="font-display text-xl mb-4">9. Изменения политики</h2>
+            <p>Оператор оставляет за собой право вносить изменения в настоящую Политику. Актуальная версия всегда доступна на данной странице.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function App(){
+  return (
+    <>
+      <Cursor/>
+      <Nav/>
+      <main>
+        <Privacy/>
+      </main>
+      <Footer/>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

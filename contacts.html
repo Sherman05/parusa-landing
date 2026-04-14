@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты — EVOLUTECH | Металлорежущий инструмент и оснастка</title>
+    <meta name="description" content="Свяжитесь с EVOLUTECH — расскажите о задаче, подберём решение по металлорежущему инструменту и оснастке для ЧПУ.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            deep: '#021024',
+                            dark: '#052659',
+                            mid: '#5483B3',
+                            light: '#7DA0CA',
+                            bright: '#C1E8FF',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --deep: #021024;
+            --dark: #052659;
+            --mid: #5483B3;
+            --light: #7DA0CA;
+            --bright: #C1E8FF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--deep);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* ===== SMOOTH SECTION TRANSITIONS ===== */
+        .section-gradient-1 {
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 80%, rgba(5,38,89,0.6) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 40% at 80% 20%, rgba(84,131,179,0.1) 0%, transparent 60%),
+                linear-gradient(180deg, var(--deep) 0%, #031a3a 50%, var(--deep) 100%);
+        }
+
+        .section-gradient-2 {
+            background:
+                radial-gradient(ellipse 70% 50% at 70% 30%, rgba(5,38,89,0.5) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 20% 70%, rgba(84,131,179,0.08) 0%, transparent 60%),
+                linear-gradient(180deg, var(--deep) 0%, #021a38 50%, var(--deep) 100%);
+        }
+
+        .section-gradient-cta {
+            background:
+                radial-gradient(ellipse 70% 60% at 50% 50%, rgba(5,38,89,0.7) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 30% at 20% 20%, rgba(84,131,179,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse 40% 30% at 80% 80%, rgba(84,131,179,0.1) 0%, transparent 50%),
+                linear-gradient(180deg, var(--deep) 0%, #052659 50%, var(--deep) 100%);
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            transition: background 0.3s, backdrop-filter 0.3s, box-shadow 0.3s;
+        }
+
+        .header.scrolled {
+            background: rgba(2, 16, 36, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 1px 0 rgba(84,131,179,0.1);
+        }
+
+        /* ===== GLOW EFFECTS ===== */
+        .glow-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--mid), transparent);
+            opacity: 0.3;
+        }
+
+        .card-glow {
+            position: relative;
+            background: rgba(5, 38, 89, 0.6);
+            border: 1px solid rgba(84, 131, 179, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-glow::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(84,131,179,0.2), transparent, rgba(125,160,202,0.1));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .card-glow:hover {
+            transform: translateY(-4px);
+            border-color: rgba(84, 131, 179, 0.35);
+            box-shadow: 0 8px 32px rgba(5, 38, 89, 0.5), 0 0 20px rgba(84, 131, 179, 0.1);
+        }
+
+        .card-glow:hover::before {
+            opacity: 1;
+        }
+
+        /* ===== CTA GLOW PULSE ===== */
+        .btn-primary {
+            background: var(--mid);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            box-shadow: 0 0 20px rgba(84,131,179,0.4);
+            opacity: 0;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        .btn-primary:hover {
+            background: #6090c0;
+            box-shadow: 0 0 30px rgba(84,131,179,0.3);
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(84,131,179,0.5);
+            color: var(--bright);
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--mid);
+            background: rgba(84,131,179,0.1);
+            box-shadow: 0 0 20px rgba(84,131,179,0.15);
+        }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-scale.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ===== MOBILE NAV ===== */
+        .mobile-nav {
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-nav.open {
+            transform: translateX(0);
+        }
+
+        /* ===== FORM INPUTS ===== */
+        .form-input {
+            background: rgba(5, 38, 89, 0.5);
+            border: 1px solid rgba(84, 131, 179, 0.2);
+            color: #fff;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--mid);
+            box-shadow: 0 0 0 3px rgba(84, 131, 179, 0.15);
+        }
+
+        .form-input::placeholder {
+            color: rgba(255,255,255,0.35);
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--deep);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--dark);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--mid);
+        }
+
+        /* ===== STAGGER ===== */
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+        .stagger-6 { transition-delay: 0.6s; }
+
+        /* ===== MAP PLACEHOLDER ===== */
+        .map-placeholder {
+            background:
+                radial-gradient(ellipse 60% 50% at 50% 50%, rgba(5,38,89,0.8) 0%, transparent 70%),
+                linear-gradient(135deg, #0a1e3d 0%, #0d2a4a 25%, #0a1e3d 50%, #0d2a4a 75%, #0a1e3d 100%);
+            border: 1px solid rgba(84, 131, 179, 0.15);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header fixed top-0 left-0 w-full z-50 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 lg:h-20">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" class="flex-shrink-0">
+                    <path d="M18 2L32 10v16L18 34 4 26V10L18 2z" stroke="var(--mid)" stroke-width="1.5" fill="none"/>
+                    <path d="M18 8L26 12.5v9L18 26l-8-4.5v-9L18 8z" stroke="var(--light)" stroke-width="1" fill="none" opacity="0.6"/>
+                    <path d="M18 14l4 2.3v4.4L18 23l-4-2.3v-4.4L18 14z" fill="var(--mid)" opacity="0.4"/>
+                </svg>
+                <span class="text-lg lg:text-xl font-bold tracking-wider text-white">EVOLUTECH</span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="catalog.html" class="text-sm text-white/60 hover:text-white transition-colors">Каталог</a>
+                <a href="about.html" class="text-sm text-white/60 hover:text-white transition-colors">О компании</a>
+                <a href="process.html" class="text-sm text-white/60 hover:text-white transition-colors">Как работаем</a>
+                <a href="index.html#industries" class="text-sm text-white/60 hover:text-white transition-colors">Отрасли</a>
+                <a href="contacts.html" class="text-sm text-white hover:text-white transition-colors">Контакты</a>
+            </nav>
+
+            <!-- Right side -->
+            <div class="hidden lg:flex items-center gap-6">
+                <a href="tel:+79999999999" class="text-sm text-white/70 hover:text-white transition-colors">+7 (999) 999-99-99</a>
+                <a href="contacts.html" class="btn-primary px-5 py-2.5 rounded-lg text-sm font-medium">Обсудить задачу</a>
+            </div>
+
+            <!-- Mobile burger -->
+            <button id="burger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Меню">
+                <span class="w-6 h-0.5 bg-white/70 transition-all origin-center"></span>
+                <span class="w-6 h-0.5 bg-white/70 transition-all"></span>
+                <span class="w-6 h-0.5 bg-white/70 transition-all origin-center"></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div id="mobile-nav" class="mobile-nav fixed top-0 right-0 w-72 h-full bg-[#031a3a]/95 backdrop-blur-xl z-50 p-8 flex flex-col lg:hidden">
+        <button id="close-nav" class="self-end p-2 text-white/60 hover:text-white mb-8" aria-label="Закрыть">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <nav class="flex flex-col gap-6">
+            <a href="catalog.html" class="text-lg text-white/70 hover:text-white transition-colors">Каталог</a>
+            <a href="about.html" class="text-lg text-white/70 hover:text-white transition-colors">О компании</a>
+            <a href="process.html" class="text-lg text-white/70 hover:text-white transition-colors">Как работаем</a>
+            <a href="index.html#industries" class="text-lg text-white/70 hover:text-white transition-colors">Отрасли</a>
+            <a href="contacts.html" class="text-lg text-white hover:text-white transition-colors">Контакты</a>
+        </nav>
+        <div class="mt-auto">
+            <a href="tel:+79999999999" class="block text-sm text-white/50 mb-4">+7 (999) 999-99-99</a>
+            <a href="contacts.html" class="btn-primary block text-center px-5 py-3 rounded-lg text-sm font-medium">Обсудить задачу</a>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile overlay -->
+<div id="mobile-overlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden"></div>
+
+
+<!-- ===== HERO ===== -->
+<section class="relative pt-28 pb-12 lg:pt-36 lg:pb-16 section-gradient-1">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Breadcrumb -->
+        <nav class="mb-8 reveal">
+            <ol class="flex items-center gap-2 text-sm">
+                <li><a href="index.html" class="text-white/40 hover:text-white/60 transition-colors">Главная</a></li>
+                <li class="text-white/20">&rarr;</li>
+                <li class="text-white/70">Контакты</li>
+            </ol>
+        </nav>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] mb-4 reveal">
+            <span class="text-white">Свяжитесь</span>
+            <span class="italic font-light" style="color: var(--light);"> с нами</span>
+        </h1>
+        <p class="text-base sm:text-lg text-white/50 max-w-xl reveal stagger-1">
+            Расскажите о задаче — подберём решение
+        </p>
+    </div>
+</section>
+
+
+<!-- ===== FORM + CONTACT INFO ===== -->
+<section class="relative py-16 lg:py-24 section-gradient-2">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+
+            <!-- Left: Contact Form -->
+            <div class="reveal-left">
+                <h2 class="text-2xl font-semibold mb-8 text-white/90">Оставьте заявку</h2>
+                <form id="contact-form" class="space-y-5">
+                    <div>
+                        <label for="name" class="block text-sm text-white/50 mb-2">Имя <span class="text-brand-mid">*</span></label>
+                        <input type="text" id="name" name="name" required
+                               class="form-input w-full px-4 py-3 rounded-lg text-sm"
+                               placeholder="Ваше имя">
+                    </div>
+
+                    <div>
+                        <label for="contact" class="block text-sm text-white/50 mb-2">Email, Telegram или телефон <span class="text-brand-mid">*</span></label>
+                        <input type="text" id="contact" name="contact" required
+                               class="form-input w-full px-4 py-3 rounded-lg text-sm"
+                               placeholder="Как с вами связаться">
+                    </div>
+
+                    <div>
+                        <label for="company" class="block text-sm text-white/50 mb-2">Компания</label>
+                        <input type="text" id="company" name="company"
+                               class="form-input w-full px-4 py-3 rounded-lg text-sm"
+                               placeholder="Название компании">
+                    </div>
+
+                    <div>
+                        <label for="task" class="block text-sm text-white/50 mb-2">О задаче</label>
+                        <textarea id="task" name="task" rows="5"
+                                  class="form-input w-full px-4 py-3 rounded-lg text-sm resize-none"
+                                  placeholder="Материал, операция, оборудование, объём..."></textarea>
+                    </div>
+
+                    <button type="submit" id="submit-btn"
+                            class="btn-primary w-full px-8 py-4 rounded-xl text-base font-medium">
+                        Отправить заявку
+                    </button>
+
+                    <p class="text-xs text-white/25 text-center">
+                        Нажимая кнопку, вы соглашаетесь с
+                        <a href="privacy.html" class="text-white/40 hover:text-white/60 underline transition-colors">политикой конфиденциальности</a>
+                    </p>
+                </form>
+            </div>
+
+            <!-- Right: Contact Info -->
+            <div class="reveal-right">
+                <h2 class="text-2xl font-semibold mb-8 text-white/90">Контактная информация</h2>
+                <div class="space-y-4">
+
+                    <!-- Phone -->
+                    <a href="tel:+79999999999" class="card-glow block rounded-xl p-5 stagger-1">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(84,131,179,0.15);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--light)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-xs text-white/40 mb-1">Телефон</p>
+                                <p class="text-sm text-white/80 font-medium">+7 (999) 999-99-99</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Email -->
+                    <a href="mailto:info@evolutech.ru" class="card-glow block rounded-xl p-5 stagger-2">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(84,131,179,0.15);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--light)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                    <path d="M22 4l-10 8L2 4"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-xs text-white/40 mb-1">Email</p>
+                                <p class="text-sm text-white/80 font-medium">info@evolutech.ru</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Telegram -->
+                    <a href="https://t.me/evolutech" target="_blank" rel="noopener" class="card-glow block rounded-xl p-5 stagger-3">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(84,131,179,0.15);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--light)">
+                                    <path d="M11.944 0A12 12 0 1 0 24 12.056A12.014 12.014 0 0 0 11.944 0Zm5.654 7.876L15.3 18.122a.75.75 0 0 1-1.068.389l-3.253-2.398-1.566 1.51a.5.5 0 0 1-.474.133l.232-3.322 6.04-5.46c.263-.237-.057-.37-.408-.133l-7.467 4.7-3.214-1.004a.5.5 0 0 1-.018-.942l12.554-4.84a.5.5 0 0 1 .65.621Z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-xs text-white/40 mb-1">Telegram</p>
+                                <p class="text-sm text-white/80 font-medium">@evolutech</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Working Hours -->
+                    <div class="card-glow rounded-xl p-5 stagger-4">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(84,131,179,0.15);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--light)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12 6 12 12 16 14"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-xs text-white/40 mb-1">Режим работы</p>
+                                <p class="text-sm text-white/80 font-medium">Пн-Пт, 9:00-18:00 (МСК)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="card-glow rounded-xl p-5 stagger-5">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(84,131,179,0.15);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--light)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-xs text-white/40 mb-1">Адрес</p>
+                                <p class="text-sm text-white/80 font-medium">Москва, Россия</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ===== MAP SECTION ===== -->
+<section class="relative py-16 lg:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal-scale">
+            <div class="map-placeholder rounded-2xl h-80 lg:h-96 flex items-center justify-center">
+                <div class="text-center">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--mid)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4 opacity-40">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    <p class="text-lg text-white/25 font-medium">Карта</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===== BOTTOM CTA ===== -->
+<section class="relative py-16 lg:py-24 section-gradient-cta">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="reveal">
+            <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-white">Предпочитаете мессенджеры?</h2>
+            <p class="text-base text-white/50 mb-8 max-w-lg mx-auto">
+                Напишите нам в Telegram — ответим в рабочее время в течение часа
+            </p>
+            <a href="https://t.me/evolutech" target="_blank" rel="noopener"
+               class="btn-outline inline-flex items-center gap-3 px-8 py-4 rounded-xl text-base font-medium">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M11.944 0A12 12 0 1 0 24 12.056A12.014 12.014 0 0 0 11.944 0Zm5.654 7.876L15.3 18.122a.75.75 0 0 1-1.068.389l-3.253-2.398-1.566 1.51a.5.5 0 0 1-.474.133l.232-3.322 6.04-5.46c.263-.237-.057-.37-.408-.133l-7.467 4.7-3.214-1.004a.5.5 0 0 1-.018-.942l12.554-4.84a.5.5 0 0 1 .65.621Z"/>
+                </svg>
+                Написать в Telegram
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===== FOOTER ===== -->
+<footer class="relative pt-16 pb-8 border-t border-white/[0.04]" style="background: linear-gradient(180deg, var(--deep), #010c1a);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
+            <div>
+                <h4 class="text-sm font-semibold text-white/70 mb-4">Каталог</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="catalog.html#inserts" class="text-sm text-white/35 hover:text-white/60 transition-colors">Токарные пластины</a></li>
+                    <li><a href="catalog.html#endmills" class="text-sm text-white/35 hover:text-white/60 transition-colors">Концевые фрезы</a></li>
+                    <li><a href="catalog.html#drills" class="text-sm text-white/35 hover:text-white/60 transition-colors">Свёрла</a></li>
+                    <li><a href="catalog.html#milling" class="text-sm text-white/35 hover:text-white/60 transition-colors">Фрезерный инструмент</a></li>
+                    <li><a href="catalog.html#threading" class="text-sm text-white/35 hover:text-white/60 transition-colors">Резьбонарезной</a></li>
+                    <li><a href="catalog.html#custom" class="text-sm text-white/35 hover:text-white/60 transition-colors">Специнструмент</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-sm font-semibold text-white/70 mb-4">Компания</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="about.html" class="text-sm text-white/35 hover:text-white/60 transition-colors">О компании</a></li>
+                    <li><a href="process.html" class="text-sm text-white/35 hover:text-white/60 transition-colors">Как работаем</a></li>
+                    <li><a href="about.html#partner" class="text-sm text-white/35 hover:text-white/60 transition-colors">Партнёр KANTISON</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-sm font-semibold text-white/70 mb-4">Клиентам</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="catalog.html" class="text-sm text-white/35 hover:text-white/60 transition-colors">Подобрать инструмент</a></li>
+                    <li><a href="contacts.html" class="text-sm text-white/35 hover:text-white/60 transition-colors">Запросить образец</a></li>
+                    <li><a href="contacts.html" class="text-sm text-white/35 hover:text-white/60 transition-colors">Обсудить задачу</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-sm font-semibold text-white/70 mb-4">Контакты</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="tel:+79999999999" class="text-sm text-white/35 hover:text-white/60 transition-colors">+7 (999) 999-99-99</a></li>
+                    <li><a href="mailto:info@evolutech.ru" class="text-sm text-white/35 hover:text-white/60 transition-colors">info@evolutech.ru</a></li>
+                    <li><a href="#" class="text-sm text-white/35 hover:text-white/60 transition-colors">Telegram</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="glow-line mb-8"></div>
+
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <svg width="24" height="24" viewBox="0 0 36 36" fill="none">
+                    <path d="M18 2L32 10v16L18 34 4 26V10L18 2z" stroke="var(--mid)" stroke-width="1.5" fill="none"/>
+                    <path d="M18 8L26 12.5v9L18 26l-8-4.5v-9L18 8z" stroke="var(--light)" stroke-width="1" fill="none" opacity="0.6"/>
+                </svg>
+                <span class="text-sm font-semibold tracking-wider text-white/50">EVOLUTECH</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <span class="text-xs text-white/25">&copy; 2024 Эволютех. Все права защищены.</span>
+                <a href="privacy.html" class="text-xs text-white/25 hover:text-white/40 transition-colors">Политика конфиденциальности</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+// ===== HEADER SCROLL =====
+const header = document.querySelector('.header');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+}, { passive: true });
+
+
+// ===== MOBILE NAV =====
+const burger = document.getElementById('burger');
+const mobileNav = document.getElementById('mobile-nav');
+const closeNav = document.getElementById('close-nav');
+const overlay = document.getElementById('mobile-overlay');
+
+function openMobileNav() {
+    mobileNav.classList.add('open');
+    overlay.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeMobileNav() {
+    mobileNav.classList.remove('open');
+    overlay.classList.add('hidden');
+    document.body.style.overflow = '';
+}
+
+burger.addEventListener('click', openMobileNav);
+closeNav.addEventListener('click', closeMobileNav);
+overlay.addEventListener('click', closeMobileNav);
+
+mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMobileNav);
+});
+
+
+// ===== INTERSECTION OBSERVER FOR REVEALS =====
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => revealObserver.observe(el));
+
+
+// ===== CONTACT FORM HANDLER =====
+const contactForm = document.getElementById('contact-form');
+const submitBtn = document.getElementById('submit-btn');
+
+contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Отправляем...';
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.7';
+
+    setTimeout(() => {
+        submitBtn.textContent = 'Заявка отправлена';
+        submitBtn.style.background = 'rgba(84, 131, 179, 0.3)';
+
+        setTimeout(() => {
+            contactForm.reset();
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = '1';
+            submitBtn.style.background = '';
+        }, 3000);
+    }, 1000);
+});
+</script>
+
+</body>
+</html>

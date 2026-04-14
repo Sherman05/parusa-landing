@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О компании — EVOLUTECH | Технический партнёр для производства</title>
+    <meta name="description" content="Эволютех — технический партнёр для производств с ЧПУ. Подбор инструмента, тестирование, сопровождение. Официальный партнёр KANTISON (Huaxin).">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            deep: '#021024',
+                            dark: '#052659',
+                            mid: '#5483B3',
+                            light: '#7DA0CA',
+                            bright: '#C1E8FF',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --deep: #021024;
+            --dark: #052659;
+            --mid: #5483B3;
+            --light: #7DA0CA;
+            --bright: #C1E8FF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--deep);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* ===== SMOOTH SECTION TRANSITIONS ===== */
+        .section-gradient-1 {
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 80%, rgba(5,38,89,0.6) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 40% at 80% 20%, rgba(84,131,179,0.1) 0%, transparent 60%),
+                linear-gradient(180deg, var(--deep) 0%, #031a3a 50%, var(--deep) 100%);
+        }
+
+        .section-gradient-2 {
+            background:
+                radial-gradient(ellipse 70% 50% at 70% 30%, rgba(5,38,89,0.5) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 20% 70%, rgba(84,131,179,0.08) 0%, transparent 60%),
+                linear-gradient(180deg, var(--deep) 0%, #021a38 50%, var(--deep) 100%);
+        }
+
+        .section-gradient-3 {
+            background:
+                radial-gradient(ellipse 60% 50% at 50% 50%, rgba(5,38,89,0.4) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 30% at 80% 80%, rgba(84,131,179,0.1) 0%, transparent 50%),
+                linear-gradient(180deg, var(--deep) 0%, #031a3a 40%, #021a38 70%, var(--deep) 100%);
+        }
+
+        .section-gradient-4 {
+            background:
+                radial-gradient(ellipse 80% 60% at 30% 40%, rgba(5,38,89,0.5) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 70% 80%, rgba(84,131,179,0.06) 0%, transparent 50%),
+                linear-gradient(180deg, var(--deep) 0%, #02152e 50%, var(--deep) 100%);
+        }
+
+        .section-gradient-5 {
+            background:
+                radial-gradient(ellipse 70% 50% at 40% 60%, rgba(5,38,89,0.45) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 35% at 75% 25%, rgba(84,131,179,0.08) 0%, transparent 55%),
+                linear-gradient(180deg, var(--deep) 0%, #021830 50%, var(--deep) 100%);
+        }
+
+        .section-gradient-6 {
+            background:
+                radial-gradient(ellipse 65% 55% at 55% 45%, rgba(5,38,89,0.5) 0%, transparent 70%),
+                radial-gradient(ellipse 45% 35% at 15% 75%, rgba(84,131,179,0.07) 0%, transparent 55%),
+                linear-gradient(180deg, var(--deep) 0%, #031a3a 45%, #021a38 75%, var(--deep) 100%);
+        }
+
+        .section-gradient-cta {
+            background:
+                radial-gradient(ellipse 70% 60% at 50% 50%, rgba(5,38,89,0.7) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 30% at 20% 20%, rgba(84,131,179,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse 40% 30% at 80% 80%, rgba(84,131,179,0.1) 0%, transparent 50%),
+                linear-gradient(180deg, var(--deep) 0%, #052659 50%, var(--deep) 100%);
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            transition: background 0.3s, backdrop-filter 0.3s, box-shadow 0.3s;
+        }
+
+        .header.scrolled {
+            background: rgba(2, 16, 36, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 1px 0 rgba(84,131,179,0.1);
+        }
+
+        /* ===== GLOW EFFECTS ===== */
+        .glow-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--mid), transparent);
+            opacity: 0.3;
+        }
+
+        .card-glow {
+            position: relative;
+            background: rgba(5, 38, 89, 0.6);
+            border: 1px solid rgba(84, 131, 179, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-glow::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(84,131,179,0.2), transparent, rgba(125,160,202,0.1));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .card-glow:hover {
+            transform: translateY(-4px);
+            border-color: rgba(84, 131, 179, 0.35);
+            box-shadow: 0 8px 32px rgba(5, 38, 89, 0.5), 0 0 20px rgba(84, 131, 179, 0.1);
+        }
+
+        .card-glow:hover::before {
+            opacity: 1;
+        }
+
+        /* ===== CTA GLOW PULSE ===== */
+        .btn-primary {
+            background: var(--mid);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            box-shadow: 0 0 20px rgba(84,131,179,0.4);
+            opacity: 0;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        .btn-primary:hover {
+            background: #6090c0;
+            box-shadow: 0 0 30px rgba(84,131,179,0.3);
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(84,131,179,0.5);
+            color: var(--bright);
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--mid);
+            background: rgba(84,131,179,0.1);
+            box-shadow: 0 0 20px rgba(84,131,179,0.15);
+        }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-scale.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ===== COUNTER ===== */
+        .counter-value {
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ===== MOBILE NAV ===== */
+        .mobile-nav {
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-nav.open {
+            transform: translateX(0);
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--deep);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--dark);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--mid);
+        }
+
+        /* ===== STAGGER ===== */
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+        .stagger-6 { transition-delay: 0.6s; }
+
+        /* ===== TEAM AVATAR ===== */
+        .team-avatar {
+            background: rgba(5, 38, 89, 0.8);
+            border: 1px solid rgba(84, 131, 179, 0.2);
+            transition: all 0.4s;
+        }
+
+        .team-avatar:hover {
+            border-color: rgba(84, 131, 179, 0.4);
+        }
+
+        /* ===== VALUE PILL ===== */
+        .value-pill {
+            background: rgba(5, 38, 89, 0.5);
+            border: 1px solid rgba(84, 131, 179, 0.15);
+            transition: all 0.3s;
+        }
+
+        .value-pill:hover {
+            border-color: rgba(84, 131, 179, 0.3);
+            background: rgba(5, 38, 89, 0.7);
+        }
+
+        /* ===== PAIN ITEM ===== */
+        .pain-item {
+            position: relative;
+            padding-left: 1.25rem;
+        }
+
+        .pain-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.55em;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--mid);
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header fixed top-0 left-0 w-full z-50 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 lg:h-20">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" class="flex-shrink-0">
+                    <path d="M18 2L32 10v16L18 34 4 26V10L18 2z" stroke="var(--mid)" stroke-width="1.5" fill="none"/>
+                    <path d="M18 8L26 12.5v9L18 26l-8-4.5v-9L18 8z" stroke="var(--light)" stroke-width="1" fill="none" opacity="0.6"/>
+                    <path d="M18 14l4 2.3v4.4L18 23l-4-2.3v-4.4L18 14z" fill="var(--mid)" opacity="0.4"/>
+                </svg>
+                <span class="text-lg lg:text-xl font-bold tracking-wider text-white">EVOLUTECH</span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="catalog.html" class="text-sm text-white/60 hover:text-white transition-colors">Каталог</a>
+                <a href="about.html" class="text-sm text-white hover:text-white transition-colors">О компании</a>
+                <a href="process.html" class="text-sm text-white/60 hover:text-white transition-colors">Как работаем</a>
+                <a href="index.html#industries" class="text-sm text-white/60 hover:text-white transition-colors">Отрасли</a>
+                <a href="contacts.html" class="text-sm text-white/60 hover:text-white transition-colors">Контакты</a>
+            </nav>
+
+            <!-- Right side -->
+            <div class="hidden lg:flex items-center gap-6">
+                <a href="tel:+79999999999" class="text-sm text-white/70 hover:text-white transition-colors">+7 (999) 999-99-99</a>
+                <a href="contacts.html" class="btn-primary px-5 py-2.5 rounded-lg text-sm font-medium">Обсудить задачу</a>
+            </div>
+
+            <!-- Mobile burger -->
+            <button id="burger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Меню">
+                <span class="w-6 h-0.5 bg-white/70 transition-all origin-center"></span>
+                <span class="w-6 h-0.5 bg-white/70 transition-all"></span>
+                <span class="w-6 h-0.5 bg-white/70 transition-all origin-center"></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div id="mobile-nav" class="mobile-nav fixed top-0 right-0 w-72 h-full bg-[#031a3a]/95 backdrop-blur-xl z-50 p-8 flex flex-col lg:hidden">
+        <button id="close-nav" class="self-end p-2 text-white/60 hover:text-white mb-8" aria-label="Закрыть">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <nav class="flex flex-col gap-6">
+            <a href="catalog.html" class="text-lg text-white/70 hover:text-white transition-colors">Каталог</a>
+            <a href="about.html" class="text-lg text-white hover:text-white transition-colors">О компании</a>
+            <a href="process.html" class="text-lg text-white/70 hover:text-white transition-colors">Как работаем</a>
+            <a href="index.html#industries" class="text-lg text-white/70 hover:text-white transition-colors">Отрасли</a>
+            <a href="contacts.html" class="text-lg text-white/70 hover:text-white transition-colors">Контакты</a>
+        </nav>
+        <div class="mt-auto">
+            <a href="tel:+79999999999" class="block text-sm text-white/50 mb-4">+7 (999) 999-99-99</a>
+            <a href="contacts.html" class="btn-primary block text-center px-5 py-3 rounded-lg text-sm font-medium">Обсудить задачу</a>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile overlay -->
+<div id="mobile-overlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden"></div>
+
+
+<!-- ===== HERO ===== -->
+<section class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+    <!-- Gradient overlays -->
+    <div class="absolute inset-0 z-0" style="background: radial-gradient(ellipse 60% 50% at 30% 50%, rgba(5,38,89,0.3) 0%, transparent 70%);"></div>
+    <div class="absolute inset-0 z-0" style="background: radial-gradient(ellipse 40% 40% at 80% 30%, rgba(84,131,179,0.05) 0%, transparent 60%);"></div>
+    <div class="absolute bottom-0 left-0 right-0 h-32 z-0" style="background: linear-gradient(to top, var(--deep), transparent);"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Breadcrumb -->
+        <nav class="flex items-center gap-2 text-sm text-white/40 mb-10 reveal">
+            <a href="index.html" class="hover:text-white/60 transition-colors">Главная</a>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="text-white/20"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+            <span class="text-white/60">О компании</span>
+        </nav>
+
+        <div class="max-w-3xl">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] mb-6 reveal">
+                <span class="text-white">Технический партнёр,</span><br>
+                <span class="italic font-light" style="color: var(--light);">а не просто поставщик</span>
+            </h1>
+            <p class="text-base sm:text-lg md:text-xl text-white/50 max-w-2xl leading-relaxed reveal stagger-1">
+                Мы работаем с производствами, где от качества инструмента зависит результат. Наша задача — не просто продать, а помочь вашему процессу работать стабильно и предсказуемо.
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===== OUR STORY / VALUES ===== -->
+<section class="relative py-20 lg:py-28 section-gradient-1">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Who we are -->
+        <div class="max-w-3xl mb-16 reveal">
+            <p class="text-xs font-semibold tracking-[0.2em] uppercase mb-4" style="color: var(--mid);">Кто мы</p>
+            <p class="text-xl sm:text-2xl font-light text-white/80 leading-relaxed">
+                Мы — компания Эволютех. Наша задача — давать производствам не просто инструмент, а уверенность в результате.
+            </p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
+            <!-- What the client really buys -->
+            <div class="reveal-left">
+                <h3 class="text-lg font-semibold text-white/90 mb-6">Что вы получаете на самом деле</h3>
+                <p class="text-sm text-white/45 mb-6 leading-relaxed">
+                    За каждой поставкой стоит не просто коробка с пластинами. Вы получаете:
+                </p>
+                <div class="flex flex-wrap gap-2.5">
+                    <span class="value-pill px-4 py-2 rounded-full text-sm text-white/70">Спокойствие</span>
+                    <span class="value-pill px-4 py-2 rounded-full text-sm text-white/70">Предсказуемость</span>
+                    <span class="value-pill px-4 py-2 rounded-full text-sm text-white/70">Снижение риска</span>
+                    <span class="value-pill px-4 py-2 rounded-full text-sm text-white/70">Личную ответственность</span>
+                    <span class="value-pill px-4 py-2 rounded-full text-sm text-white/70">Ощущение опоры</span>
+                </div>
+            </div>
+
+            <!-- Pains we solve -->
+            <div class="reveal-right">
+                <h3 class="text-lg font-semibold text-white/90 mb-6">Проблемы, которые мы решаем</h3>
+                <p class="text-sm text-white/45 mb-6 leading-relaxed">
+                    Мы хорошо знаем, с чем сталкиваются производства каждый день:
+                </p>
+                <ul class="space-y-3">
+                    <li class="pain-item text-sm text-white/60 leading-relaxed">Простои из-за некачественного инструмента</li>
+                    <li class="pain-item text-sm text-white/60 leading-relaxed">Срывы сроков из-за задержек поставок</li>
+                    <li class="pain-item text-sm text-white/60 leading-relaxed">Неправильный подбор инструмента под задачу</li>
+                    <li class="pain-item text-sm text-white/60 leading-relaxed">Нестабильность обработки от партии к партии</li>
+                    <li class="pain-item text-sm text-white/60 leading-relaxed">Поставщики, которые пропадают после продажи</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===== PARTNERSHIP ===== -->
+<section id="partner" class="relative py-20 lg:py-28 section-gradient-2">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <p class="text-xs font-semibold tracking-[0.2em] uppercase mb-4" style="color: var(--mid);">Производственный партнёр</p>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+                Zhuzhou Huaxin<br>
+                <span class="font-light italic" style="color: var(--light);">Cemented Carbide Tool Co., Ltd.</span>
+            </h2>
+            <p class="text-sm text-white/40 mb-2">Бренд KANTISON</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            <div class="card-glow rounded-2xl p-6 text-center reveal stagger-1">
+                <div class="text-3xl sm:text-4xl font-bold mb-2" style="color: var(--bright);">
+                    <span class="counter-value" data-target="1986">0</span>
+                </div>
+                <p class="text-xs sm:text-sm text-white/40">Год основания</p>
+            </div>
+            <div class="card-glow rounded-2xl p-6 text-center reveal stagger-2">
+                <div class="text-3xl sm:text-4xl font-bold mb-2" style="color: var(--bright);">
+                    <span class="counter-value" data-target="38" data-suffix="+">0</span>
+                </div>
+                <p class="text-xs sm:text-sm text-white/40">Лет опыта</p>
+            </div>
+            <div class="card-glow rounded-2xl p-6 text-center reveal stagger-3">
+                <div class="text-3xl sm:text-4xl font-bold mb-2" style="color: var(--bright);">
+                    <span class="counter-value" data-target="18">0</span>
+                </div>
+                <p class="text-xs sm:text-sm text-white/40">Патентов</p>
+            </div>
+            <div class="card-glow rounded-2xl p-6 text-center reveal stagger-4">
+                <div class="text-3xl sm:text-4xl font-bold mb-2" style="color: var(--bright);">
+                    <span class="text-sm font-normal text-white/50">Часть группы</span><br>Fortune 500
+                </div>
+                <p class="text-xs sm:text-sm text-white/40">Корпоративная группа</p>
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div class="max-w-3xl mx-auto reveal">
+            <div class="card-glow rounded-2xl p-8 lg:p-10">
+                <p class="text-base sm:text-lg text-white/70 leading-relaxed mb-4">
+                    Huaxin — одно из ведущих предприятий Китая в сфере производства твердосплавного режущего инструмента. Завод обладает полным циклом производства: от порошковой металлургии до финишной обработки и нанесения покрытий.
+                </p>
+                <p class="text-base sm:text-lg font-medium" style="color: var(--light);">
+                    Всё, что есть у Huaxin — есть у Эволютеха. Мы обеспечиваем прямой доступ к полному ассортименту и технической экспертизе производителя.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===== PRINCIPLES ===== -->
+<section class="relative py-20 lg:py-28 section-gradient-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <p class="text-xs font-semibold tracking-[0.2em] uppercase mb-4" style="color: var(--mid);">Принципы</p>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold">
+                Правила, которых мы <span class="italic font-light" style="color: var(--light);">придерживаемся</span>
+            </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+            <!-- Principle 1 -->
+            <div class="card-glow rounded-2xl p-8 reveal stagger-1">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style="background: rgba(84,131,179,0.15);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--light)" stroke-width="1.5">
+                        <path d="M9 12l2 2 4-4"/>
+                        <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-white/90 mb-3">Не продаём плохое ради выгоды</h3>
+                <p class="text-sm text-white/45 leading-relaxed">
+                    Если инструмент не подходит под задачу — мы об этом скажем. Даже если это означает отказ от сделки. Репутация важнее разовой прибыли. Мы работаем на долгосрочные отношения.
+                </p>
+            </div>
+
+            <!-- Principle 2 -->
+            <div class="card-glow rounded-2xl p-8 reveal stagger-2">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style="background: rgba(84,131,179,0.15);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--light)" stroke-width="1.5">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-white/90 mb-3">Не исчезаем после сделки</h3>
+                <p class="text-sm text-white/45 leading-relaxed">
+                    Продажа — это начало, а не конец. Мы остаёмся на связи, помогаем с настройкой режимов, разбираем сложные случаи и решаем проблемы, если они возникают.
+                </p>
+            </div>
+
+            <!-- Principle 3 -->
+            <div class="card-glow rounded-2xl p-8 reveal stagger-3">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style="background: rgba(84,131,179,0.15);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--light)" stroke-width="1.5">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-white/90 mb-3">Не перекладываем ответственность</h3>
+                <p class="text-sm text-white/45 leading-relaxed">
+                    Если что-то пошло не так — мы разбираемся, а не ищем виноватых. Берём на себя координацию с производителем и находим решение. Ваша задача — производить, наша — обеспечить инструмент.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===== BRAND CHARACTER ===== -->
+<section class="relative py-20 lg:py-28 section-gradient-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center reveal">
+            <p class="text-xs font-semibold tracking-[0.2em] uppercase mb-4" style="color: var(--mid);">Характер</p>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-10">
+                Какой мы <span class="italic font-light" style="color: var(--light);">партнёр</span>
+            </h2>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-3 mb-12 reveal stagger-1">
+            <span class="value-pill px-5 py-2.5 rounded-full text-sm text-white/70">Надёжный</span>
+            <span class="value-pill px-5 py-2.5 rounded-full text-sm text-white/70">Человечный</span>
+            <span class="value-pill px-5 py-2.5 rounded-full text-sm text-white/70">Вовлечённый</span>
+            <span class="value-pill px-5 py-2.5 rounded-full text-sm text-white/70">Ответственный</span>
+            <span class="value-pill px-5 py-2.5 rounded-full text-sm text-white/70">Спокойный</span>
+            <span class="value-pill px-5 py-2.5 rounded-full text-sm text-white/70">Технически сильный</span>
+            <span class="value-pill px-5 py-2.5 rounded-full text-sm text-white/70">Честный</span>
+        </div>
+
+        <div class="max-w-2xl mx-auto text-center reveal stagger-2">
+            <p class="text-lg sm:text-xl text-white/50 leading-relaxed italic">
+                Как партнёр, который не подведёт в сложный момент
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===== TEAM ===== -->
+<section class="relative py-20 lg:py-28 section-gradient-5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <p class="text-xs font-semibold tracking-[0.2em] uppercase mb-4" style="color: var(--mid);">Команда</p>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold">
+                Люди, на которых <span class="italic font-light" style="color: var(--light);">можно положиться</span>
+            </h2>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            <!-- Team member 1 -->
+            <div class="card-glow rounded-2xl p-6 text-center reveal stagger-1">
+                <div class="team-avatar w-20 h-20 rounded-full mx-auto mb-5 flex items-center justify-center">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <polygon points="20,4 36,14 36,26 20,36 4,26 4,14" stroke="var(--light)" stroke-width="1" fill="none" opacity="0.5"/>
+                        <polygon points="20,10 30,16 30,24 20,30 10,24 10,16" stroke="var(--mid)" stroke-width="0.8" fill="rgba(84,131,179,0.15)"/>
+                        <circle cx="20" cy="18" r="3" fill="var(--mid)" opacity="0.4"/>
+                    </svg>
+                </div>
+                <h4 class="text-base font-semibold text-white/90 mb-1">Алексей Воронов</h4>
+                <p class="text-xs font-medium mb-3" style="color: var(--mid);">Руководитель</p>
+                <p class="text-xs text-white/40 leading-relaxed">Координация проектов, стратегические решения, работа с ключевыми клиентами</p>
+            </div>
+
+            <!-- Team member 2 -->
+            <div class="card-glow rounded-2xl p-6 text-center reveal stagger-2">
+                <div class="team-avatar w-20 h-20 rounded-full mx-auto mb-5 flex items-center justify-center">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <rect x="6" y="6" width="28" height="28" rx="4" stroke="var(--light)" stroke-width="1" fill="none" opacity="0.5"/>
+                        <rect x="12" y="12" width="16" height="16" rx="2" stroke="var(--mid)" stroke-width="0.8" fill="rgba(84,131,179,0.15)"/>
+                        <circle cx="20" cy="18" r="3" fill="var(--mid)" opacity="0.4"/>
+                    </svg>
+                </div>
+                <h4 class="text-base font-semibold text-white/90 mb-1">Дмитрий Касьянов</h4>
+                <p class="text-xs font-medium mb-3" style="color: var(--mid);">Технический специалист</p>
+                <p class="text-xs text-white/40 leading-relaxed">Подбор инструмента, расчёт режимов резания, техническое сопровождение</p>
+            </div>
+
+            <!-- Team member 3 -->
+            <div class="card-glow rounded-2xl p-6 text-center reveal stagger-3">
+                <div class="team-avatar w-20 h-20 rounded-full mx-auto mb-5 flex items-center justify-center">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <circle cx="20" cy="20" r="16" stroke="var(--light)" stroke-width="1" fill="none" opacity="0.5"/>
+                        <circle cx="20" cy="20" r="10" stroke="var(--mid)" stroke-width="0.8" fill="rgba(84,131,179,0.15)"/>
+                        <circle cx="20" cy="18" r="3" fill="var(--mid)" opacity="0.4"/>
+                    </svg>
+                </div>
+                <h4 class="text-base font-semibold text-white/90 mb-1">Марина Иванова</h4>
+                <p class="text-xs font-medium mb-3" style="color: var(--mid);">Менеджер по работе с клиентами</p>
+                <p class="text-xs text-white/40 leading-relaxed">Обработка заявок, логистика, контроль сроков поставки</p>
+            </div>
+
+            <!-- Team member 4 -->
+            <div class="card-glow rounded-2xl p-6 text-center reveal stagger-4">
+                <div class="team-avatar w-20 h-20 rounded-full mx-auto mb-5 flex items-center justify-center">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <path d="M20 4 L36 20 L20 36 L4 20 Z" stroke="var(--light)" stroke-width="1" fill="none" opacity="0.5"/>
+                        <path d="M20 11 L29 20 L20 29 L11 20 Z" stroke="var(--mid)" stroke-width="0.8" fill="rgba(84,131,179,0.15)"/>
+                        <circle cx="20" cy="18" r="3" fill="var(--mid)" opacity="0.4"/>
+                    </svg>
+                </div>
+                <h4 class="text-base font-semibold text-white/90 mb-1">Сергей Панов</h4>
+                <p class="text-xs font-medium mb-3" style="color: var(--mid);">Инженер по применению</p>
+                <p class="text-xs text-white/40 leading-relaxed">Тестирование инструмента, выезды на производство, оптимизация процессов</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===== CTA ===== -->
+<section class="relative py-20 lg:py-28 section-gradient-cta">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="max-w-2xl mx-auto reveal">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+                Хотите <span class="italic font-light" style="color: var(--light);">обсудить задачу</span>
+            </h2>
+            <p class="text-base sm:text-lg text-white/45 mb-10 leading-relaxed">
+                Расскажите о вашем производстве и задачах — мы предложим подходящее решение и рассчитаем стоимость.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="contacts.html" class="btn-primary px-8 py-4 rounded-xl text-base font-medium">Связаться с нами</a>
+                <a href="catalog.html" class="btn-outline px-8 py-4 rounded-xl text-base font-medium">Смотреть каталог</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===== FOOTER ===== -->
+<footer class="relative pt-16 pb-8 border-t border-white/[0.04]" style="background: linear-gradient(180deg, var(--deep), #010c1a);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
+            <div>
+                <h4 class="text-sm font-semibold text-white/70 mb-4">Каталог</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="catalog.html#inserts" class="text-sm text-white/35 hover:text-white/60 transition-colors">Токарные пластины</a></li>
+                    <li><a href="catalog.html#endmills" class="text-sm text-white/35 hover:text-white/60 transition-colors">Концевые фрезы</a></li>
+                    <li><a href="catalog.html#drills" class="text-sm text-white/35 hover:text-white/60 transition-colors">Свёрла</a></li>
+                    <li><a href="catalog.html#milling" class="text-sm text-white/35 hover:text-white/60 transition-colors">Фрезерный инструмент</a></li>
+                    <li><a href="catalog.html#threading" class="text-sm text-white/35 hover:text-white/60 transition-colors">Резьбонарезной</a></li>
+                    <li><a href="catalog.html#custom" class="text-sm text-white/35 hover:text-white/60 transition-colors">Специнструмент</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-sm font-semibold text-white/70 mb-4">Компания</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="about.html" class="text-sm text-white/35 hover:text-white/60 transition-colors">О компании</a></li>
+                    <li><a href="process.html" class="text-sm text-white/35 hover:text-white/60 transition-colors">Как работаем</a></li>
+                    <li><a href="about.html#partner" class="text-sm text-white/35 hover:text-white/60 transition-colors">Партнёр KANTISON</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-sm font-semibold text-white/70 mb-4">Клиентам</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="catalog.html" class="text-sm text-white/35 hover:text-white/60 transition-colors">Подобрать инструмент</a></li>
+                    <li><a href="contacts.html" class="text-sm text-white/35 hover:text-white/60 transition-colors">Запросить образец</a></li>
+                    <li><a href="contacts.html" class="text-sm text-white/35 hover:text-white/60 transition-colors">Обсудить задачу</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-sm font-semibold text-white/70 mb-4">Контакты</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="tel:+79999999999" class="text-sm text-white/35 hover:text-white/60 transition-colors">+7 (999) 999-99-99</a></li>
+                    <li><a href="mailto:info@evolutech.ru" class="text-sm text-white/35 hover:text-white/60 transition-colors">info@evolutech.ru</a></li>
+                    <li><a href="#" class="text-sm text-white/35 hover:text-white/60 transition-colors">Telegram</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="glow-line mb-8"></div>
+
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <svg width="24" height="24" viewBox="0 0 36 36" fill="none">
+                    <path d="M18 2L32 10v16L18 34 4 26V10L18 2z" stroke="var(--mid)" stroke-width="1.5" fill="none"/>
+                    <path d="M18 8L26 12.5v9L18 26l-8-4.5v-9L18 8z" stroke="var(--light)" stroke-width="1" fill="none" opacity="0.6"/>
+                </svg>
+                <span class="text-sm font-semibold tracking-wider text-white/50">EVOLUTECH</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <span class="text-xs text-white/25">&copy; 2024 Эволютех. Все права защищены.</span>
+                <a href="privacy.html" class="text-xs text-white/25 hover:text-white/40 transition-colors">Политика конфиденциальности</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+// ===== HEADER SCROLL =====
+const header = document.querySelector('.header');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+}, { passive: true });
+
+
+// ===== MOBILE NAV =====
+const burger = document.getElementById('burger');
+const mobileNav = document.getElementById('mobile-nav');
+const closeNav = document.getElementById('close-nav');
+const overlay = document.getElementById('mobile-overlay');
+
+function openMobileNav() {
+    mobileNav.classList.add('open');
+    overlay.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeMobileNav() {
+    mobileNav.classList.remove('open');
+    overlay.classList.add('hidden');
+    document.body.style.overflow = '';
+}
+
+burger.addEventListener('click', openMobileNav);
+closeNav.addEventListener('click', closeMobileNav);
+overlay.addEventListener('click', closeMobileNav);
+
+mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMobileNav);
+});
+
+
+// ===== INTERSECTION OBSERVER FOR REVEALS =====
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => revealObserver.observe(el));
+
+
+// ===== ANIMATED COUNTERS =====
+const countersAnimated = new Set();
+
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !countersAnimated.has(entry.target)) {
+            countersAnimated.add(entry.target);
+            const el = entry.target;
+            const target = parseInt(el.dataset.target);
+            const suffix = el.dataset.suffix || '';
+            const duration = 2000;
+            const startTime = performance.now();
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                el.textContent = Math.round(eased * target) + suffix;
+                if (progress < 1) requestAnimationFrame(update);
+            }
+            requestAnimationFrame(update);
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.counter-value[data-target]').forEach(c => counterObserver.observe(c));
+</script>
+
+</body>
+</html>

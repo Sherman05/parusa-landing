@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Как мы работаем — EVOLUTECH</title>
+    <meta name="description" content="Шесть шагов от первого разговора до стабильной обработки. Узнайте, как мы подбираем инструмент, тестируем и сопровождаем.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            deep: '#021024',
+                            dark: '#052659',
+                            mid: '#5483B3',
+                            light: '#7DA0CA',
+                            bright: '#C1E8FF',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --deep: #021024;
+            --dark: #052659;
+            --mid: #5483B3;
+            --light: #7DA0CA;
+            --bright: #C1E8FF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--deep);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* ===== SMOOTH SECTION TRANSITIONS ===== */
+        .section-gradient-1 {
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 80%, rgba(5,38,89,0.6) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 40% at 80% 20%, rgba(84,131,179,0.1) 0%, transparent 60%),
+                linear-gradient(180deg, var(--deep) 0%, #031a3a 50%, var(--deep) 100%);
+        }
+
+        .section-gradient-cta {
+            background:
+                radial-gradient(ellipse 70% 60% at 50% 50%, rgba(5,38,89,0.7) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 30% at 20% 20%, rgba(84,131,179,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse 40% 30% at 80% 80%, rgba(84,131,179,0.1) 0%, transparent 50%),
+                linear-gradient(180deg, var(--deep) 0%, #052659 50%, var(--deep) 100%);
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            transition: background 0.3s, backdrop-filter 0.3s, box-shadow 0.3s;
+        }
+
+        .header.scrolled {
+            background: rgba(2, 16, 36, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 1px 0 rgba(84,131,179,0.1);
+        }
+
+        /* ===== GLOW EFFECTS ===== */
+        .glow-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--mid), transparent);
+            opacity: 0.3;
+        }
+
+        /* ===== CTA GLOW PULSE ===== */
+        .btn-primary {
+            background: var(--mid);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            box-shadow: 0 0 20px rgba(84,131,179,0.4);
+            opacity: 0;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        .btn-primary:hover {
+            background: #6090c0;
+            box-shadow: 0 0 30px rgba(84,131,179,0.3);
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(84,131,179,0.5);
+            color: var(--bright);
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--mid);
+            background: rgba(84,131,179,0.1);
+            box-shadow: 0 0 20px rgba(84,131,179,0.15);
+        }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ===== MOBILE NAV ===== */
+        .mobile-nav {
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-nav.open {
+            transform: translateX(0);
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--deep);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--dark);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--mid);
+        }
+
+        /* ===== STAGGER ===== */
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+        .stagger-6 { transition-delay: 0.6s; }
+
+        /* ===== TIMELINE ===== */
+        .timeline-line {
+            position: absolute;
+            left: 23px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, transparent, rgba(84,131,179,0.3) 10%, rgba(84,131,179,0.3) 90%, transparent);
+        }
+
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: -2px;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: linear-gradient(180deg, transparent, rgba(84,131,179,0.15) 10%, rgba(84,131,179,0.15) 90%, transparent);
+            filter: blur(4px);
+            animation: timelineGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes timelineGlow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .timeline-step {
+            position: relative;
+            padding-left: 64px;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-step:last-child {
+            padding-bottom: 0;
+        }
+
+        .step-circle {
+            position: absolute;
+            left: 8px;
+            top: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--dark);
+            border: 2px solid var(--mid);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--bright);
+            z-index: 2;
+            box-shadow: 0 0 12px rgba(84,131,179,0.25);
+            transition: all 0.4s;
+        }
+
+        .timeline-step:hover .step-circle,
+        .timeline-step.expanded .step-circle {
+            box-shadow: 0 0 24px rgba(84,131,179,0.5);
+            border-color: var(--bright);
+            background: rgba(84,131,179,0.3);
+        }
+
+        .step-content {
+            background: rgba(5, 38, 89, 0.4);
+            border: 1px solid rgba(84, 131, 179, 0.12);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .step-content:hover {
+            border-color: rgba(84, 131, 179, 0.3);
+            background: rgba(5, 38, 89, 0.6);
+        }
+
+        .timeline-step.expanded .step-content {
+            border-color: rgba(84, 131, 179, 0.3);
+            background: rgba(5, 38, 89, 0.6);
+            box-shadow: 0 4px 24px rgba(5, 38, 89, 0.4);
+        }
+
+        .step-details {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, margin-top 0.4s ease;
+            margin-top: 0;
+        }
+
+        .timeline-step.expanded .step-details {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 0.75rem;
+        }
+
+        .step-toggle {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+
+        .timeline-step.expanded .step-toggle {
+            transform: rotate(180deg);
+        }
+
+        @media (min-width: 768px) {
+            .timeline-line {
+                left: 27px;
+            }
+
+            .timeline-step {
+                padding-left: 76px;
+            }
+
+            .step-circle {
+                left: 10px;
+                width: 36px;
+                height: 36px;
+                font-size: 14px;
+            }
+
+            .step-content {
+                padding: 1.5rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header fixed top-0 left-0 w-full z-50 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 lg:h-20">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" class="flex-shrink-0">
+                    <path d="M18 2L32 10v16L18 34 4 26V10L18 2z" stroke="var(--mid)" stroke-width="1.5" fill="none"/>
+                    <path d="M18 8L26 12.5v9L18 26l-8-4.5v-9L18 8z" stroke="var(--light)" stroke-width="1" fill="none" opacity="0.6"/>
+                    <path d="M18 14l4 2.3v4.4L18 23l-4-2.3v-4.4L18 14z" fill="var(--mid)" opacity="0.4"/>
+                </svg>
+                <span class="text-lg lg:text-xl font-bold tracking-wider text-white">EVOLUTECH</span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="catalog.html" class="text-sm text-white/60 hover:text-white transition-colors">Каталог</a>
+                <a href="about.html" class="text-sm text-white/60 hover:text-white transition-colors">О компании</a>
+                <a href="process.html" class="text-sm text-white hover:text-white transition-colors">Как работаем</a>
+                <a href="index.html#industries" class="text-sm text-white/60 hover:text-white transition-colors">Отрасли</a>
+                <a href="contacts.html" class="text-sm text-white/60 hover:text-white transition-colors">Контакты</a>
+            </nav>
+
+            <!-- Right side -->
+            <div class="hidden lg:flex items-center gap-6">
+                <a href="tel:+79999999999" class="text-sm text-white/70 hover:text-white transition-colors">+7 (999) 999-99-99</a>
+                <a href="contacts.html" class="btn-primary px-5 py-2.5 rounded-lg text-sm font-medium">Обсудить задачу</a>
+            </div>
+
+            <!-- Mobile burger -->
+            <button id="burger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Меню">
+                <span class="w-6 h-0.5 bg-white/70 transition-all origin-center"></span>
+                <span class="w-6 h-0.5 bg-white/70 transition-all"></span>
+                <span class="w-6 h-0.5 bg-white/70 transition-all origin-center"></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div id="mobile-nav" class="mobile-nav fixed top-0 right-0 w-72 h-full bg-[#031a3a]/95 backdrop-blur-xl z-50 p-8 flex flex-col lg:hidden">
+        <button id="close-nav" class="self-end p-2 text-white/60 hover:text-white mb-8" aria-label="Закрыть">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <nav class="flex flex-col gap-6">
+            <a href="catalog.html" class="text-lg text-white/70 hover:text-white transition-colors">Каталог</a>
+            <a href="about.html" class="text-lg text-white/70 hover:text-white transition-colors">О компании</a>
+            <a href="process.html" class="text-lg text-white hover:text-white transition-colors">Как работаем</a>
+            <a href="index.html#industries" class="text-lg text-white/70 hover:text-white transition-colors">Отрасли</a>
+            <a href="contacts.html" class="text-lg text-white/70 hover:text-white transition-colors">Контакты</a>
+        </nav>
+        <div class="mt-auto">
+            <a href="tel:+79999999999" class="block text-sm text-white/50 mb-4">+7 (999) 999-99-99</a>
+            <a href="contacts.html" class="btn-primary block text-center px-5 py-3 rounded-lg text-sm font-medium">Обсудить задачу</a>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile overlay -->
+<div id="mobile-overlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden"></div>
+
+
+<!-- ===== HERO ===== -->
+<section class="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
+    <!-- Gradient overlays -->
+    <div class="absolute inset-0 z-0" style="background: radial-gradient(ellipse 60% 50% at 30% 50%, rgba(5,38,89,0.3) 0%, transparent 70%);"></div>
+    <div class="absolute inset-0 z-0" style="background: radial-gradient(ellipse 40% 40% at 80% 30%, rgba(84,131,179,0.05) 0%, transparent 60%);"></div>
+    <div class="absolute bottom-0 left-0 right-0 h-32 z-0" style="background: linear-gradient(to top, var(--deep), transparent);"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Breadcrumb -->
+        <nav class="mb-8 reveal">
+            <ol class="flex items-center gap-2 text-sm">
+                <li><a href="index.html" class="text-white/40 hover:text-white/70 transition-colors">Главная</a></li>
+                <li class="text-white/20">&rarr;</li>
+                <li class="text-white/70">Как работаем</li>
+            </ol>
+        </nav>
+
+        <div class="max-w-3xl">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] mb-6 reveal">
+                <span class="text-white">Как мы</span><br>
+                <span class="italic font-light" style="color: var(--light);">работаем</span>
+            </h1>
+            <p class="text-base sm:text-lg md:text-xl text-white/60 max-w-xl leading-relaxed reveal">
+                Шесть шагов от первого разговора до стабильной обработки
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===== TIMELINE ===== -->
+<section class="section-gradient-1 py-16 md:py-24">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="relative">
+            <!-- Vertical connector line -->
+            <div class="timeline-line" aria-hidden="true"></div>
+
+            <!-- Step 1 -->
+            <div class="timeline-step reveal stagger-1" data-step>
+                <div class="step-circle">1</div>
+                <div class="step-content" role="button" tabindex="0" aria-expanded="false">
+                    <div class="flex items-start justify-between gap-4">
+                        <div>
+                            <h3 class="text-lg md:text-xl font-semibold text-white mb-1">Обсуждаем задачу</h3>
+                            <p class="text-sm md:text-base text-white/50">Вы рассказываете — мы слушаем</p>
+                        </div>
+                        <svg class="step-toggle text-white/30 mt-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="step-details">
+                        <p class="text-sm md:text-base text-white/40 leading-relaxed">Что обрабатываете, на каком оборудовании, какие требования к поверхности и допускам. Чем точнее вводные — тем точнее решение.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="timeline-step reveal stagger-2" data-step>
+                <div class="step-circle">2</div>
+                <div class="step-content" role="button" tabindex="0" aria-expanded="false">
+                    <div class="flex items-start justify-between gap-4">
+                        <div>
+                            <h3 class="text-lg md:text-xl font-semibold text-white mb-1">Анализируем и подбираем</h3>
+                            <p class="text-sm md:text-base text-white/50">Не каталог на 500 страниц — а конкретное решение</p>
+                        </div>
+                        <svg class="step-toggle text-white/30 mt-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="step-details">
+                        <p class="text-sm md:text-base text-white/40 leading-relaxed">Подбираем марку сплава, геометрию, покрытие. Учитываем материал заготовки, тип операции, жёсткость системы, требуемую производительность.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="timeline-step reveal stagger-3" data-step>
+                <div class="step-circle">3</div>
+                <div class="step-content" role="button" tabindex="0" aria-expanded="false">
+                    <div class="flex items-start justify-between gap-4">
+                        <div>
+                            <h3 class="text-lg md:text-xl font-semibold text-white mb-1">Предлагаем варианты</h3>
+                            <p class="text-sm md:text-base text-white/50">Обычно 2-3 варианта с объяснением разницы</p>
+                        </div>
+                        <svg class="step-toggle text-white/30 mt-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="step-details">
+                        <p class="text-sm md:text-base text-white/40 leading-relaxed">Объясняем, почему именно этот инструмент, какие режимы рекомендуем, чего ожидать по стойкости. Без навязывания — вы принимаете решение.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="timeline-step reveal stagger-4" data-step>
+                <div class="step-circle">4</div>
+                <div class="step-content" role="button" tabindex="0" aria-expanded="false">
+                    <div class="flex items-start justify-between gap-4">
+                        <div>
+                            <h3 class="text-lg md:text-xl font-semibold text-white mb-1">Даём образцы на тест</h3>
+                            <p class="text-sm md:text-base text-white/50">Увидите результат до закупки</p>
+                        </div>
+                        <svg class="step-toggle text-white/30 mt-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="step-details">
+                        <p class="text-sm md:text-base text-white/40 leading-relaxed">Отправляем образцы, помогаем с настройкой режимов. Если нужно — подключаем технолога партнёра. Цель — чтобы вы были уверены в выборе.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="timeline-step reveal stagger-5" data-step>
+                <div class="step-circle">5</div>
+                <div class="step-content" role="button" tabindex="0" aria-expanded="false">
+                    <div class="flex items-start justify-between gap-4">
+                        <div>
+                            <h3 class="text-lg md:text-xl font-semibold text-white mb-1">Поставляем</h3>
+                            <p class="text-sm md:text-base text-white/50">Точно и в срок</p>
+                        </div>
+                        <svg class="step-toggle text-white/30 mt-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="step-details">
+                        <p class="text-sm md:text-base text-white/40 leading-relaxed">Формируем заказ, контролируем производство, доставляем. Обычный срок поставки — от 2 до 6 недель в зависимости от позиции.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="timeline-step reveal stagger-6" data-step>
+                <div class="step-circle">6</div>
+                <div class="step-content" role="button" tabindex="0" aria-expanded="false">
+                    <div class="flex items-start justify-between gap-4">
+                        <div>
+                            <h3 class="text-lg md:text-xl font-semibold text-white mb-1">Сопровождаем</h3>
+                            <p class="text-sm md:text-base text-white/50">Не пропадаем после продажи</p>
+                        </div>
+                        <svg class="step-toggle text-white/30 mt-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="step-details">
+                        <p class="text-sm md:text-base text-white/40 leading-relaxed">Следим за результатом, собираем обратную связь, корректируем если нужно. Вы всегда можете позвонить и получить ответ.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===== CTA ===== -->
+<section class="section-gradient-cta py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="max-w-2xl mx-auto reveal">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">Готовы обсудить задачу?</h2>
+            <div class="glow-line max-w-xs mx-auto mb-8"></div>
+            <a href="contacts.html" class="btn-primary inline-block px-10 py-4 rounded-xl text-base font-medium">Связаться с нами</a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===== FOOTER ===== -->
+<footer class="relative pt-16 pb-8 border-t border-white/[0.04]" style="background: linear-gradient(180deg, var(--deep), #010c1a);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
+            <div>
+                <h4 class="text-sm font-semibold text-white/70 mb-4">Каталог</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="catalog.html#inserts" class="text-sm text-white/35 hover:text-white/60 transition-colors">Токарные пластины</a></li>
+                    <li><a href="catalog.html#endmills" class="text-sm text-white/35 hover:text-white/60 transition-colors">Концевые фрезы</a></li>
+                    <li><a href="catalog.html#drills" class="text-sm text-white/35 hover:text-white/60 transition-colors">Свёрла</a></li>
+                    <li><a href="catalog.html#milling" class="text-sm text-white/35 hover:text-white/60 transition-colors">Фрезерный инструмент</a></li>
+                    <li><a href="catalog.html#threading" class="text-sm text-white/35 hover:text-white/60 transition-colors">Резьбонарезной</a></li>
+                    <li><a href="catalog.html#custom" class="text-sm text-white/35 hover:text-white/60 transition-colors">Специнструмент</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-sm font-semibold text-white/70 mb-4">Компания</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="about.html" class="text-sm text-white/35 hover:text-white/60 transition-colors">О компании</a></li>
+                    <li><a href="process.html" class="text-sm text-white/35 hover:text-white/60 transition-colors">Как работаем</a></li>
+                    <li><a href="about.html#partner" class="text-sm text-white/35 hover:text-white/60 transition-colors">Партнёр KANTISON</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-sm font-semibold text-white/70 mb-4">Клиентам</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="catalog.html" class="text-sm text-white/35 hover:text-white/60 transition-colors">Подобрать инструмент</a></li>
+                    <li><a href="contacts.html" class="text-sm text-white/35 hover:text-white/60 transition-colors">Запросить образец</a></li>
+                    <li><a href="contacts.html" class="text-sm text-white/35 hover:text-white/60 transition-colors">Обсудить задачу</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-sm font-semibold text-white/70 mb-4">Контакты</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="tel:+79999999999" class="text-sm text-white/35 hover:text-white/60 transition-colors">+7 (999) 999-99-99</a></li>
+                    <li><a href="mailto:info@evolutech.ru" class="text-sm text-white/35 hover:text-white/60 transition-colors">info@evolutech.ru</a></li>
+                    <li><a href="#" class="text-sm text-white/35 hover:text-white/60 transition-colors">Telegram</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="glow-line mb-8"></div>
+
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <svg width="24" height="24" viewBox="0 0 36 36" fill="none">
+                    <path d="M18 2L32 10v16L18 34 4 26V10L18 2z" stroke="var(--mid)" stroke-width="1.5" fill="none"/>
+                    <path d="M18 8L26 12.5v9L18 26l-8-4.5v-9L18 8z" stroke="var(--light)" stroke-width="1" fill="none" opacity="0.6"/>
+                </svg>
+                <span class="text-sm font-semibold tracking-wider text-white/50">EVOLUTECH</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <span class="text-xs text-white/25">&copy; 2024 Эволютех. Все права защищены.</span>
+                <a href="privacy.html" class="text-xs text-white/25 hover:text-white/40 transition-colors">Политика конфиденциальности</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+// ===== HEADER SCROLL =====
+const header = document.querySelector('.header');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+}, { passive: true });
+
+
+// ===== MOBILE NAV =====
+const burger = document.getElementById('burger');
+const mobileNav = document.getElementById('mobile-nav');
+const closeNav = document.getElementById('close-nav');
+const overlay = document.getElementById('mobile-overlay');
+
+function openMobileNav() {
+    mobileNav.classList.add('open');
+    overlay.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeMobileNav() {
+    mobileNav.classList.remove('open');
+    overlay.classList.add('hidden');
+    document.body.style.overflow = '';
+}
+
+burger.addEventListener('click', openMobileNav);
+closeNav.addEventListener('click', closeMobileNav);
+overlay.addEventListener('click', closeMobileNav);
+
+mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMobileNav);
+});
+
+
+// ===== INTERSECTION OBSERVER FOR REVEALS =====
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => revealObserver.observe(el));
+
+
+// ===== TIMELINE ACCORDION =====
+document.querySelectorAll('[data-step]').forEach(step => {
+    const content = step.querySelector('.step-content');
+
+    function toggle() {
+        const isExpanded = step.classList.contains('expanded');
+
+        // Close all other steps
+        document.querySelectorAll('[data-step].expanded').forEach(other => {
+            if (other !== step) {
+                other.classList.remove('expanded');
+                other.querySelector('.step-content').setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Toggle current
+        step.classList.toggle('expanded', !isExpanded);
+        content.setAttribute('aria-expanded', String(!isExpanded));
+    }
+
+    content.addEventListener('click', toggle);
+    content.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggle();
+        }
+    });
+});
+</script>
+
+</body>
+</html>

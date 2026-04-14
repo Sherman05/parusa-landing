@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог инструмента — EVOLUTECH</title>
+    <meta name="description" content="Полный ассортимент металлорежущего инструмента и оснастки: токарные пластины, концевые фрезы, свёрла, резьбонарезной и специнструмент.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            deep: '#021024',
+                            dark: '#052659',
+                            mid: '#5483B3',
+                            light: '#7DA0CA',
+                            bright: '#C1E8FF',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --deep: #021024;
+            --dark: #052659;
+            --mid: #5483B3;
+            --light: #7DA0CA;
+            --bright: #C1E8FF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--deep);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            transition: background 0.3s, backdrop-filter 0.3s, box-shadow 0.3s;
+        }
+
+        .header.scrolled {
+            background: rgba(2, 16, 36, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 1px 0 rgba(84,131,179,0.1);
+        }
+
+        /* ===== GLOW EFFECTS ===== */
+        .glow-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--mid), transparent);
+            opacity: 0.3;
+        }
+
+        .card-glow {
+            position: relative;
+            background: rgba(5, 38, 89, 0.6);
+            border: 1px solid rgba(84, 131, 179, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-glow::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(84,131,179,0.2), transparent, rgba(125,160,202,0.1));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .card-glow:hover {
+            transform: translateY(-4px);
+            border-color: rgba(84, 131, 179, 0.35);
+            box-shadow: 0 8px 32px rgba(5, 38, 89, 0.5), 0 0 20px rgba(84, 131, 179, 0.1);
+        }
+
+        .card-glow:hover::before {
+            opacity: 1;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-primary {
+            background: var(--mid);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            box-shadow: 0 0 20px rgba(84,131,179,0.4);
+            opacity: 0;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        .btn-primary:hover {
+            background: #6090c0;
+            box-shadow: 0 0 30px rgba(84,131,179,0.3);
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(84,131,179,0.5);
+            color: var(--bright);
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--mid);
+            background: rgba(84,131,179,0.1);
+            box-shadow: 0 0 20px rgba(84,131,179,0.15);
+        }
+
+        .btn-card {
+            background: rgba(84,131,179,0.15);
+            border: 1px solid rgba(84,131,179,0.3);
+            color: var(--bright);
+            transition: all 0.3s;
+        }
+
+        .btn-card:hover {
+            background: var(--mid);
+            color: #fff;
+            border-color: var(--mid);
+        }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== SECTION GRADIENTS ===== */
+        .section-gradient-1 {
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 80%, rgba(5,38,89,0.6) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 40% at 80% 20%, rgba(84,131,179,0.1) 0%, transparent 60%),
+                linear-gradient(180deg, var(--deep) 0%, #031a3a 50%, var(--deep) 100%);
+        }
+
+        .section-gradient-2 {
+            background:
+                radial-gradient(ellipse 70% 50% at 70% 30%, rgba(5,38,89,0.5) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 20% 70%, rgba(84,131,179,0.08) 0%, transparent 60%),
+                linear-gradient(180deg, var(--deep) 0%, #021a38 50%, var(--deep) 100%);
+        }
+
+        .section-gradient-3 {
+            background:
+                radial-gradient(ellipse 60% 50% at 50% 50%, rgba(5,38,89,0.4) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 30% at 80% 80%, rgba(84,131,179,0.1) 0%, transparent 50%),
+                linear-gradient(180deg, var(--deep) 0%, #031a3a 40%, #021a38 70%, var(--deep) 100%);
+        }
+
+        .section-gradient-4 {
+            background:
+                radial-gradient(ellipse 80% 60% at 30% 40%, rgba(5,38,89,0.5) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 70% 80%, rgba(84,131,179,0.06) 0%, transparent 50%),
+                linear-gradient(180deg, var(--deep) 0%, #02152e 50%, var(--deep) 100%);
+        }
+
+        .section-gradient-5 {
+            background:
+                radial-gradient(ellipse 70% 50% at 40% 60%, rgba(5,38,89,0.45) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 35% at 75% 25%, rgba(84,131,179,0.08) 0%, transparent 55%),
+                linear-gradient(180deg, var(--deep) 0%, #031a3a 50%, var(--deep) 100%);
+        }
+
+        .section-gradient-6 {
+            background:
+                radial-gradient(ellipse 65% 55% at 60% 45%, rgba(5,38,89,0.5) 0%, transparent 70%),
+                radial-gradient(ellipse 45% 35% at 25% 70%, rgba(84,131,179,0.07) 0%, transparent 55%),
+                linear-gradient(180deg, var(--deep) 0%, #021a38 45%, #031a3a 75%, var(--deep) 100%);
+        }
+
+        .section-gradient-7 {
+            background:
+                radial-gradient(ellipse 75% 50% at 35% 50%, rgba(5,38,89,0.4) 0%, transparent 70%),
+                radial-gradient(ellipse 55% 40% at 80% 30%, rgba(84,131,179,0.09) 0%, transparent 55%),
+                linear-gradient(180deg, var(--deep) 0%, #02152e 50%, var(--deep) 100%);
+        }
+
+        .section-gradient-8 {
+            background:
+                radial-gradient(ellipse 70% 60% at 50% 50%, rgba(5,38,89,0.55) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 30% at 20% 20%, rgba(84,131,179,0.12) 0%, transparent 50%),
+                radial-gradient(ellipse 40% 30% at 80% 80%, rgba(84,131,179,0.08) 0%, transparent 50%),
+                linear-gradient(180deg, var(--deep) 0%, #031a3a 50%, var(--deep) 100%);
+        }
+
+        /* ===== MOBILE NAV ===== */
+        .mobile-nav {
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-nav.open {
+            transform: translateX(0);
+        }
+
+        /* ===== FORM INPUTS ===== */
+        .form-input {
+            background: rgba(5, 38, 89, 0.5);
+            border: 1px solid rgba(84, 131, 179, 0.2);
+            color: #fff;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--mid);
+            box-shadow: 0 0 0 3px rgba(84, 131, 179, 0.15);
+        }
+
+        .form-input::placeholder {
+            color: rgba(255,255,255,0.35);
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--deep);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--dark);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--mid);
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar-link {
+            color: rgba(255,255,255,0.5);
+            transition: all 0.3s;
+            border-left: 2px solid transparent;
+        }
+
+        .sidebar-link:hover,
+        .sidebar-link.active {
+            color: var(--bright);
+            border-left-color: var(--mid);
+            background: rgba(84,131,179,0.08);
+        }
+
+        .sidebar-sub {
+            color: rgba(255,255,255,0.35);
+            transition: all 0.3s;
+        }
+
+        .sidebar-sub:hover {
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* ===== STAGGER ===== */
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+
+        /* ===== MOBILE SIDEBAR ===== */
+        .mobile-sidebar {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .mobile-sidebar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header fixed top-0 left-0 w-full z-50 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 lg:h-20">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" class="flex-shrink-0">
+                    <path d="M18 2L32 10v16L18 34 4 26V10L18 2z" stroke="var(--mid)" stroke-width="1.5" fill="none"/>
+                    <path d="M18 8L26 12.5v9L18 26l-8-4.5v-9L18 8z" stroke="var(--light)" stroke-width="1" fill="none" opacity="0.6"/>
+                    <path d="M18 14l4 2.3v4.4L18 23l-4-2.3v-4.4L18 14z" fill="var(--mid)" opacity="0.4"/>
+                </svg>
+                <span class="text-lg lg:text-xl font-bold tracking-wider text-white">EVOLUTECH</span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="catalog.html" class="text-sm text-white hover:text-white transition-colors">Каталог</a>
+                <a href="about.html" class="text-sm text-white/60 hover:text-white transition-colors">О компании</a>
+                <a href="process.html" class="text-sm text-white/60 hover:text-white transition-colors">Как работаем</a>
+                <a href="index.html#industries" class="text-sm text-white/60 hover:text-white transition-colors">Отрасли</a>
+                <a href="contacts.html" class="text-sm text-white/60 hover:text-white transition-colors">Контакты</a>
+            </nav>
+
+            <!-- Right side -->
+            <div class="hidden lg:flex items-center gap-6">
+                <a href="tel:+79999999999" class="text-sm text-white/70 hover:text-white transition-colors">+7 (999) 999-99-99</a>
+                <a href="contacts.html" class="btn-primary px-5 py-2.5 rounded-lg text-sm font-medium">Обсудить задачу</a>
+            </div>
+
+            <!-- Mobile burger -->
+            <button id="burger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Меню">
+                <span class="w-6 h-0.5 bg-white/70 transition-all origin-center"></span>
+                <span class="w-6 h-0.5 bg-white/70 transition-all"></span>
+                <span class="w-6 h-0.5 bg-white/70 transition-all origin-center"></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div id="mobile-nav" class="mobile-nav fixed top-0 right-0 w-72 h-full bg-[#031a3a]/95 backdrop-blur-xl z-50 p-8 flex flex-col lg:hidden">
+        <button id="close-nav" class="self-end p-2 text-white/60 hover:text-white mb-8" aria-label="Закрыть">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <nav class="flex flex-col gap-6">
+            <a href="catalog.html" class="text-lg text-white hover:text-white transition-colors">Каталог</a>
+            <a href="about.html" class="text-lg text-white/70 hover:text-white transition-colors">О компании</a>
+            <a href="process.html" class="text-lg text-white/70 hover:text-white transition-colors">Как работаем</a>
+            <a href="index.html#industries" class="text-lg text-white/70 hover:text-white transition-colors">Отрасли</a>
+            <a href="contacts.html" class="text-lg text-white/70 hover:text-white transition-colors">Контакты</a>
+        </nav>
+        <div class="mt-auto">
+            <a href="tel:+79999999999" class="block text-sm text-white/50 mb-4">+7 (999) 999-99-99</a>
+            <a href="contacts.html" class="btn-primary block text-center px-5 py-3 rounded-lg text-sm font-medium">Обсудить задачу</a>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile overlay -->
+<div id="mobile-overlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden"></div>
+
+
+<!-- ===== BREADCRUMB & HERO ===== -->
+<section class="relative pt-24 lg:pt-28 pb-12" style="background: radial-gradient(ellipse 80% 60% at 50% 20%, rgba(5,38,89,0.5) 0%, transparent 70%), linear-gradient(180deg, var(--deep) 0%, #031a3a 70%, var(--deep) 100%);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Breadcrumb -->
+        <nav class="flex items-center gap-2 text-sm mb-8">
+            <a href="index.html" class="text-white/40 hover:text-white/70 transition-colors">Главная</a>
+            <span class="text-white/20">&rarr;</span>
+            <span class="text-white/70">Каталог</span>
+        </nav>
+
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+            <span class="text-white">Каталог</span>
+            <span class="italic font-light" style="color: var(--light);"> инструмента</span>
+        </h1>
+        <p class="text-base sm:text-lg text-white/50 max-w-2xl mb-8 leading-relaxed">
+            Полный ассортимент металлорежущего инструмента и оснастки
+        </p>
+
+        <!-- Search -->
+        <div class="relative max-w-md">
+            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/30" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+            </svg>
+            <input id="catalog-search" type="text" placeholder="Поиск по каталогу..." class="form-input w-full pl-12 pr-4 py-3 rounded-xl text-sm">
+        </div>
+    </div>
+</section>
+
+
+<!-- ===== MOBILE CATEGORY BAR ===== -->
+<div class="lg:hidden sticky top-16 z-30 border-b border-white/[0.06]" style="background: rgba(2,16,36,0.92); backdrop-filter: blur(16px);">
+    <div class="mobile-sidebar flex gap-1 px-4 py-3 overflow-x-auto">
+        <a href="#inserts" class="flex-shrink-0 px-4 py-2 rounded-lg text-xs font-medium text-white/50 hover:text-white hover:bg-white/[0.06] transition-all">Пластины</a>
+        <a href="#endmills" class="flex-shrink-0 px-4 py-2 rounded-lg text-xs font-medium text-white/50 hover:text-white hover:bg-white/[0.06] transition-all">Концевые фрезы</a>
+        <a href="#welded" class="flex-shrink-0 px-4 py-2 rounded-lg text-xs font-medium text-white/50 hover:text-white hover:bg-white/[0.06] transition-all">Сварные фрезы</a>
+        <a href="#drills" class="flex-shrink-0 px-4 py-2 rounded-lg text-xs font-medium text-white/50 hover:text-white hover:bg-white/[0.06] transition-all">Свёрла</a>
+        <a href="#hss" class="flex-shrink-0 px-4 py-2 rounded-lg text-xs font-medium text-white/50 hover:text-white hover:bg-white/[0.06] transition-all">БРС</a>
+        <a href="#milling" class="flex-shrink-0 px-4 py-2 rounded-lg text-xs font-medium text-white/50 hover:text-white hover:bg-white/[0.06] transition-all">Фрезерный</a>
+        <a href="#threading" class="flex-shrink-0 px-4 py-2 rounded-lg text-xs font-medium text-white/50 hover:text-white hover:bg-white/[0.06] transition-all">Резьба</a>
+        <a href="#custom" class="flex-shrink-0 px-4 py-2 rounded-lg text-xs font-medium text-white/50 hover:text-white hover:bg-white/[0.06] transition-all">Спец.</a>
+    </div>
+</div>
+
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+    <div class="flex gap-8 lg:gap-12">
+
+        <!-- ===== SIDEBAR (desktop) ===== -->
+        <aside class="hidden lg:block w-64 flex-shrink-0">
+            <div class="sticky top-28">
+                <h3 class="text-xs font-semibold text-white/30 uppercase tracking-wider mb-4">Категории</h3>
+                <nav class="flex flex-col gap-0.5">
+                    <!-- Inserts -->
+                    <a href="#inserts" class="sidebar-link px-3 py-2.5 rounded-r-lg text-sm font-medium">Токарные пластины</a>
+                    <div class="pl-6 flex flex-col gap-1 mb-1">
+                        <a href="#inserts" class="sidebar-sub text-xs py-1">Токарная обработка</a>
+                        <a href="#inserts" class="sidebar-sub text-xs py-1">Фрезерование</a>
+                        <a href="#inserts" class="sidebar-sub text-xs py-1">Резьбонарезание</a>
+                    </div>
+
+                    <!-- End Mills -->
+                    <a href="#endmills" class="sidebar-link px-3 py-2.5 rounded-r-lg text-sm font-medium">Концевые фрезы</a>
+                    <div class="pl-6 flex flex-col gap-1 mb-1">
+                        <a href="#endmills" class="sidebar-sub text-xs py-1">Плоский торец</a>
+                        <a href="#endmills" class="sidebar-sub text-xs py-1">Сферический торец</a>
+                        <a href="#endmills" class="sidebar-sub text-xs py-1">Радиусный торец</a>
+                    </div>
+
+                    <!-- Welded -->
+                    <a href="#welded" class="sidebar-link px-3 py-2.5 rounded-r-lg text-sm font-medium">Сварные фрезы</a>
+
+                    <!-- Drills -->
+                    <a href="#drills" class="sidebar-link px-3 py-2.5 rounded-r-lg text-sm font-medium">Твердосплавные свёрла</a>
+
+                    <!-- HSS -->
+                    <a href="#hss" class="sidebar-link px-3 py-2.5 rounded-r-lg text-sm font-medium">Быстрорежущий инструмент</a>
+
+                    <!-- Milling -->
+                    <a href="#milling" class="sidebar-link px-3 py-2.5 rounded-r-lg text-sm font-medium">Фрезерный и сверлильный</a>
+
+                    <!-- Threading -->
+                    <a href="#threading" class="sidebar-link px-3 py-2.5 rounded-r-lg text-sm font-medium">Развёртки</a>
+
+                    <!-- Custom -->
+                    <a href="#custom" class="sidebar-link px-3 py-2.5 rounded-r-lg text-sm font-medium">Специнструмент</a>
+                </nav>
+
+                <div class="mt-8 p-4 rounded-xl" style="background: rgba(5,38,89,0.4); border: 1px solid rgba(84,131,179,0.1);">
+                    <p class="text-xs text-white/40 mb-3">Не нашли нужный инструмент?</p>
+                    <a href="contacts.html" class="btn-primary block text-center px-4 py-2.5 rounded-lg text-xs font-medium">Запросить подбор</a>
+                </div>
+            </div>
+        </aside>
+
+
+        <!-- ===== PRODUCT GRID ===== -->
+        <main class="flex-1 min-w-0">
+
+            <!-- ===== SECTION: INSERTS ===== -->
+            <section id="inserts" class="mb-16 scroll-mt-24 lg:scroll-mt-28">
+                <div class="section-gradient-1 -mx-4 sm:-mx-6 lg:mx-0 px-4 sm:px-6 lg:px-0 py-8 lg:py-0 rounded-none lg:rounded-2xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(84,131,179,0.15);">
+                            <!-- Insert icon: rhombus shape -->
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3L21 12L12 21L3 12Z" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                <circle cx="12" cy="12" r="2.5" stroke="var(--mid)" stroke-width="1" fill="none"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-xl sm:text-2xl font-bold text-white">Токарные пластины</h2>
+                            <p class="text-sm text-white/40">Сменные многогранные пластины из твёрдого сплава</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                        <!-- CNMG -->
+                        <div class="card-glow rounded-xl p-5 reveal stagger-1" data-category="inserts">
+                            <div class="flex items-center justify-center h-28 mb-4">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <path d="M40 10L65 40L40 70L15 40Z" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                    <path d="M40 20L55 40L40 60L25 40Z" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.5"/>
+                                    <circle cx="40" cy="40" r="5" stroke="var(--mid)" stroke-width="1.2" fill="none"/>
+                                    <circle cx="40" cy="40" r="1.5" fill="var(--light)" opacity="0.6"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-1">CNMG 120408</h3>
+                            <p class="text-xs text-white/40 mb-4 leading-relaxed">Пластина ромбическая 80, для чернового и получистового точения сталей и чугунов</p>
+                            <a href="contacts.html" class="btn-card block text-center px-4 py-2 rounded-lg text-xs font-medium">Запросить</a>
+                        </div>
+                        <!-- WNMG -->
+                        <div class="card-glow rounded-xl p-5 reveal stagger-2" data-category="inserts">
+                            <div class="flex items-center justify-center h-28 mb-4">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <path d="M20 25L60 25L50 55L30 55Z" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                    <path d="M28 30L52 30L46 50L34 50Z" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.5"/>
+                                    <circle cx="40" cy="40" r="4" stroke="var(--mid)" stroke-width="1.2" fill="none"/>
+                                    <circle cx="40" cy="40" r="1.5" fill="var(--light)" opacity="0.6"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-1">WNMG 080408</h3>
+                            <p class="text-xs text-white/40 mb-4 leading-relaxed">Пластина тригональная 80, для получистового точения с контролем стружки</p>
+                            <a href="contacts.html" class="btn-card block text-center px-4 py-2 rounded-lg text-xs font-medium">Запросить</a>
+                        </div>
+                        <!-- DNMG -->
+                        <div class="card-glow rounded-xl p-5 reveal stagger-3" data-category="inserts">
+                            <div class="flex items-center justify-center h-28 mb-4">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <path d="M40 12L62 40L40 68L18 40Z" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                    <path d="M40 22L52 40L40 58L28 40Z" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.5"/>
+                                    <circle cx="40" cy="40" r="4.5" stroke="var(--mid)" stroke-width="1.2" fill="none"/>
+                                    <line x1="36" y1="40" x2="44" y2="40" stroke="var(--light)" stroke-width="0.8" opacity="0.4"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-1">DNMG 150608</h3>
+                            <p class="text-xs text-white/40 mb-4 leading-relaxed">Пластина ромбическая 55, для среднего и чистового точения, высокая стойкость</p>
+                            <a href="contacts.html" class="btn-card block text-center px-4 py-2 rounded-lg text-xs font-medium">Запросить</a>
+                        </div>
+                        <!-- TNMG -->
+                        <div class="card-glow rounded-xl p-5 reveal stagger-4" data-category="inserts">
+                            <div class="flex items-center justify-center h-28 mb-4">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <path d="M40 15L65 60L15 60Z" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                    <path d="M40 28L55 55L25 55Z" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.5"/>
+                                    <circle cx="40" cy="46" r="4" stroke="var(--mid)" stroke-width="1.2" fill="none"/>
+                                    <circle cx="40" cy="46" r="1.5" fill="var(--light)" opacity="0.6"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-1">TNMG 160408</h3>
+                            <p class="text-xs text-white/40 mb-4 leading-relaxed">Пластина треугольная 60, универсальная для токарных операций, хорошая экономичность</p>
+                            <a href="contacts.html" class="btn-card block text-center px-4 py-2 rounded-lg text-xs font-medium">Запросить</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ===== SECTION: END MILLS ===== -->
+            <section id="endmills" class="mb-16 scroll-mt-24 lg:scroll-mt-28">
+                <div class="section-gradient-2 -mx-4 sm:-mx-6 lg:mx-0 px-4 sm:px-6 lg:px-0 py-8 lg:py-0 rounded-none lg:rounded-2xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(84,131,179,0.15);">
+                            <!-- End mill icon: cylinder with flutes -->
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect x="10" y="2" width="4" height="18" rx="2" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                <path d="M10 6L7 8M14 10L17 8M10 14L7 16M14 18L17 16" stroke="var(--mid)" stroke-width="1" opacity="0.7"/>
+                                <rect x="8" y="20" width="8" height="2" rx="1" stroke="var(--mid)" stroke-width="1" fill="none"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-xl sm:text-2xl font-bold text-white">Концевые фрезы</h2>
+                            <p class="text-sm text-white/40">Монолитные твердосплавные фрезы для обработки на ЧПУ</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                        <!-- Square D10 -->
+                        <div class="card-glow rounded-xl p-5 reveal stagger-1" data-category="endmills">
+                            <div class="flex items-center justify-center h-28 mb-4">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <rect x="33" y="8" width="14" height="48" rx="1" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                    <path d="M33 20L27 24M47 16L53 20M33 32L27 36M47 28L53 32M33 44L27 48M47 40L53 44" stroke="var(--mid)" stroke-width="1" opacity="0.6"/>
+                                    <rect x="35" y="56" width="10" height="16" rx="1" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.5"/>
+                                    <line x1="33" y1="8" x2="47" y2="8" stroke="var(--light)" stroke-width="1.5"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-1">Фреза 4-зубая D10</h3>
+                            <p class="text-xs text-white/40 mb-4 leading-relaxed">Плоский торец, 4 режущих зуба, для обработки пазов, контуров и плоскостей</p>
+                            <a href="contacts.html" class="btn-card block text-center px-4 py-2 rounded-lg text-xs font-medium">Запросить</a>
+                        </div>
+                        <!-- Ball Nose D8 -->
+                        <div class="card-glow rounded-xl p-5 reveal stagger-2" data-category="endmills">
+                            <div class="flex items-center justify-center h-28 mb-4">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <path d="M34 14L34 50Q34 58 40 58Q46 58 46 50L46 14" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                    <path d="M34 22L28 26M46 18L52 22M34 34L28 38M46 30L52 34M46 42L52 46" stroke="var(--mid)" stroke-width="1" opacity="0.6"/>
+                                    <rect x="36" y="58" width="8" height="14" rx="1" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.5"/>
+                                    <ellipse cx="40" cy="14" rx="6" ry="4" stroke="var(--light)" stroke-width="1" fill="none" opacity="0.4"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-1">Фреза сферическая D8</h3>
+                            <p class="text-xs text-white/40 mb-4 leading-relaxed">Сферический торец, для 3D-обработки, чистовых операций по сложным поверхностям</p>
+                            <a href="contacts.html" class="btn-card block text-center px-4 py-2 rounded-lg text-xs font-medium">Запросить</a>
+                        </div>
+                        <!-- Corner Radius D12 -->
+                        <div class="card-glow rounded-xl p-5 reveal stagger-3" data-category="endmills">
+                            <div class="flex items-center justify-center h-28 mb-4">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <path d="M33 12L33 52Q33 56 37 56L43 56Q47 56 47 52L47 12" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                    <path d="M33 20L27 24M47 16L53 20M33 32L27 36M47 28L53 32M33 44L27 48M47 40L53 44" stroke="var(--mid)" stroke-width="1" opacity="0.6"/>
+                                    <rect x="35" y="56" width="10" height="16" rx="1" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.5"/>
+                                    <path d="M33 12Q33 8 40 8Q47 8 47 12" stroke="var(--light)" stroke-width="1" fill="none" opacity="0.4"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-1">Фреза радиусная D12</h3>
+                            <p class="text-xs text-white/40 mb-4 leading-relaxed">Скруглённый торец R1.0, повышенная стойкость в высокопроизводительном фрезеровании</p>
+                            <a href="contacts.html" class="btn-card block text-center px-4 py-2 rounded-lg text-xs font-medium">Запросить</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ===== SECTION: WELDED END MILLS ===== -->
+            <section id="welded" class="mb-16 scroll-mt-24 lg:scroll-mt-28">
+                <div class="section-gradient-3 -mx-4 sm:-mx-6 lg:mx-0 px-4 sm:px-6 lg:px-0 py-8 lg:py-0 rounded-none lg:rounded-2xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(84,131,179,0.15);">
+                            <!-- Welded mill icon -->
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect x="10" y="2" width="4" height="10" rx="1" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                <rect x="9" y="12" width="6" height="2" rx="0.5" stroke="var(--mid)" stroke-width="1.2" fill="none"/>
+                                <rect x="10" y="14" width="4" height="8" rx="1" stroke="var(--light)" stroke-width="1" fill="none" opacity="0.5"/>
+                                <path d="M10 5L7 7M14 8L17 6" stroke="var(--mid)" stroke-width="1" opacity="0.6"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-xl sm:text-2xl font-bold text-white">Сварные фрезы</h2>
+                            <p class="text-sm text-white/40">Сварные концевые фрезы с твердосплавной режущей частью</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                        <div class="card-glow rounded-xl p-5 reveal stagger-1" data-category="welded">
+                            <div class="flex items-center justify-center h-28 mb-4">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <rect x="33" y="8" width="14" height="30" rx="1" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                    <rect x="31" y="38" width="18" height="4" rx="1" stroke="var(--bright)" stroke-width="1.2" fill="rgba(193,232,255,0.08)"/>
+                                    <rect x="34" y="42" width="12" height="28" rx="1" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.5"/>
+                                    <path d="M33 16L27 20M47 12L53 16M33 28L27 32M47 24L53 28" stroke="var(--mid)" stroke-width="1" opacity="0.6"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-1">Сварная фреза D16</h3>
+                            <p class="text-xs text-white/40 mb-4 leading-relaxed">Твердосплавная рабочая часть, стальной хвостовик, для обработки пазов и уступов</p>
+                            <a href="contacts.html" class="btn-card block text-center px-4 py-2 rounded-lg text-xs font-medium">Запросить</a>
+                        </div>
+                        <div class="card-glow rounded-xl p-5 reveal stagger-2" data-category="welded">
+                            <div class="flex items-center justify-center h-28 mb-4">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <rect x="31" y="8" width="18" height="30" rx="1" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                    <rect x="29" y="38" width="22" height="4" rx="1" stroke="var(--bright)" stroke-width="1.2" fill="rgba(193,232,255,0.08)"/>
+                                    <rect x="33" y="42" width="14" height="28" rx="1" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.5"/>
+                                    <path d="M31 16L25 20M49 12L55 16M31 28L25 32M49 24L55 28" stroke="var(--mid)" stroke-width="1" opacity="0.6"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-1">Сварная фреза D20</h3>
+                            <p class="text-xs text-white/40 mb-4 leading-relaxed">Увеличенный диаметр, для тяжёлых условий обработки, жёсткая конструкция</p>
+                            <a href="contacts.html" class="btn-card block text-center px-4 py-2 rounded-lg text-xs font-medium">Запросить</a>
+                        </div>
+                        <div class="card-glow rounded-xl p-5 reveal stagger-3" data-category="welded">
+                            <div class="flex items-center justify-center h-28 mb-4">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <path d="M34 8L34 35Q34 40 40 40Q46 40 46 35L46 8" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                    <rect x="32" y="38" width="16" height="4" rx="1" stroke="var(--bright)" stroke-width="1.2" fill="rgba(193,232,255,0.08)"/>
+                                    <rect x="35" y="42" width="10" height="28" rx="1" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.5"/>
+                                    <path d="M34 16L28 20M46 12L52 16M34 28L28 32" stroke="var(--mid)" stroke-width="1" opacity="0.6"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-1">Сварная фреза сферическая D12</h3>
+                            <p class="text-xs text-white/40 mb-4 leading-relaxed">Сферический торец, для 3D-обработки форм и штампов, сварное соединение</p>
+                            <a href="contacts.html" class="btn-card block text-center px-4 py-2 rounded-lg text-xs font-medium">Запросить</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ===== SECTION: DRILLS ===== -->
+            <section id="drills" class="mb-16 scroll-mt-24 lg:scroll-mt-28">
+                <div class="section-gradient-4 -mx-4 sm:-mx-6 lg:mx-0 px-4 sm:px-6 lg:px-0 py-8 lg:py-0 rounded-none lg:rounded-2xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(84,131,179,0.15);">
+                            <!-- Drill icon -->
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L15 8L15 18L9 18L9 8Z" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                <path d="M9 8L6 6M15 8L18 6" stroke="var(--mid)" stroke-width="1" opacity="0.7"/>
+                                <rect x="9" y="18" width="6" height="4" rx="1" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.5"/>
+                                <line x1="12" y1="2" x2="12" y2="8" stroke="var(--mid)" stroke-width="0.8" opacity="0.4"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-xl sm:text-2xl font-bold text-white">Твердосплавные свёрла</h2>
+                            <p class="text-sm text-white/40">Монолитные свёрла из твёрдого сплава с внутренним подводом СОЖ</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                        <!-- D6 -->
+                        <div class="card-glow rounded-xl p-5 reveal stagger-1" data-category="drills">
+                            <div class="flex items-center justify-center h-28 mb-4">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <path d="M40 8L46 18L46 52L34 52L34 18Z" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                    <path d="M34 24C30 22 30 18 34 18M46 24C50 22 50 18 46 18" stroke="var(--mid)" stroke-width="0.8" opacity="0.5"/>
+                                    <path d="M36 26L34 52M44 26L46 52" stroke="var(--mid)" stroke-width="0.5" opacity="0.3" stroke-dasharray="2 3"/>
+                                    <rect x="36" y="52" width="8" height="18" rx="1" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.5"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-1">Сверло D6 x 3D</h3>
+                            <p class="text-xs text-white/40 mb-4 leading-relaxed">Диаметр 6 мм, глубина сверления 3xD, двухзубое, с внутренним подводом СОЖ</p>
+                            <a href="contacts.html" class="btn-card block text-center px-4 py-2 rounded-lg text-xs font-medium">Запросить</a>
+                        </div>
+                        <!-- D8 -->
+                        <div class="card-glow rounded-xl p-5 reveal stagger-2" data-category="drills">
+                            <div class="flex items-center justify-center h-28 mb-4">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <path d="M40 8L48 20L48 52L32 52L32 20Z" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                    <path d="M32 26C28 24 28 20 32 20M48 26C52 24 52 20 48 20" stroke="var(--mid)" stroke-width="0.8" opacity="0.5"/>
+                                    <path d="M35 28L32 52M45 28L48 52" stroke="var(--mid)" stroke-width="0.5" opacity="0.3" stroke-dasharray="2 3"/>
+                                    <rect x="35" y="52" width="10" height="18" rx="1" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.5"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-1">Сверло D8 x 5D</h3>
+                            <p class="text-xs text-white/40 mb-4 leading-relaxed">Диаметр 8 мм, глубина сверления 5xD, для средних глубин, стабильный вывод стружки</p>
+                            <a href="contacts.html" class="btn-card block text-center px-4 py-2 rounded-lg text-xs font-medium">Запросить</a>
+                        </div>
+                        <!-- D10 -->
+                        <div class="card-glow rounded-xl p-5 reveal stagger-3" data-category="drills">
+                            <div class="flex items-center justify-center h-28 mb-4">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <path d="M40 6L50 20L50 50L30 50L30 20Z" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                    <path d="M30 26C26 24 26 20 30 20M50 26C54 24 54 20 50 20" stroke="var(--mid)" stroke-width="0.8" opacity="0.5"/>
+                                    <path d="M34 28L30 50M46 28L50 50" stroke="var(--mid)" stroke-width="0.5" opacity="0.3" stroke-dasharray="2 3"/>
+                                    <rect x="34" y="50" width="12" height="20" rx="1" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.5"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-1">Сверло D10 x 5D</h3>
+                            <p class="text-xs text-white/40 mb-4 leading-relaxed">Диаметр 10 мм, глубина сверления 5xD, универсальное покрытие для сталей и чугунов</p>
+                            <a href="contacts.html" class="btn-card block text-center px-4 py-2 rounded-lg text-xs font-medium">Запросить</a>
+                        </div>
+                        <!-- D12 -->
+                        <div class="card-glow rounded-xl p-5 reveal stagger-4" data-category="drills">
+                            <div class="flex items-center justify-center h-28 mb-4">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <path d="M40 6L52 22L52 48L28 48L28 22Z" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                    <path d="M28 28C24 26 24 22 28 22M52 28C56 26 56 22 52 22" stroke="var(--mid)" stroke-width="0.8" opacity="0.5"/>
+                                    <path d="M33 30L28 48M47 30L52 48" stroke="var(--mid)" stroke-width="0.5" opacity="0.3" stroke-dasharray="2 3"/>
+                                    <rect x="33" y="48" width="14" height="22" rx="1" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.5"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-1">Сверло D12 x 3D</h3>
+                            <p class="text-xs text-white/40 mb-4 leading-relaxed">Диаметр 12 мм, глубина сверления 3xD, усиленная конструкция, для отверстий под резьбу</p>
+                            <a href="contacts.html" class="btn-card block text-center px-4 py-2 rounded-lg text-xs font-medium">Запросить</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ===== SECTION: HSS ===== -->
+            <section id="hss" class="mb-16 scroll-mt-24 lg:scroll-mt-28">
+                <div class="section-gradient-5 -mx-4 sm:-mx-6 lg:mx-0 px-4 sm:px-6 lg:px-0 py-8 lg:py-0 rounded-none lg:rounded-2xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(84,131,179,0.15);">
+                            <!-- HSS tool icon -->
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect x="10" y="2" width="4" height="16" rx="1" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                <path d="M10 6L8 7M14 6L16 7M10 10L8 11M14 10L16 11M10 14L8 15M14 14L16 15" stroke="var(--mid)" stroke-width="0.8" opacity="0.6"/>
+                                <rect x="9" y="18" width="6" height="4" rx="1" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.5"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-xl sm:text-2xl font-bold text-white">Быстрорежущий инструмент</h2>
+                            <p class="text-sm text-white/40">Инструмент из быстрорежущей стали (HSS) для универсальных операций</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                        <div class="card-glow rounded-xl p-5 reveal stagger-1" data-category="hss">
+                            <div class="flex items-center justify-center h-28 mb-4">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <rect x="35" y="10" width="10" height="42" rx="1" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                    <path d="M35 18L30 21M45 14L50 17M35 28L30 31M45 24L50 27M35 38L30 41M45 34L50 37" stroke="var(--mid)" stroke-width="1" opacity="0.5"/>
+                                    <rect x="36" y="52" width="8" height="18" rx="1" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.4"/>
+                                    <line x1="35" y1="10" x2="45" y2="10" stroke="var(--light)" stroke-width="1.5"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-1">Фреза HSS D12</h3>
+                            <p class="text-xs text-white/40 mb-4 leading-relaxed">Быстрорежущая концевая фреза, для обработки алюминия, меди и мягких сталей</p>
+                            <a href="contacts.html" class="btn-card block text-center px-4 py-2 rounded-lg text-xs font-medium">Запросить</a>
+                        </div>
+                        <div class="card-glow rounded-xl p-5 reveal stagger-2" data-category="hss">
+                            <div class="flex items-center justify-center h-28 mb-4">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <path d="M40 10L46 18L46 50L34 50L34 18Z" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                    <path d="M36 22L34 50M44 22L46 50" stroke="var(--mid)" stroke-width="0.5" opacity="0.3" stroke-dasharray="2 3"/>
+                                    <rect x="36" y="50" width="8" height="18" rx="1" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.4"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-1">Сверло HSS D10</h3>
+                            <p class="text-xs text-white/40 mb-4 leading-relaxed">Спиральное сверло из быстрорежущей стали, для общего применения на станках</p>
+                            <a href="contacts.html" class="btn-card block text-center px-4 py-2 rounded-lg text-xs font-medium">Запросить</a>
+                        </div>
+                        <div class="card-glow rounded-xl p-5 reveal stagger-3" data-category="hss">
+                            <div class="flex items-center justify-center h-28 mb-4">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <rect x="33" y="10" width="14" height="38" rx="1" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                    <path d="M33 18L28 21M47 14L52 17M33 28L28 31M47 24L52 27M33 38L28 41M47 34L52 37" stroke="var(--mid)" stroke-width="1" opacity="0.5"/>
+                                    <rect x="35" y="48" width="10" height="20" rx="1" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.4"/>
+                                    <path d="M33 10Q40 4 47 10" stroke="var(--light)" stroke-width="1" fill="none" opacity="0.4"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-1">Зенкер HSS D16</h3>
+                            <p class="text-xs text-white/40 mb-4 leading-relaxed">Для обработки отверстий, зенкования фасок и подготовки под финишные операции</p>
+                            <a href="contacts.html" class="btn-card block text-center px-4 py-2 rounded-lg text-xs font-medium">Запросить</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ===== SECTION: MILLING ===== -->
+            <section id="milling" class="mb-16 scroll-mt-24 lg:scroll-mt-28">
+                <div class="section-gradient-6 -mx-4 sm:-mx-6 lg:mx-0 px-4 sm:px-6 lg:px-0 py-8 lg:py-0 rounded-none lg:rounded-2xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(84,131,179,0.15);">
+                            <!-- Face mill icon -->
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <ellipse cx="12" cy="10" rx="9" ry="4" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                <path d="M3 10v4c0 2.2 4 4 9 4s9-1.8 9-4v-4" stroke="var(--light)" stroke-width="1" fill="none" opacity="0.4"/>
+                                <circle cx="12" cy="10" r="3" stroke="var(--mid)" stroke-width="1" fill="none"/>
+                                <circle cx="12" cy="10" r="1" fill="var(--mid)" opacity="0.5"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-xl sm:text-2xl font-bold text-white">Фрезерный и сверлильный инструмент</h2>
+                            <p class="text-sm text-white/40">Корпусные фрезы и сборный инструмент для станков с ЧПУ</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                        <!-- Face mill D50 -->
+                        <div class="card-glow rounded-xl p-5 reveal stagger-1" data-category="milling">
+                            <div class="flex items-center justify-center h-28 mb-4">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <ellipse cx="40" cy="32" rx="28" ry="12" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                    <path d="M12 32v10c0 6.6 12.5 12 28 12s28-5.4 28-12V32" stroke="var(--light)" stroke-width="1" fill="none" opacity="0.4"/>
+                                    <ellipse cx="40" cy="32" rx="10" ry="4" stroke="var(--mid)" stroke-width="1" fill="none"/>
+                                    <circle cx="40" cy="32" r="2" fill="var(--mid)" opacity="0.5"/>
+                                    <!-- Insert pockets -->
+                                    <rect x="18" y="29" width="6" height="6" rx="1" stroke="var(--mid)" stroke-width="0.8" fill="none" opacity="0.6" transform="rotate(-15 21 32)"/>
+                                    <rect x="56" y="29" width="6" height="6" rx="1" stroke="var(--mid)" stroke-width="0.8" fill="none" opacity="0.6" transform="rotate(15 59 32)"/>
+                                    <rect x="37" y="19" width="6" height="5" rx="1" stroke="var(--mid)" stroke-width="0.8" fill="none" opacity="0.6"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-1">Торцевая фреза D50</h3>
+                            <p class="text-xs text-white/40 mb-4 leading-relaxed">Корпусная фреза для обработки плоскостей, 5 гнёзд под пластины, высокая производительность</p>
+                            <a href="contacts.html" class="btn-card block text-center px-4 py-2 rounded-lg text-xs font-medium">Запросить</a>
+                        </div>
+                        <!-- Shell mill D63 -->
+                        <div class="card-glow rounded-xl p-5 reveal stagger-2" data-category="milling">
+                            <div class="flex items-center justify-center h-28 mb-4">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <ellipse cx="40" cy="30" rx="30" ry="14" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                    <path d="M10 30v12c0 7.7 13.4 14 30 14s30-6.3 30-14V30" stroke="var(--light)" stroke-width="1" fill="none" opacity="0.35"/>
+                                    <ellipse cx="40" cy="30" rx="12" ry="5" stroke="var(--mid)" stroke-width="1" fill="none"/>
+                                    <circle cx="40" cy="30" r="2.5" fill="var(--mid)" opacity="0.5"/>
+                                    <rect x="16" y="27" width="5" height="5" rx="1" stroke="var(--mid)" stroke-width="0.8" fill="none" opacity="0.6" transform="rotate(-20 18 30)"/>
+                                    <rect x="59" y="27" width="5" height="5" rx="1" stroke="var(--mid)" stroke-width="0.8" fill="none" opacity="0.6" transform="rotate(20 62 30)"/>
+                                    <rect x="25" y="17" width="5" height="5" rx="1" stroke="var(--mid)" stroke-width="0.8" fill="none" opacity="0.5"/>
+                                    <rect x="50" y="17" width="5" height="5" rx="1" stroke="var(--mid)" stroke-width="0.8" fill="none" opacity="0.5"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-1">Насадная фреза D63</h3>
+                            <p class="text-xs text-white/40 mb-4 leading-relaxed">Корпусная насадная фреза, для обработки больших плоскостей, посадка на оправку</p>
+                            <a href="contacts.html" class="btn-card block text-center px-4 py-2 rounded-lg text-xs font-medium">Запросить</a>
+                        </div>
+                        <!-- Shoulder mill D40 -->
+                        <div class="card-glow rounded-xl p-5 reveal stagger-3" data-category="milling">
+                            <div class="flex items-center justify-center h-28 mb-4">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <ellipse cx="40" cy="28" rx="22" ry="10" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                    <path d="M18 28v16c0 5.5 9.8 10 22 10s22-4.5 22-10V28" stroke="var(--light)" stroke-width="1" fill="none" opacity="0.4"/>
+                                    <ellipse cx="40" cy="28" rx="8" ry="3.5" stroke="var(--mid)" stroke-width="1" fill="none"/>
+                                    <circle cx="40" cy="28" r="1.5" fill="var(--mid)" opacity="0.5"/>
+                                    <!-- Side inserts -->
+                                    <rect x="20" y="32" width="5" height="8" rx="1" stroke="var(--mid)" stroke-width="0.8" fill="none" opacity="0.6"/>
+                                    <rect x="55" y="32" width="5" height="8" rx="1" stroke="var(--mid)" stroke-width="0.8" fill="none" opacity="0.6"/>
+                                    <rect x="36" y="32" width="8" height="8" rx="1" stroke="var(--mid)" stroke-width="0.5" fill="none" opacity="0.3"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-1">Фреза уступная D40</h3>
+                            <p class="text-xs text-white/40 mb-4 leading-relaxed">Для обработки уступов и плечиков, точный угол 90, минимальные осевые силы</p>
+                            <a href="contacts.html" class="btn-card block text-center px-4 py-2 rounded-lg text-xs font-medium">Запросить</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ===== SECTION: THREADING / REAMERS ===== -->
+            <section id="threading" class="mb-16 scroll-mt-24 lg:scroll-mt-28">
+                <div class="section-gradient-7 -mx-4 sm:-mx-6 lg:mx-0 px-4 sm:px-6 lg:px-0 py-8 lg:py-0 rounded-none lg:rounded-2xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(84,131,179,0.15);">
+                            <!-- Thread icon -->
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect x="10" y="2" width="4" height="18" rx="1" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                <path d="M10 5L14 7M10 9L14 11M10 13L14 15M10 17L14 19" stroke="var(--mid)" stroke-width="1" opacity="0.6"/>
+                                <rect x="9" y="20" width="6" height="2" rx="0.5" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.5"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-xl sm:text-2xl font-bold text-white">Развёртки и резьбонарезной инструмент</h2>
+                            <p class="text-sm text-white/40">Инструмент для нарезания резьбы и финишной обработки отверстий</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                        <!-- Thread turning insert -->
+                        <div class="card-glow rounded-xl p-5 reveal stagger-1" data-category="threading">
+                            <div class="flex items-center justify-center h-28 mb-4">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <path d="M40 15L58 45L22 45Z" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                    <path d="M40 25L50 42L30 42Z" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.5"/>
+                                    <circle cx="40" cy="36" r="3" stroke="var(--mid)" stroke-width="1" fill="none"/>
+                                    <!-- Thread profile at tip -->
+                                    <path d="M38 15L40 10L42 15" stroke="var(--bright)" stroke-width="1" fill="none" opacity="0.6"/>
+                                    <path d="M37 18L40 13L43 18" stroke="var(--mid)" stroke-width="0.6" fill="none" opacity="0.3"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-1">Резьбовая пластина 16ER</h3>
+                            <p class="text-xs text-white/40 mb-4 leading-relaxed">Пластина для наружной резьбы, профиль ISO метрический, шаг 1.0-3.0 мм</p>
+                            <a href="contacts.html" class="btn-card block text-center px-4 py-2 rounded-lg text-xs font-medium">Запросить</a>
+                        </div>
+                        <!-- Thread mill D20 -->
+                        <div class="card-glow rounded-xl p-5 reveal stagger-2" data-category="threading">
+                            <div class="flex items-center justify-center h-28 mb-4">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <rect x="35" y="10" width="10" height="40" rx="1" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                    <!-- Thread teeth -->
+                                    <path d="M35 18L30 20L35 22M45 15L50 17L45 19M35 28L30 30L35 32M45 25L50 27L45 29M35 38L30 40L35 42M45 35L50 37L45 39" stroke="var(--mid)" stroke-width="1" opacity="0.6"/>
+                                    <rect x="37" y="50" width="6" height="18" rx="1" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.4"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-1">Резьбовая фреза D20</h3>
+                            <p class="text-xs text-white/40 mb-4 leading-relaxed">Твердосплавная резьбовая фреза для внутренней и наружной резьбы, CNC</p>
+                            <a href="contacts.html" class="btn-card block text-center px-4 py-2 rounded-lg text-xs font-medium">Запросить</a>
+                        </div>
+                        <!-- M8 tap -->
+                        <div class="card-glow rounded-xl p-5 reveal stagger-3" data-category="threading">
+                            <div class="flex items-center justify-center h-28 mb-4">
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <rect x="36" y="10" width="8" height="38" rx="1" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                    <path d="M36 16L44 20M36 24L44 28M36 32L44 36M36 40L44 44" stroke="var(--mid)" stroke-width="0.8" opacity="0.5"/>
+                                    <!-- Square shank -->
+                                    <rect x="35" y="48" width="10" height="6" rx="0.5" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.6"/>
+                                    <rect x="37" y="54" width="6" height="16" rx="1" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.4"/>
+                                    <!-- Tapered entry -->
+                                    <path d="M38 10L40 6L42 10" stroke="var(--light)" stroke-width="1" fill="none" opacity="0.5"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-base font-semibold text-white mb-1">Метчик M8 x 1.25</h3>
+                            <p class="text-xs text-white/40 mb-4 leading-relaxed">Машинный метчик для сквозных отверстий, спиральная канавка, для станков с ЧПУ</p>
+                            <a href="contacts.html" class="btn-card block text-center px-4 py-2 rounded-lg text-xs font-medium">Запросить</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ===== SECTION: CUSTOM ===== -->
+            <section id="custom" class="mb-8 scroll-mt-24 lg:scroll-mt-28">
+                <div class="section-gradient-8 -mx-4 sm:-mx-6 lg:mx-0 px-4 sm:px-6 lg:px-0 py-8 lg:py-0 rounded-none lg:rounded-2xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(84,131,179,0.15);">
+                            <!-- Custom tool icon: gear/wrench -->
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="4" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                <circle cx="12" cy="12" r="1.5" fill="var(--mid)" opacity="0.5"/>
+                                <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12" stroke="var(--mid)" stroke-width="1" opacity="0.5"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-xl sm:text-2xl font-bold text-white">Специнструмент</h2>
+                            <p class="text-sm text-white/40">Нестандартный инструмент под конкретные задачи производства</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                        <div class="card-glow rounded-xl p-6 sm:col-span-2 xl:col-span-3 reveal stagger-1" data-category="custom">
+                            <div class="flex flex-col md:flex-row items-center gap-6">
+                                <div class="flex items-center justify-center w-32 h-32 flex-shrink-0">
+                                    <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+                                        <!-- Central gear -->
+                                        <circle cx="50" cy="50" r="18" stroke="var(--light)" stroke-width="1.5" fill="none"/>
+                                        <circle cx="50" cy="50" r="8" stroke="var(--mid)" stroke-width="1" fill="none"/>
+                                        <circle cx="50" cy="50" r="3" fill="var(--mid)" opacity="0.4"/>
+                                        <!-- Gear teeth -->
+                                        <path d="M50 28v-6M50 78v-6M28 50h-6M78 50h-6" stroke="var(--light)" stroke-width="2" opacity="0.5"/>
+                                        <path d="M35.4 35.4l-4.2-4.2M68.8 68.8l-4.2-4.2M35.4 64.6l-4.2 4.2M68.8 31.2l-4.2 4.2" stroke="var(--light)" stroke-width="1.5" opacity="0.35"/>
+                                        <!-- Orbiting elements -->
+                                        <circle cx="50" cy="22" r="3" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.5"/>
+                                        <circle cx="78" cy="50" r="3" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.5"/>
+                                        <circle cx="50" cy="78" r="3" stroke="var(--mid)" stroke-width="1" fill="none" opacity="0.5"/>
+                                        <!-- Connecting arcs -->
+                                        <path d="M30 30 Q20 50 30 70" stroke="var(--mid)" stroke-width="0.6" fill="none" opacity="0.2"/>
+                                        <path d="M70 30 Q80 50 70 70" stroke="var(--mid)" stroke-width="0.6" fill="none" opacity="0.2"/>
+                                    </svg>
+                                </div>
+                                <div class="text-center md:text-left">
+                                    <h3 class="text-lg font-semibold text-white mb-2">Нестандартный инструмент -- обсудим вашу задачу</h3>
+                                    <p class="text-sm text-white/40 mb-4 leading-relaxed max-w-lg">
+                                        Проектируем и изготавливаем специальный инструмент под конкретные операции: ступенчатые свёрла, комбинированные фрезы, фасонные резцы, нестандартные развёртки. Работаем по чертежам или подбираем решение совместно с вашими технологами.
+                                    </p>
+                                    <a href="contacts.html" class="btn-primary inline-block px-6 py-3 rounded-lg text-sm font-medium">Обсудить задачу</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+</div>
+
+
+<!-- ===== FOOTER ===== -->
+<footer class="relative pt-16 pb-8 border-t border-white/[0.04]" style="background: linear-gradient(180deg, var(--deep), #010c1a);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
+            <div>
+                <h4 class="text-sm font-semibold text-white/70 mb-4">Каталог</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="catalog.html#inserts" class="text-sm text-white/35 hover:text-white/60 transition-colors">Токарные пластины</a></li>
+                    <li><a href="catalog.html#endmills" class="text-sm text-white/35 hover:text-white/60 transition-colors">Концевые фрезы</a></li>
+                    <li><a href="catalog.html#drills" class="text-sm text-white/35 hover:text-white/60 transition-colors">Свёрла</a></li>
+                    <li><a href="catalog.html#milling" class="text-sm text-white/35 hover:text-white/60 transition-colors">Фрезерный инструмент</a></li>
+                    <li><a href="catalog.html#threading" class="text-sm text-white/35 hover:text-white/60 transition-colors">Резьбонарезной</a></li>
+                    <li><a href="catalog.html#custom" class="text-sm text-white/35 hover:text-white/60 transition-colors">Специнструмент</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-sm font-semibold text-white/70 mb-4">Компания</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="about.html" class="text-sm text-white/35 hover:text-white/60 transition-colors">О компании</a></li>
+                    <li><a href="process.html" class="text-sm text-white/35 hover:text-white/60 transition-colors">Как работаем</a></li>
+                    <li><a href="about.html#partner" class="text-sm text-white/35 hover:text-white/60 transition-colors">Партнёр KANTISON</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-sm font-semibold text-white/70 mb-4">Клиентам</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="catalog.html" class="text-sm text-white/35 hover:text-white/60 transition-colors">Подобрать инструмент</a></li>
+                    <li><a href="contacts.html" class="text-sm text-white/35 hover:text-white/60 transition-colors">Запросить образец</a></li>
+                    <li><a href="contacts.html" class="text-sm text-white/35 hover:text-white/60 transition-colors">Обсудить задачу</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-sm font-semibold text-white/70 mb-4">Контакты</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="tel:+79999999999" class="text-sm text-white/35 hover:text-white/60 transition-colors">+7 (999) 999-99-99</a></li>
+                    <li><a href="mailto:info@evolutech.ru" class="text-sm text-white/35 hover:text-white/60 transition-colors">info@evolutech.ru</a></li>
+                    <li><a href="#" class="text-sm text-white/35 hover:text-white/60 transition-colors">Telegram</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="glow-line mb-8"></div>
+
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <svg width="24" height="24" viewBox="0 0 36 36" fill="none">
+                    <path d="M18 2L32 10v16L18 34 4 26V10L18 2z" stroke="var(--mid)" stroke-width="1.5" fill="none"/>
+                    <path d="M18 8L26 12.5v9L18 26l-8-4.5v-9L18 8z" stroke="var(--light)" stroke-width="1" fill="none" opacity="0.6"/>
+                </svg>
+                <span class="text-sm font-semibold tracking-wider text-white/50">EVOLUTECH</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <span class="text-xs text-white/25">&copy; 2024 Эволютех. Все права защищены.</span>
+                <a href="privacy.html" class="text-xs text-white/25 hover:text-white/40 transition-colors">Политика конфиденциальности</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+// ===== HEADER SCROLL =====
+const header = document.querySelector('.header');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+}, { passive: true });
+
+
+// ===== MOBILE NAV =====
+const burger = document.getElementById('burger');
+const mobileNav = document.getElementById('mobile-nav');
+const closeNav = document.getElementById('close-nav');
+const overlay = document.getElementById('mobile-overlay');
+
+function openMobileNav() {
+    mobileNav.classList.add('open');
+    overlay.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeMobileNav() {
+    mobileNav.classList.remove('open');
+    overlay.classList.add('hidden');
+    document.body.style.overflow = '';
+}
+
+burger.addEventListener('click', openMobileNav);
+closeNav.addEventListener('click', closeMobileNav);
+overlay.addEventListener('click', closeMobileNav);
+
+mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMobileNav);
+});
+
+
+// ===== SCROLL REVEAL (Intersection Observer) =====
+const revealElements = document.querySelectorAll('.reveal');
+
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -40px 0px'
+});
+
+revealElements.forEach(el => revealObserver.observe(el));
+
+
+// ===== SIDEBAR ACTIVE STATE =====
+const sections = document.querySelectorAll('section[id]');
+const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            sidebarLinks.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+            });
+        }
+    });
+}, {
+    threshold: 0.2,
+    rootMargin: '-80px 0px -60% 0px'
+});
+
+sections.forEach(section => sectionObserver.observe(section));
+
+
+// ===== SEARCH FILTER =====
+const searchInput = document.getElementById('catalog-search');
+
+searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.card-glow');
+
+    cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (!query || text.includes(query)) {
+            card.style.display = '';
+            card.style.opacity = '1';
+        } else {
+            card.style.opacity = '0.15';
+        }
+    });
+
+    // Also dim section headers if no cards match
+    const sectionEls = document.querySelectorAll('section[id]');
+    sectionEls.forEach(section => {
+        const sectionCards = section.querySelectorAll('.card-glow');
+        const anyVisible = Array.from(sectionCards).some(c => !query || c.textContent.toLowerCase().includes(query));
+        section.style.opacity = anyVisible ? '1' : '0.3';
+        section.style.transition = 'opacity 0.3s';
+    });
+});
+</script>
+
+</body>
+</html>

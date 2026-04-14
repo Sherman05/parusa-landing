@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Паруса — Попутный ветер для вашего бизнеса</title>
-<meta name="description" content="Паруса — IT-студия: автоматизация бизнес-процессов, интеграция AI-агентов, разработка полного цикла." />
+<meta name="description" content="Паруса — IT-студия: автоматизация бизнес-процессов, интеграция ИИ-агентов, разработка полного цикла." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -91,6 +91,10 @@
     0%{transform:translateX(0)} 100%{transform:translateX(-50%)}
   }
   .wave-move{animation:wave 22s linear infinite}
+
+  /* text selection — neat bg across all font sizes */
+  ::selection{background:rgba(212,162,76,.35);color:var(--cream);-webkit-text-fill-color:var(--cream);text-shadow:none}
+  ::-moz-selection{background:rgba(212,162,76,.35);color:var(--cream);-webkit-text-fill-color:var(--cream);text-shadow:none}
 
   /* marquee — seamless: two identical sequences, animate exactly -50% */
   @keyframes marquee { from{transform:translate3d(0,0,0)} to{transform:translate3d(-50%,0,0)} }
@@ -316,9 +320,9 @@ function Hero(){
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 grid lg:grid-cols-12 gap-10 items-center">
         {/* left: text */}
         <div className="lg:col-span-7 relative z-10">
-          <div className="reveal eyebrow mb-8">Студия цифровой навигации · Казань</div>
+          <div className="reveal eyebrow mb-8">Цифровая студия полного цикла</div>
 
-          <h1 className="reveal font-display text-[clamp(3rem,7.8vw,7.5rem)] leading-[.92] tracking-[-0.02em]">
+          <h1 className="reveal font-display text-[clamp(3rem,7.8vw,7.5rem)] leading-[1] tracking-[-0.02em]">
             <SplitText>Попутный</SplitText>
             <br/>
             <span className="italic font-normal"><SplitText>ветер&nbsp;для</SplitText></span>
@@ -328,7 +332,7 @@ function Hero(){
 
           <p className="reveal d2 mt-10 max-w-xl text-lg text-[color:var(--cream)]/75 leading-relaxed">
             Мы поднимаем паруса там, где другие ждут у берега. Автоматизируем процессы,
-            встраиваем AI-агентов и строим софт, который везёт бизнес дальше горизонта.
+            встраиваем ИИ-агентов и разрабатываем цифровые продукты для бизнеса, которые везут дальше горизонта.
           </p>
 
           <div className="reveal d3 mt-12 flex flex-wrap items-center gap-4">
@@ -432,7 +436,7 @@ function Hero(){
 }
 
 function Marquee(){
-  const items = ["Автоматизация","AI-агенты","Разработка","Интеграции","Data Pipelines","LLM Ops","Процессы","Архитектура"];
+  const items = ["Автоматизация","ИИ-агенты","Разработка","Интеграции","Data Pipelines","LLM Ops","Процессы","Архитектура"];
   const Seq = ({aria}) => (
     <div className="marquee-seq" aria-hidden={aria}>
       {items.map((t,i)=>(
@@ -459,22 +463,22 @@ function Services(){
       n:"01",
       title:"Автоматизация бизнес-процессов",
       tag:"Operations",
-      desc:"Снимаем рутину с плеч команды: CRM, ERP, документооборот, связки между системами. Вы видите процессы на карте, а не в чатах.",
-      bullets:["Аудит и реинжиниринг","Low-code и кастом","Интеграции API","Мониторинг и метрики"],
+      desc:"Снимаем рутину с плеч команды: CRM, ERP, документооборот, связки между системами. Процессы становятся прозрачными и управляемыми.",
+      bullets:["Аудит бизнес-процессов","Подключение внешних сервисов и баз данных","Аналитика и контроль эффективности"],
     },
     {
       n:"02",
-      title:"AI-агенты на борту",
+      title:"ИИ-агенты",
       tag:"Intelligence",
-      desc:"Внедряем агентов, которые отвечают клиентам, ведут документы, анализируют данные и принимают решения. Не чат-бот — цифровой сотрудник.",
-      bullets:["LLM под задачи","RAG и базы знаний","Голос и мультимодал","Safety и наблюдаемость"],
+      desc:"Внедряем агентов, которые отвечают клиентам, ведут документы, анализируют данные и принимают решения. Не чат-бот, а полноценный цифровой сотрудник.",
+      bullets:["Подбор ИИ-модели под вашу задачу","Работа с данными и документами компании","ИИ-ассистент: звонки, текст, видео"],
     },
     {
       n:"03",
       title:"Разработка полного цикла",
       tag:"Engineering",
-      desc:"От концепта и дизайна до релиза и поддержки. Веб, мобильные, backend, инфраструктура — всё под одной мачтой.",
-      bullets:["Продуктовый дизайн","Web · Mobile · Backend","DevOps & Cloud","Сопровождение 24/7"],
+      desc:"От идеи до готового дизайна и релиза. Проектируем, собираем, запускаем — весь путь от макета до рабочего продукта.",
+      bullets:["Дизайн интерфейсов","Сайты и мобильные приложения","Сопровождение после релиза"],
     },
   ];
 
@@ -490,29 +494,28 @@ function Services(){
       <div className="max-w-[1400px] mx-auto px-6 md:px-10">
         <div className="grid md:grid-cols-12 gap-10 mb-20">
           <div className="md:col-span-5">
-            <div className="eyebrow reveal mb-6">§ 01 — Направления</div>
-            <h2 className="reveal font-display text-[clamp(2.5rem,5vw,5rem)] leading-[.95] tracking-tight">
-              Три <span className="italic">мачты,</span><br/> одна <span className="gold">команда.</span>
+            <div className="eyebrow reveal mb-6">§ 01 — Услуги</div>
+            <h2 className="reveal font-display text-[clamp(2.5rem,5vw,5rem)] leading-[1] tracking-tight">
+              Формула <span className="italic">цифрового</span><br/> <span className="gold">роста.</span>
             </h2>
           </div>
           <div className="md:col-span-6 md:col-start-7 flex items-end">
             <p className="reveal d2 text-lg text-[color:var(--cream)]/70 max-w-lg">
-              Каждое направление — отдельный парус. Вместе они ловят ветер и разгоняют
-              бизнес, куда бы вы ни держали курс.
+              Автоматизация наводит порядок в процессах. ИИ забирает рутину и помогает принимать решения быстрее. Разработка превращает задачу в готовый продукт.
             </p>
           </div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
           {list.map((s,i)=>(
-            <div key={i} onMouseMove={onMove} className={`service-card p-8 md:p-10 reveal d${i+1}`}>
+            <div key={i} onMouseMove={onMove} className={`service-card p-8 md:p-10 reveal d${i+1} h-full flex flex-col`}>
               <div className="flex items-start justify-between">
                 <div className="font-mono text-[11px] tracking-[0.3em] text-[color:var(--gold)] uppercase">{s.tag}</div>
                 <div className="font-display text-6xl md:text-7xl text-[color:var(--cream)]/10 leading-none">{s.n}</div>
               </div>
-              <h3 className="font-display text-3xl md:text-[32px] leading-tight mt-6">{s.title}</h3>
-              <p className="mt-5 text-[color:var(--cream)]/70 leading-relaxed">{s.desc}</p>
-              <ul className="mt-8 space-y-3">
+              <h3 className="font-display text-3xl md:text-[32px] leading-tight mt-6 min-h-[4.5rem]">{s.title}</h3>
+              <p className="mt-5 text-[color:var(--cream)]/70 leading-relaxed min-h-[6.5rem]">{s.desc}</p>
+              <ul className="mt-8 space-y-3 flex-grow">
                 {s.bullets.map((b,bi)=>(
                   <li key={bi} className="flex items-center gap-3 text-sm text-[color:var(--cream)]/80">
                     <svg width="14" height="14" viewBox="0 0 20 20"><path d="M10 3 L13 10 L10 17 L7 10 Z" fill="none" stroke="#D4A24C" strokeWidth="1"/></svg>
@@ -547,11 +550,11 @@ function Process(){
   },[]);
 
   const steps = [
-    {k:"I",   t:"Гавань",       d:"Встреча, бриф, аудит. Смотрим карту бизнеса, отмечаем мели и попутные течения."},
-    {k:"II",  t:"Курс",         d:"Стратегия и план. Архитектура, roadmap, оценка, ответственные по вахтам."},
-    {k:"III", t:"Плавание",     d:"Двухнедельные спринты, демо, метрики. Вы видите прогресс каждую пятницу."},
-    {k:"IV",  t:"Швартовка",    d:"Релиз, обучение команды, документация. Переход в рабочий режим."},
-    {k:"V",   t:"Попутный ветер",d:"Поддержка, развитие, наблюдаемость. Мы остаёмся на связи — как штурман в рубке."},
+    {k:"I",   t:"Гавань",       d:"Смотрим на карту бизнеса, находим узкие места и точки роста."},
+    {k:"II",  t:"Курс",         d:"На основе аудита строим план — что внедряем, в каком порядке, с каким результатом."},
+    {k:"III", t:"Плавание",     d:"Работаем по плану, показываем результат. Вы всегда в курсе, что происходит."},
+    {k:"IV",  t:"Швартовка",    d:"Выводим продукт в работу, помогаем команде освоиться и настраиваем процессы."},
+    {k:"V",   t:"Попутный ветер",d:"Решение работает. Выручка растёт, процессы налажены. Мы на связи и готовы расти вместе."},
   ];
 
   return (
@@ -570,7 +573,7 @@ function Process(){
         <div className="grid md:grid-cols-12 gap-10 mb-20 items-end">
           <div className="md:col-span-7">
             <div className="eyebrow reveal mb-6">§ 02 — Процесс</div>
-            <h2 className="reveal font-display text-[clamp(2.5rem,5vw,5rem)] leading-[.95] tracking-tight">
+            <h2 className="reveal font-display text-[clamp(2.5rem,5vw,5rem)] leading-[1] tracking-tight">
               Как мы держим <span className="italic gold">курс.</span>
             </h2>
           </div>
@@ -625,13 +628,13 @@ function Process(){
 
 function Results(){
   const stats = [
-    {n:"+318%",l:"средний ROI наших внедрений",sub:"по 24 проектам 2023–2025"},
-    {n:"−62%",l:"сокращение ручных операций",sub:"после автоматизации"},
-    {n:"4.9/5",l:"NPS клиентов на поддержке",sub:"за последний год"},
-    {n:"14д",l:"от идеи до первого релиза",sub:"в среднем по MVP"},
+    {n:"+318%",l:"средний ROI наших внедрений",sub:"по 74+ проектам 2023–2026"},
+    {n:"80%",l:"рутинных задач",sub:"уходит после автоматизации"},
+    {n:"94%",l:"клиентов возвращаются",sub:"за последний год"},
+    {n:"14д",l:"от идеи до первого релиза",sub:"в среднем по проектам"},
   ];
   const cases = [
-    {tag:"Логистика",title:"Перенос диспетчеризации в AI-агента",result:"×3,4 обрабатываемых заявок в смену"},
+    {tag:"Логистика",title:"Перенос диспетчеризации в ИИ-агента",result:"×3,4 обрабатываемых заявок в смену"},
     {tag:"Ритейл",title:"Единая витрина данных для 140 магазинов",result:"отчёты за минуты вместо суток"},
     {tag:"Финтех",title:"Скоринг и антифрод на LLM + правилах",result:"−41% потерь, +2,1% одобрений"},
   ];
@@ -639,7 +642,7 @@ function Results(){
     <section id="results" className="relative py-32 md:py-40">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10">
         <div className="eyebrow reveal mb-6">§ 03 — Результаты</div>
-        <h2 className="reveal font-display text-[clamp(2.5rem,5vw,5rem)] leading-[.95] tracking-tight max-w-4xl">
+        <h2 className="reveal font-display text-[clamp(2.5rem,5vw,5rem)] leading-[1] tracking-tight max-w-4xl">
           Ветер в цифрах, <br/><span className="italic">а не в обещаниях.</span>
         </h2>
 
@@ -667,18 +670,6 @@ function Results(){
           ))}
         </div>
 
-        {/* quote */}
-        <figure className="reveal mt-28 max-w-3xl mx-auto text-center">
-          <svg className="mx-auto mb-6" width="40" height="40" viewBox="0 0 40 40"><path d="M8 26 C 8 16, 14 10, 20 10 L 20 16 C 16 16, 14 19, 14 22 H 20 V 30 H 8 Z M 22 26 C 22 16, 28 10, 34 10 L 34 16 C 30 16, 28 19, 28 22 H 34 V 30 H 22 Z" fill="#D4A24C"/></svg>
-          <blockquote className="font-display italic text-2xl md:text-3xl leading-snug">
-            «Паруса превратили идеи из моих книг в живой цифровой продукт. Они не просто
-            написали код — они погрузились в саму философию игры, в стратегию, в замысел.
-            Такой уровень профессионализма и вовлечённости — большая редкость на рынке.»
-          </blockquote>
-          <figcaption className="mt-6 text-sm text-[color:var(--mist)] tracking-wide">
-            ХАСАНОВ ШАМИЛЬ МИХАЙЛОВИЧ · предприниматель, автор книги «Другие шахматы», основатель Chess T1
-          </figcaption>
-        </figure>
       </div>
     </section>
   );
@@ -687,9 +678,9 @@ function Results(){
 function Team(){
   const people = [
     {n:"Камал",r:"CEO",q:"Стратегия, курс и работа с клиентами"},
-    {n:"Амир",r:"Full Stack · AI",q:"Разработка и интеграция ИИ-агентов"},
+    {n:"Амир",r:"Full Stack · ИИ",q:"Разработка и интеграция ИИ-агентов"},
     {n:"Илья",r:"Sales & Marketing",q:"Продажи, маркетинг и партнёрства"},
-    {n:"Никита",r:"Full Stack · AI",q:"Архитектура, LLM, инженерия данных"},
+    {n:"Никита",r:"Full Stack · ИИ",q:"Архитектура, LLM, инженерия данных"},
   ];
   return (
     <section id="team" className="relative py-32 md:py-40 bg-[#050B17]">
@@ -697,14 +688,13 @@ function Team(){
         <div className="grid md:grid-cols-12 gap-10 items-end mb-20">
           <div className="md:col-span-7">
             <div className="eyebrow reveal mb-6">§ 04 — Экипаж</div>
-            <h2 className="reveal font-display text-[clamp(2.5rem,5vw,5rem)] leading-[.95] tracking-tight">
+            <h2 className="reveal font-display text-[clamp(2.5rem,5vw,5rem)] leading-[1] tracking-tight">
               Маленькая команда <br/><span className="italic gold">большого плавания.</span>
             </h2>
           </div>
           <div className="md:col-span-4 md:col-start-9">
             <p className="reveal d2 text-[color:var(--cream)]/70">
-              Четыре человека, каждый — на своей вахте. Без прослоек, без аккаунт-менеджеров
-              между вами и теми, кто делает продукт.
+              Четыре человека, каждый отвечает за свою зону. Вы общаетесь напрямую с теми, кто делает продукт.
             </p>
           </div>
         </div>
@@ -745,7 +735,7 @@ function Contact(){
 
       <div className="max-w-[1200px] mx-auto px-6 md:px-10">
         <div className="eyebrow reveal mb-8 justify-self-center text-center">§ 05 — Отправление</div>
-        <h2 className="reveal font-display text-center text-[clamp(2.8rem,7vw,8rem)] leading-[.9] tracking-[-0.02em]">
+        <h2 className="reveal font-display text-center text-[clamp(2.8rem,7vw,8rem)] leading-[1] tracking-[-0.02em]">
           Поднимем <span className="italic">паруса</span><br/>
           <span className="gold shimmer">вместе?</span>
         </h2>
@@ -768,7 +758,7 @@ function Contact(){
               <div className="mt-16 max-w-2xl mx-auto text-center py-16" style={{animation:'fadeIn 1s cubic-bezier(.2,.7,0,1) forwards'}}>
                 <div className="font-display text-[clamp(1.8rem,4vw,3rem)] leading-[1.1] gold mb-6">Заявка принята</div>
                 <p className="text-lg text-[color:var(--cream)]/80 leading-relaxed">Мы свяжемся с вами в течение одного рабочего дня<br/>и предложим маршрут.</p>
-                <p className="mt-6 text-sm text-[color:var(--mist)]">Если вопрос срочный — пишите в Telegram: <a href="https://t.me/parusa_manager" target="_blank" rel="noopener" className="ulink text-[color:var(--gold)]">@parusa_manager</a></p>
+                <p className="mt-6 text-sm text-[color:var(--mist)]">Если вопрос срочный — пишите нам в <a href="https://t.me/parusa_manager" target="_blank" rel="noopener" className="ulink text-[color:var(--gold)]">Telegram</a> или <a href="https://max.ru/u/f9LHodD0cOKyvXihVX2qTLPRPyTuBJ5HVyyzC6pm3lYzTV0CAoqot0K3ZIs" target="_blank" rel="noopener" className="ulink text-[color:var(--gold)]">MAX</a></p>
               </div>
             );
           }
@@ -867,7 +857,7 @@ function Footer(){
           </div>
         </div>
         <div className="text-xs text-[color:var(--mist)] font-mono tracking-widest uppercase text-center">
-          Сделано с попутным ветром в Казани
+          Сделано с попутным ветром
         </div>
         <div className="flex items-center gap-5 text-xs text-[color:var(--cream)]/70">
           <a className="ulink" href="https://t.me/parusa_manager" target="_blank" rel="noopener">Telegram</a>

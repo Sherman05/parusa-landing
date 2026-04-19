@@ -48,8 +48,20 @@
 
   /* gold text */
   .gold{
-    background:linear-gradient(180deg,var(--gold-hi) 0%,var(--gold) 55%,var(--gold-deep) 100%);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
+    background-image:linear-gradient(180deg,var(--gold-hi) 0%,var(--gold) 55%,var(--gold-deep) 100%);
+    -webkit-background-clip:text;background-clip:text;
+    color:var(--gold); /* fallback */
+    -webkit-text-fill-color:transparent;
+    color:transparent;
+  }
+  /* Safari/iOS: children with their own transform (e.g. animated .char) get their
+     own composited layer, which breaks the parent's background-clip:text and makes
+     the text invisible. Re-apply the clipped gradient on each animated char so the
+     gold fill survives the per-char transform. */
+  .gold .char{
+    background-image:linear-gradient(180deg,var(--gold-hi) 0%,var(--gold) 55%,var(--gold-deep) 100%);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
   }
 
   /* link underline */

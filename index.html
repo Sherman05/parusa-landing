@@ -101,6 +101,48 @@
   .marquee-track{display:flex;width:max-content;animation:marquee 40s linear infinite;will-change:transform}
   .marquee-seq{display:flex;gap:3rem;padding-right:3rem;flex-shrink:0}
 
+  /* cases carousel — transform-based, GPU-accelerated */
+  .cases-viewport{
+    position:relative;
+    overflow:hidden;
+    cursor:grab;
+    touch-action:pan-y;          /* vertical page scroll native, horizontal → pointer events */
+    -webkit-user-select:none;user-select:none;
+  }
+  .cases-viewport.is-grabbing{cursor:grabbing}
+  .cases-viewport.is-grabbing .case-card{pointer-events:none}
+  .cases-track{
+    display:flex;
+    width:max-content;
+    will-change:transform;
+    transform:translate3d(0,0,0);
+    backface-visibility:hidden;
+  }
+  .cases-seq{display:flex;gap:1.5rem;padding-right:1.5rem;flex-shrink:0;align-items:stretch}
+  .case-card{
+    position:relative;
+    width:clamp(320px,30vw,440px);
+    flex-shrink:0;
+    background:linear-gradient(180deg, rgba(17,34,63,.55), rgba(7,14,28,.55));
+    border:1px solid rgba(212,162,76,.18);
+    display:flex;flex-direction:column;
+    overflow-wrap:break-word;
+    transform:translate3d(0,0,0); /* own GPU layer */
+    transition:border-color .5s cubic-bezier(.2,.7,0,1), transform .5s cubic-bezier(.2,.7,0,1);
+  }
+  .case-card:hover{border-color:rgba(245,217,139,.45);transform:translate3d(0,-4px,0)}
+  .cases-fade::before,.cases-fade::after{
+    content:"";position:absolute;top:0;bottom:0;width:32px;pointer-events:none;z-index:2;
+  }
+  .cases-fade::before{left:0;background:linear-gradient(90deg,var(--ink),transparent)}
+  .cases-fade::after{right:0;background:linear-gradient(270deg,var(--ink),transparent)}
+
+  @media (max-width:767px){
+    .case-card{width:82vw}
+    .cases-fade::before,.cases-fade::after{display:none}
+    .cases-viewport{cursor:auto}
+  }
+
   /* divider line */
   .hairline{height:1px;background:linear-gradient(90deg,transparent, var(--line) 15%, var(--line) 85%, transparent)}
 
@@ -634,10 +676,222 @@ function Results(){
     {n:"14д",l:"от идеи до первого релиза",sub:"в среднем по проектам"},
   ];
   const cases = [
-    {tag:"Логистика",title:"Перенос диспетчеризации в ИИ-агента",result:"×3,4 обрабатываемых заявок в смену"},
-    {tag:"Ритейл",title:"Единая витрина данных для 140 магазинов",result:"отчёты за минуты вместо суток"},
-    {tag:"Финтех",title:"Скоринг и антифрод на LLM + правилах",result:"−41% потерь, +2,1% одобрений"},
+    {
+      num:"01", tag:"Логистика",
+      title:"ИИ-диспетчер, который не спит",
+      desc:"Агент принимает заявки из всех каналов, сверяет с приоритетами и текущей загрузкой, распределяет по водителям и автоматически сообщает клиенту статус. Ночная смена диспетчерской больше не нужна.",
+      result:{big:"×3,4", cap:"заявок на одну смену обрабатывает ИИ-диспетчер"},
+    },
+    {
+      num:"02", tag:"Ритейл",
+      title:"140 магазинов в одном окне",
+      desc:"Объединили данные касс, склада и закупок в единое хранилище с BI-панелями. Управляющий видит всю сеть, директор точки — свой магазин. Ручные выгрузки в Excel как жанр уходят из компании.",
+      result:{big:"1 мин", cap:"на сводный отчёт по сети — вместо 24 часов"},
+    },
+    {
+      num:"03", tag:"E-commerce",
+      title:"Карточка товара пишет себя сама",
+      desc:"Агент парсит характеристики с сайтов производителей, заполняет поля по вашей контент-модели, генерирует SEO-описания и теги, подтягивает фото. Контент-менеджер только подтверждает результат.",
+      result:{big:"2 мин", cap:"на одну карточку — вместо 15–20 минут"},
+    },
+    {
+      num:"04", tag:"Производство",
+      title:"Цех на одном экране",
+      desc:"Связали ERP, MES и складские системы. План на смену формируется автоматически с учётом загрузки оборудования, наличия материалов и дедлайнов заказов. Простои подсвечиваются в момент возникновения.",
+      descGap:true,
+      result:{rows:[
+        {big:"−37%", lbl:"простой оборудования"},
+        {big:"+22%", lbl:"выпуск на ту же смену"},
+      ]},
+    },
+    {
+      num:"05", tag:"Сервис",
+      title:"Первая линия — без операторов",
+      desc:"Ассистент принимает обращения в чате, мессенджерах и по телефону. Классифицирует запрос, решает типовое без человека, сложные случаи передаёт специалисту с готовым резюме диалога.",
+      result:{big:"68%", cap:"обращений без человека · ответ 12 сек · CSAT 4,7/5"},
+    },
   ];
+  const CaseCard = ({c}) => (
+    <article className="case-card p-8 md:p-10">
+      <div className="font-mono text-[11px] tracking-[0.3em] uppercase text-[color:var(--gold)]">
+        Кейс №{c.num} — {c.tag}
+      </div>
+      <h3 className="font-display text-2xl md:text-3xl mt-6 leading-tight">{c.title}</h3>
+      <p className={"text-sm leading-relaxed text-[color:var(--cream)]/70 " + (c.descGap ? "mt-12" : "mt-5")}>{c.desc}</p>
+      <div className="mt-auto pt-8">
+        <div className="hairline"/>
+        <div className="mt-6">
+          <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-[color:var(--gold)]">Результат</div>
+          {c.result.rows ? (
+            <div className="mt-3 space-y-2">
+              {c.result.rows.map((r,k)=>(
+                <div key={k} className="flex items-baseline gap-3">
+                  <div className="font-display gold text-2xl md:text-3xl leading-none whitespace-nowrap">{r.big}</div>
+                  <div className="text-sm text-[color:var(--cream)]/70 leading-snug">— {r.lbl}</div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <React.Fragment>
+              <div className="font-display gold text-3xl md:text-4xl mt-2 leading-tight">{c.result.big}</div>
+              <div className="mt-2 text-sm text-[color:var(--cream)]/70 leading-relaxed">{c.result.cap}</div>
+            </React.Fragment>
+          )}
+        </div>
+      </div>
+    </article>
+  );
+  const CaseSeq = ({dup}) => (
+    <div className="cases-seq" data-dup={dup?"true":"false"} aria-hidden={dup?true:undefined}>
+      {cases.map((c,i)=><CaseCard key={i} c={c}/>)}
+    </div>
+  );
+  const viewportRef = React.useRef(null);
+  const trackRef = React.useRef(null);
+  React.useEffect(() => {
+    const vp = viewportRef.current;
+    const track = trackRef.current;
+    if (!vp || !track) return;
+    const firstSeq = track.querySelector('.cases-seq');
+    if (!firstSeq) return;
+    const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const SPEED = 22;            // px/sec — ~80s per cycle given seq width
+    const RESUME_DELAY = 1400;   // ms idle before auto resumes
+    const WHEEL_IDLE = 350;      // ms after last wheel tick
+
+    let seqWidth = firstSeq.offsetWidth || 1;
+    let offset = 0;
+    let rafId = 0;
+    let lastTime = 0;
+    let paused = reduced;
+    let resumeTimer = null;
+    let wheelTimer = null;
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragStartOffset = 0;
+    let dragMoved = false;
+    let activePointerId = null;
+
+    const apply = () => { track.style.transform = 'translate3d(' + offset + 'px,0,0)'; };
+    const normalize = () => {
+      if (seqWidth <= 0) return;
+      while (offset <= -seqWidth) offset += seqWidth;
+      while (offset > 0) offset -= seqWidth;
+    };
+
+    const tick = (now) => {
+      if (!lastTime) { lastTime = now; rafId = requestAnimationFrame(tick); return; }
+      const dt = now - lastTime;
+      lastTime = now;
+      if (!paused && !isDragging && seqWidth > 0) {
+        offset -= (SPEED * dt) / 1000;
+        normalize();
+        apply();
+      }
+      rafId = requestAnimationFrame(tick);
+    };
+
+    const measure = () => {
+      const w = firstSeq.offsetWidth;
+      if (w > 0) { seqWidth = w; normalize(); apply(); }
+    };
+    measure();
+    apply();
+    rafId = requestAnimationFrame(tick);
+
+    const ro = ('ResizeObserver' in window) ? new ResizeObserver(measure) : null;
+    if (ro) ro.observe(firstSeq);
+    window.addEventListener('resize', measure);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure).catch(()=>{});
+
+    const pause = () => {
+      paused = true;
+      if (resumeTimer) { clearTimeout(resumeTimer); resumeTimer = null; }
+    };
+    const scheduleResume = () => {
+      if (reduced) return;
+      if (resumeTimer) clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(() => { paused = false; lastTime = 0; }, RESUME_DELAY);
+    };
+
+    const onPointerEnter = (e) => { if (e.pointerType === 'mouse') pause(); };
+    const onPointerLeave = (e) => { if (e.pointerType === 'mouse' && !isDragging) scheduleResume(); };
+
+    const onWheel = (e) => {
+      // Shift+wheel → treat deltaY as horizontal intent; otherwise only deltaX.
+      const dx = e.shiftKey ? (e.deltaX || e.deltaY) : e.deltaX;
+      // Ignore pure vertical gestures — let the page scroll naturally.
+      if (dx === 0) return;
+      if (!e.shiftKey && Math.abs(e.deltaX) < Math.abs(e.deltaY)) return;
+      offset -= dx;
+      normalize();
+      apply();
+      e.preventDefault();
+      pause();
+      if (wheelTimer) clearTimeout(wheelTimer);
+      wheelTimer = setTimeout(scheduleResume, WHEEL_IDLE);
+    };
+
+    const onPointerDown = (e) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      isDragging = true;
+      dragMoved = false;
+      dragStartX = e.clientX;
+      dragStartOffset = offset;
+      activePointerId = e.pointerId;
+      vp.classList.add('is-grabbing');
+      pause();
+      try { vp.setPointerCapture(e.pointerId); } catch (_) {}
+      if (e.pointerType === 'mouse') e.preventDefault();
+    };
+    const onPointerMove = (e) => {
+      if (!isDragging || e.pointerId !== activePointerId) return;
+      const delta = e.clientX - dragStartX;
+      if (Math.abs(delta) > 3) dragMoved = true;
+      offset = dragStartOffset + delta;
+      normalize();
+      apply();
+    };
+    const onPointerUp = (e) => {
+      if (!isDragging) return;
+      if (activePointerId !== null && e.pointerId !== activePointerId) return;
+      isDragging = false;
+      activePointerId = null;
+      vp.classList.remove('is-grabbing');
+      try { vp.releasePointerCapture(e.pointerId); } catch (_) {}
+      scheduleResume();
+    };
+    const onClickCapture = (e) => {
+      if (dragMoved) { e.preventDefault(); e.stopPropagation(); dragMoved = false; }
+    };
+
+    vp.addEventListener('pointerenter', onPointerEnter);
+    vp.addEventListener('pointerleave', onPointerLeave);
+    vp.addEventListener('wheel', onWheel, { passive: false });
+    vp.addEventListener('pointerdown', onPointerDown);
+    vp.addEventListener('pointermove', onPointerMove);
+    vp.addEventListener('pointerup', onPointerUp);
+    vp.addEventListener('pointercancel', onPointerUp);
+    vp.addEventListener('click', onClickCapture, true);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      if (resumeTimer) clearTimeout(resumeTimer);
+      if (wheelTimer) clearTimeout(wheelTimer);
+      if (ro) ro.disconnect();
+      window.removeEventListener('resize', measure);
+      vp.removeEventListener('pointerenter', onPointerEnter);
+      vp.removeEventListener('pointerleave', onPointerLeave);
+      vp.removeEventListener('wheel', onWheel);
+      vp.removeEventListener('pointerdown', onPointerDown);
+      vp.removeEventListener('pointermove', onPointerMove);
+      vp.removeEventListener('pointerup', onPointerUp);
+      vp.removeEventListener('pointercancel', onPointerUp);
+      vp.removeEventListener('click', onClickCapture, true);
+      vp.classList.remove('is-grabbing');
+    };
+  }, []);
   return (
     <section id="results" className="relative py-32 md:py-40">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10">
@@ -656,20 +910,15 @@ function Results(){
           ))}
         </div>
 
-        <div className="mt-28 grid md:grid-cols-3 gap-0 border-t border-b border-[color:var(--line)]">
-          {cases.map((c,i)=>(
-            <a key={i} href="#contact" className={`reveal d${i+1} group p-8 md:p-10 ${i<2?'md:border-r border-[color:var(--line)]':''} ${i<cases.length-1?'border-b md:border-b-0 border-[color:var(--line)]':''} hover:bg-[rgba(212,162,76,0.05)] transition-colors duration-500`}>
-              <div className="flex items-center justify-between">
-                <div className="font-mono text-[11px] tracking-[0.3em] uppercase text-[color:var(--gold)]">{c.tag}</div>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all"><path d="M7 17 L17 7 M9 7 H17 V15" stroke="#F5D98B" strokeWidth="1.4"/></svg>
-              </div>
-              <h3 className="font-display text-2xl md:text-3xl mt-6 leading-tight">{c.title}</h3>
-              <div className="mt-8 text-[color:var(--cream)]/75 text-sm">Результат</div>
-              <div className="text-[color:var(--gold-hi)] text-lg mt-1">{c.result}</div>
-            </a>
-          ))}
-        </div>
+      </div>
 
+      <div className="reveal mt-24">
+        <div ref={viewportRef} className="cases-viewport cases-fade">
+          <div ref={trackRef} className="cases-track">
+            <CaseSeq/>
+            <CaseSeq dup/>
+          </div>
+        </div>
       </div>
     </section>
   );
